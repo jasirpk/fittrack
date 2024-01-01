@@ -34,6 +34,9 @@ class _LoginScreenState extends State<LoginScreen> {
           Imagepath: null),
     );
     if (response == true) {
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          backgroundColor: Colors.blue,
+          content: Text("personal Detials Added Succesfully")));
       print('It is worked');
       //if login is correct, then goto next screen
       if (!mounted) return;
@@ -155,12 +158,13 @@ class _LoginScreenState extends State<LoginScreen> {
                         style: TextStyle(color: Colors.white),
                       ),
                     ),
-                    isLogintrue
-                        ? Text(
-                            'EmailAddress or PassWord is Incorrect',
-                            style: TextStyle(color: Colors.red),
-                          )
-                        : SizedBox(),
+                    if (isLogintrue)
+                      Text(
+                        'EmailAddress or PassWord is Incorrect',
+                        style: TextStyle(color: Colors.red),
+                      )
+                    else
+                      SizedBox(),
                     ElevatedButton(
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Color.fromARGB(255, 176, 6, 219),
@@ -171,10 +175,6 @@ class _LoginScreenState extends State<LoginScreen> {
                           // passwordController.clear();
                           // EmailAddressController.clear();
                           after();
-                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                              backgroundColor: Colors.blue,
-                              content:
-                                  Text("personal Detials Added Succesfully")));
                         }
                       },
                       child: Text(
