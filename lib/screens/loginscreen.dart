@@ -1,7 +1,7 @@
-import 'package:fittrack/screens/FeedbackScreen.dart';
+import 'package:fittrack/Sqlite/usermodal.dart';
+import 'package:fittrack/screens/addnote.dart';
 import 'package:fittrack/screens/signupScreen.dart';
 import 'package:fittrack/Sqlite/Sqflite.dart';
-import 'package:fittrack/Sqlite/SqfliteModal.dart';
 import 'package:flutter/material.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -41,7 +41,7 @@ class _LoginScreenState extends State<LoginScreen> {
       //if login is correct, then goto next screen
       if (!mounted) return;
       Navigator.pushReplacement(
-          context, MaterialPageRoute(builder: (context) => FeedBack_Screen()));
+          context, MaterialPageRoute(builder: (context) => create_note()));
     } else {
       print('It is not worked');
       // if not ,true the correct then show the error message

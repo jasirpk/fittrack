@@ -1,7 +1,7 @@
 import 'dart:io';
+import 'package:fittrack/Sqlite/usermodal.dart';
 import 'package:fittrack/screens/Loginscreen.dart';
 import 'package:fittrack/Sqlite/Sqflite.dart';
-import 'package:fittrack/Sqlite/SqfliteModal.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -284,14 +284,12 @@ class _SignUp_ScreenState extends State<SignUp_Screen> {
                                 ConfirmpasswordController.text) {
                               print('Stored ${NameController.text}');
                               final db = DatabaseHelper();
-                              db
-                                  .signup(Users(
+                              db.SignUp(Users(
                                 usrName: NameController.text,
                                 usrMail: EmailAddressController.text,
                                 usrPassword: passwordController.text,
                                 Imagepath: imagepathcontroller.text,
-                              ))
-                                  .whenComplete(
+                              )).whenComplete(
                                 () {
                                   Navigator.push(
                                     context,
