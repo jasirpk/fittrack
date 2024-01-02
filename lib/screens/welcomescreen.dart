@@ -21,7 +21,7 @@ class _AboutScreenState extends State<AboutScreen> {
                 fit: BoxFit.cover),
           ),
           child: Padding(
-            padding: const EdgeInsets.only(bottom: 16),
+            padding: EdgeInsets.only(bottom: 16),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [

@@ -1,5 +1,5 @@
 import 'package:fittrack/Sqlite/usermodal.dart';
-import 'package:fittrack/screens/addnote.dart';
+import 'package:fittrack/screens/levelscreen.dart';
 import 'package:fittrack/screens/signupScreen.dart';
 import 'package:fittrack/Sqlite/Sqflite.dart';
 import 'package:flutter/material.dart';
@@ -41,7 +41,7 @@ class _LoginScreenState extends State<LoginScreen> {
       //if login is correct, then goto next screen
       if (!mounted) return;
       Navigator.pushReplacement(
-          context, MaterialPageRoute(builder: (context) => create_note()));
+          context, MaterialPageRoute(builder: (context) => Level_Screen()));
     } else {
       print('It is not worked');
       // if not ,true the correct then show the error message

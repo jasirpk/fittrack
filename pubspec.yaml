@@ -81,6 +81,9 @@ flutter:
     - assets/images/Screenshot 2023-12-18 185831.png
     - assets/images/Screenshot 2023-12-19 140455.png
     - assets/images/images.png
+    - assets/images/powerful-fitness-gym-background_849761-28989.jpg
+    - assets/images/5-Mandatory-Athletic-Exercises-for-Non-Athletes.jpeg
+    - assets/images/48201119-athlete-muscular-bodybuilder-training-in-the-gym-back-training-in-gym.jpg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
