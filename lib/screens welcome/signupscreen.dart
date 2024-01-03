@@ -1,7 +1,7 @@
 import 'dart:io';
 import 'package:fittrack/Sqlite/usermodal.dart';
-import 'package:fittrack/screens/Loginscreen.dart';
 import 'package:fittrack/Sqlite/Sqflite.dart';
+import 'package:fittrack/screens%20welcome/loginscreen.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 

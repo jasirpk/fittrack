@@ -1,5 +1,10 @@
-import 'package:fittrack/screens/welcomescreen.dart';
+// import 'package:fittrack/Sqlite/Sqflite.dart';
+import 'package:fittrack/Sqlite/sqflite.dart';
+import 'package:fittrack/Sqlite/usermodal.dart';
+import 'package:fittrack/screens%20welcome/levelscreen.dart';
+import 'package:fittrack/screens%20welcome/welcomescreen.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 main() {
   runApp(Fit_Track());
@@ -26,10 +31,52 @@ class Splash_Screen extends StatefulWidget {
 }
 
 class _Splash_ScreenState extends State<Splash_Screen> {
-  @override
+  // @override
+  // void initState() {
+  //   gotonextScreen();
+  //   super.initState();
+  // }
   void initState() {
-    gotonextScreen();
     super.initState();
+    checkLogin();
+  }
+
+  Future<void> checkLogin() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String? email = prefs.getString('email');
+    String? password = prefs.getString('password');
+    var db = DatabaseHelper();
+    // Check if email and password are not null
+    if (email != null && password != null) {
+      // Perform auto-login using the saved credentials
+      // Modify this part based on your authentication logic
+      var response = await db.login(
+        Users(
+          usrName: null,
+          usrMail: email,
+          usrPassword: password,
+          Imagepath: null,
+        ),
+      );
+
+      if (response == true) {
+        await Future.delayed(Duration(seconds: 1));
+        // If auto-login successful, navigate to Level_Screen
+        Navigator.of(context).pushReplacement(
+          MaterialPageRoute(
+            builder: (ctx) => Level_Screen(),
+          ),
+        );
+        return;
+      }
+    }
+    await Future.delayed(Duration(seconds: 3));
+    // If no saved credentials or auto-login failed, navigate to AboutScreen
+    Navigator.of(context).pushReplacement(
+      MaterialPageRoute(
+        builder: (ctx) => AboutScreen(),
+      ),
+    );
   }
 
   @override
@@ -116,17 +163,20 @@ class _Splash_ScreenState extends State<Splash_Screen> {
     super.dispose();
   }
 
-  Future<void> gotonextScreen() async {
-    AboutScreen();
-    await Future.delayed(
-      Duration(seconds: 3),
-    );
-    Navigator.of(context).push(
-      MaterialPageRoute(
-        builder: (ctx) {
-          return AboutScreen();
-        },
-      ),
-    );
-  }
+  // Future<void> gotonextScreen() async {
+  //   AboutScreen();
+  //   await Future.delayed(
+  //     Duration(seconds: 3),
+  //   );
+
+  //   // Navigator.of(context).pushAndRemoveUntil(
+  //   //     MaterialPageRoute(builder: (ctx) => Level_Screen()), (route) => false);
+  //   Navigator.of(context).pushReplacement(
+  //     MaterialPageRoute(
+  //       builder: (ctx) {
+  //         return AboutScreen();
+  //       },
+  //     ),
+  //   );
+  // }
 }

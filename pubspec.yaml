@@ -30,7 +30,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-
+ 
 
 
   # The following adds the Cupertino Icons font to your application.
@@ -44,7 +44,8 @@ dependencies:
   intl: 0.18.1
   image_picker: ^1.0.5
   syncfusion_flutter_calendar: ^21.2.3
-  table_calendar: ^3.0.2
+  shared_preferences: ^2.2.2
+  provider: ^6.1.1
  
   
 
@@ -84,7 +85,15 @@ flutter:
     - assets/images/powerful-fitness-gym-background_849761-28989.jpg
     - assets/images/5-Mandatory-Athletic-Exercises-for-Non-Athletes.jpeg
     - assets/images/48201119-athlete-muscular-bodybuilder-training-in-the-gym-back-training-in-gym.jpg
-
+    - assets/images/mh-exercise-with-weights-royalty-free-image-1567792294.png
+    - assets/images/shutterstock_749160127_1000x.jpg
+    - assets/images/c0c98a4b074fbafba32965fb312846e41fb602ad-1080x540.webp
+    - assets/images/abs-muscular-muscle-ripped-main.jpg
+    - assets/images/Muscular-Man-Chained.jpg
+    - assets/images/shoulder-workouts-featured.jpg
+    - assets/images/Bald-Muscular-Body-Builder-Flexing-His-Biceps.jpg
+    - assets/images/stretching-man-GettyImages-654424976.jpg
+    - assets/images/average-chest-size-men.png
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
 

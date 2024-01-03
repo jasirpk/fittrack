@@ -1,8 +1,9 @@
 import 'package:fittrack/Sqlite/usermodal.dart';
-import 'package:fittrack/screens/levelscreen.dart';
-import 'package:fittrack/screens/signupScreen.dart';
+import 'package:fittrack/screens%20welcome/levelscreen.dart';
 import 'package:fittrack/Sqlite/Sqflite.dart';
+import 'package:fittrack/screens%20welcome/signupscreen.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -26,6 +27,9 @@ class _LoginScreenState extends State<LoginScreen> {
   bool isLogintrue = false;
 
   after() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setString('email', EmailAddressController.text);
+    prefs.setString('password', passwordController.text);
     var response = await db.login(
       Users(
           usrName: null,
@@ -40,8 +44,11 @@ class _LoginScreenState extends State<LoginScreen> {
       print('It is worked');
       //if login is correct, then goto next screen
       if (!mounted) return;
-      Navigator.pushReplacement(
-          context, MaterialPageRoute(builder: (context) => Level_Screen()));
+      Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (ctx) {
+        return Level_Screen();
+      }), (route) => false);
+      // Navigator.pushReplacement(
+      //     context, MaterialPageRoute(builder: (context) => Level_Screen()));
     } else {
       print('It is not worked');
       // if not ,true the correct then show the error message

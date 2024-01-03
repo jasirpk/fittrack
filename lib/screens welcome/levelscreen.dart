@@ -1,3 +1,4 @@
+import 'package:fittrack/screenshome/homescreen.dart';
 import 'package:flutter/material.dart';
 
 class Level_Screen extends StatefulWidget {
@@ -43,30 +44,36 @@ class _Level_ScreenState extends State<Level_Screen> {
               ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: Container(
-                  height: 250,
-                  decoration: BoxDecoration(
-                    border: Border.all(),
-                    borderRadius: BorderRadius.circular(30),
-                    color: Colors.grey,
-                    image: DecorationImage(
-                        image: AssetImage(
-                          'assets/images/5-Mandatory-Athletic-Exercises-for-Non-Athletes.jpeg',
-                        ),
-                        fit: BoxFit.cover),
-                  ),
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        "Biginner",
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontFamily: "JacquesFracois",
-                            fontSize: 40,
-                            fontWeight: FontWeight.w400),
-                      )
-                    ],
+                child: GestureDetector(
+                  onTap: () {
+                    Navigator.of(context).push(
+                        MaterialPageRoute(builder: (ctx) => Home_Screen()));
+                  },
+                  child: Container(
+                    height: 250,
+                    decoration: BoxDecoration(
+                      border: Border.all(),
+                      borderRadius: BorderRadius.circular(30),
+                      color: Colors.grey,
+                      image: DecorationImage(
+                          image: AssetImage(
+                            'assets/images/5-Mandatory-Athletic-Exercises-for-Non-Athletes.jpeg',
+                          ),
+                          fit: BoxFit.cover),
+                    ),
+                    child: Row(
+                      // crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "Biginner",
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontFamily: "JacquesFracois",
+                              fontSize: 32,
+                              fontWeight: FontWeight.w400),
+                        )
+                      ],
+                    ),
                   ),
                 ),
               ),
@@ -88,14 +95,13 @@ class _Level_ScreenState extends State<Level_Screen> {
                         fit: BoxFit.cover),
                   ),
                   child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
                         "InterMediate",
                         style: TextStyle(
                             color: Colors.white,
                             fontFamily: "JacquesFracois",
-                            fontSize: 40,
+                            fontSize: 30,
                             fontWeight: FontWeight.w400),
                       )
                     ],
