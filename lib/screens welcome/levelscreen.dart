@@ -47,7 +47,7 @@ class _Level_ScreenState extends State<Level_Screen> {
                 child: GestureDetector(
                   onTap: () {
                     Navigator.of(context).push(
-                        MaterialPageRoute(builder: (ctx) => Home_Screen()));
+                        MaterialPageRoute(builder: (ctx) => HomeScreen()));
                   },
                   child: Container(
                     height: 250,
@@ -82,29 +82,35 @@ class _Level_ScreenState extends State<Level_Screen> {
               ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: Container(
-                  height: 250,
-                  decoration: BoxDecoration(
-                    border: Border.all(),
-                    borderRadius: BorderRadius.circular(30),
-                    color: Colors.grey,
-                    image: DecorationImage(
-                        image: AssetImage(
-                          'assets/images/48201119-athlete-muscular-bodybuilder-training-in-the-gym-back-training-in-gym.jpg',
-                        ),
-                        fit: BoxFit.cover),
-                  ),
-                  child: Row(
-                    children: [
-                      Text(
-                        "InterMediate",
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontFamily: "JacquesFracois",
-                            fontSize: 30,
-                            fontWeight: FontWeight.w400),
-                      )
-                    ],
+                child: GestureDetector(
+                  onTap: () {
+                    Navigator.of(context).push(
+                        MaterialPageRoute(builder: (ctx) => HomeScreen()));
+                  },
+                  child: Container(
+                    height: 250,
+                    decoration: BoxDecoration(
+                      border: Border.all(),
+                      borderRadius: BorderRadius.circular(30),
+                      color: Colors.grey,
+                      image: DecorationImage(
+                          image: AssetImage(
+                            'assets/images/48201119-athlete-muscular-bodybuilder-training-in-the-gym-back-training-in-gym.jpg',
+                          ),
+                          fit: BoxFit.cover),
+                    ),
+                    child: Row(
+                      children: [
+                        Text(
+                          "InterMediate",
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontFamily: "JacquesFracois",
+                              fontSize: 30,
+                              fontWeight: FontWeight.w400),
+                        )
+                      ],
+                    ),
                   ),
                 ),
               ),

@@ -1,164 +1,86 @@
+import 'package:fittrack/screenshome/biginnerscreen.dart';
+import 'package:fittrack/screenshome/intermediatescreen.dart';
 import 'package:fittrack/screenshome/navbar.dart';
 import 'package:flutter/material.dart';
 
-class Home_Screen extends StatefulWidget {
-  const Home_Screen({super.key});
+class HomeScreen extends StatefulWidget {
+  const HomeScreen({Key? key}) : super(key: key);
 
   @override
-  State<Home_Screen> createState() => _Home_ScreenState();
+  _HomeScreenState createState() => _HomeScreenState();
 }
 
-class _Home_ScreenState extends State<Home_Screen> {
+class _HomeScreenState extends State<HomeScreen> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
-  List<Map<String, dynamic>> catagaries = [
-    {
-      "image": "assets/images/average-chest-size-men.png",
-      "title": "Chest",
-    },
-    {
-      "image":
-          "assets/images/mh-exercise-with-weights-royalty-free-image-1567792294.png",
-      "title": "Back",
-    },
-    {
-      "image": "assets/images/shutterstock_749160127_1000x.jpg",
-      "title": "Legs",
-    },
-    {
-      "image":
-          "assets/images/c0c98a4b074fbafba32965fb312846e41fb602ad-1080x540.webp",
-      "title": "Triceps",
-    },
-    {
-      "image": "assets/images/abs-muscular-muscle-ripped-main.jpg",
-      "title": "Abs",
-    },
-    {
-      "image": "assets/images/Muscular-Man-Chained.jpg",
-      "title": "Forearm",
-    },
-    {
-      "image": "assets/images/shoulder-workouts-featured.jpg",
-      "title": "Shoulder",
-    },
-    {
-      "image":
-          "assets/images/Bald-Muscular-Body-Builder-Flexing-His-Biceps.jpg",
-      "title": "Biceps",
-    },
-  ];
+  List<Map<String, dynamic>> categories = [];
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      key: _scaffoldKey,
-      drawer: Navbar(),
-      appBar: PreferredSize(
-        preferredSize: Size.fromHeight(100),
-        child: AppBar(
-          automaticallyImplyLeading: false,
-          backgroundColor: Colors.black,
-          centerTitle: true,
-          title: Row(
-            children: [
-              IconButton(
-                onPressed: () {
-                  _scaffoldKey.currentState?.openDrawer();
-                },
-                icon: Icon(Icons.menu),
-                color: Colors.white,
-              ),
-              SizedBox(
-                width: 40,
-              ),
-              Text(
-                'Muscle Groups',
-                style: TextStyle(
+    return DefaultTabController(
+      length: 2,
+      child: Scaffold(
+        key: _scaffoldKey,
+        drawer: Navbar(),
+        appBar: PreferredSize(
+          preferredSize: Size.fromHeight(100),
+          child: AppBar(
+            automaticallyImplyLeading: false,
+            backgroundColor: Colors.black,
+            centerTitle: true,
+            title: Row(
+              children: [
+                IconButton(
+                  onPressed: () {
+                    _scaffoldKey.currentState?.openDrawer();
+                  },
+                  icon: Icon(Icons.menu),
                   color: Colors.white,
-                  fontSize: 32,
-                  fontWeight: FontWeight.bold,
                 ),
-              ),
-            ],
-          ),
-        ),
-      ),
-      body: Column(
-        children: [
-          Expanded(
-            child: Container(
-              child: GridView.builder(
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2),
-                itemCount: catagaries.length,
-                itemBuilder: (context, index) {
-                  final catagarie = catagaries[index];
-                  return Card(
-                    elevation: 10,
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          image: DecorationImage(
-                              image: AssetImage(catagarie['image']),
-                              fit: BoxFit.cover),
-                        ),
-                        child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.end,
-                          children: [
-                            Text(
-                              catagarie['title'],
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 24,
-                                  fontWeight: FontWeight.bold,
-                                  letterSpacing: 1,
-                                  fontFamily: "JacquesFracois"),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  );
-                },
-              ),
-            ),
-          ),
-          Card(
-            elevation: 20,
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Container(
-                height: 200,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(20),
-                  image: DecorationImage(
-                      image: AssetImage(
-                          'assets/images/stretching-man-GettyImages-654424976.jpg'),
-                      fit: BoxFit.cover),
+                SizedBox(
+                  width: 40,
                 ),
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      Text(
-                        'STRUCHERS',
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 24,
-                            fontWeight: FontWeight.bold,
-                            letterSpacing: 1,
-                            fontFamily: "JacquesFracois"),
-                      ),
-                    ],
+                Text(
+                  'Muscle Groups',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 32,
+                    fontWeight: FontWeight.bold,
                   ),
                 ),
-              ),
+              ],
             ),
-          )
-        ],
+            bottom: TabBar(
+              indicator: BoxDecoration(
+                border: Border(
+                  bottom: BorderSide(color: Colors.white, width: 2.0),
+                ),
+              ),
+              tabs: [
+                Tab(
+                  child: Text(
+                    'Beginner',
+                    style: TextStyle(color: Colors.white, letterSpacing: 1),
+                  ),
+                ),
+                Tab(
+                  child: Text(
+                    'Intermediate',
+                    style: TextStyle(color: Colors.white, letterSpacing: 1),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+        body: TabBarView(
+          children: [
+            // Content for Beginner Tab
+            Biginner_Screen(),
+
+            // Content for Intermediate Tab
+            intermediate_Screen(),
+          ],
+        ),
       ),
     );
   }
