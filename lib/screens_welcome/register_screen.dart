@@ -1,5 +1,5 @@
-import 'package:fittrack/screens%20welcome/loginscreen.dart';
-import 'package:fittrack/screens%20welcome/signupscreen.dart';
+import 'package:fittrack/screens_welcome/login_screen.dart';
+import 'package:fittrack/screens_welcome/signup_screen.dart';
 import 'package:flutter/material.dart';
 
 class IntroductionScreen extends StatefulWidget {

@@ -1,6 +1,6 @@
-import 'package:fittrack/screens%20welcome/addnote.dart';
-import 'package:fittrack/screens%20welcome/loginscreen.dart';
-import 'package:fittrack/screenshome/homescreen.dart';
+import 'package:fittrack/screens_welcome/addnote.dart';
+import 'package:fittrack/screens_welcome/login_screen.dart';
+import 'package:fittrack/screens_home/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 

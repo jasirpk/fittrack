@@ -1,6 +1,6 @@
-import 'package:fittrack/screenshome/biginnerscreen.dart';
-import 'package:fittrack/screenshome/intermediatescreen.dart';
-import 'package:fittrack/screenshome/navbar.dart';
+import 'package:fittrack/screens_home/biginner_screen.dart';
+import 'package:fittrack/screens_home/intermediate_screen.dart';
+import 'package:fittrack/screens_home/navbar.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatefulWidget {

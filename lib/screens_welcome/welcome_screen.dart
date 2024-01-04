@@ -1,4 +1,4 @@
-import 'package:fittrack/screens%20welcome/registerscreen.dart';
+import 'package:fittrack/screens_welcome/register_screen.dart';
 import 'package:flutter/material.dart';
 
 class AboutScreen extends StatefulWidget {

@@ -1,7 +1,7 @@
 import 'package:fittrack/Sqlite/usermodal.dart';
-import 'package:fittrack/screens%20welcome/levelscreen.dart';
+import 'package:fittrack/screens_welcome/level_screen.dart';
 import 'package:fittrack/Sqlite/Sqflite.dart';
-import 'package:fittrack/screens%20welcome/signupscreen.dart';
+import 'package:fittrack/screens_welcome/signup_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
