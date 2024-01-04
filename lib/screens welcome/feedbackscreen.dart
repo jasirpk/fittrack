@@ -86,6 +86,9 @@ class _Feedback_ScreenState extends State<Feedback_Screen> {
                       child: Column(
                         children: [
                           TextFormField(
+                            enabled: false,
+                            autovalidateMode:
+                                AutovalidateMode.onUserInteraction,
                             validator: (value) {
                               if (value!.isEmpty) {
                                 return "Title is required";
@@ -102,6 +105,8 @@ class _Feedback_ScreenState extends State<Feedback_Screen> {
                             height: 20,
                           ),
                           TextFormField(
+                            autovalidateMode:
+                                AutovalidateMode.onUserInteraction,
                             validator: (value) {
                               if (value!.isEmpty) {
                                 return "Content Required";

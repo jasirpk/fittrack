@@ -1,8 +1,8 @@
 // import 'package:fittrack/Sqlite/Sqflite.dart';
 import 'package:fittrack/Sqlite/sqflite.dart';
 import 'package:fittrack/Sqlite/usermodal.dart';
-import 'package:fittrack/screens%20welcome/levelscreen.dart';
 import 'package:fittrack/screens%20welcome/welcomescreen.dart';
+import 'package:fittrack/screenshome/homescreen.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -64,7 +64,7 @@ class _Splash_ScreenState extends State<Splash_Screen> {
         // If auto-login successful, navigate to Level_Screen
         Navigator.of(context).pushReplacement(
           MaterialPageRoute(
-            builder: (ctx) => Level_Screen(),
+            builder: (ctx) => HomeScreen(),
           ),
         );
         return;

@@ -96,12 +96,38 @@ class _create_noteState extends State<create_note> {
                         ),
                       ),
                       trailing: IconButton(
-                          onPressed: () {
-                            db.deleteNote(items[index].noteId!).whenComplete(
-                                  () => refresh(),
-                                );
-                          },
-                          icon: Icon(Icons.delete)),
+                        onPressed: () {
+                          showDialog(
+                            context: context,
+                            builder: (context) {
+                              return AlertDialog(
+                                content: const Text(
+                                    'Are you sure you want to Delete?'),
+                                actions: [
+                                  TextButton(
+                                    onPressed: () async {
+                                      await db.deleteNote(items[index].noteId!);
+
+                                      Navigator.of(context).pop();
+
+                                      Future.delayed(
+                                          Duration.zero, () => refresh());
+                                    },
+                                    child: const Text('DELETE'),
+                                  ),
+                                  TextButton(
+                                    onPressed: () {
+                                      Navigator.of(context).pop();
+                                    },
+                                    child: const Text('CANCEL'),
+                                  ),
+                                ],
+                              );
+                            },
+                          );
+                        },
+                        icon: Icon(Icons.delete),
+                      ),
                       onTap: () {
                         setState(() {
                           titleController.text = items[index].noteTitle;

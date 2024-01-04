@@ -59,7 +59,6 @@ class _intermediate_ScreenState extends State<intermediate_Screen> {
     return Column(
       children: [
         Card(
-          elevation: 20,
           child: Padding(
             padding: const EdgeInsets.all(8.0),
             child: Container(
@@ -78,7 +77,7 @@ class _intermediate_ScreenState extends State<intermediate_Screen> {
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
                     Text(
-                      'STRUCHERS',
+                      'STRETCHES',
                       style: TextStyle(
                           color: Colors.white,
                           fontSize: 24,
@@ -101,7 +100,6 @@ class _intermediate_ScreenState extends State<intermediate_Screen> {
               itemBuilder: (context, index) {
                 final catagarie = catagaries[index];
                 return Card(
-                  elevation: 10,
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Container(

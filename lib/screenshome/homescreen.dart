@@ -18,68 +18,71 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return DefaultTabController(
       length: 2,
-      child: Scaffold(
-        key: _scaffoldKey,
-        drawer: Navbar(),
-        appBar: PreferredSize(
-          preferredSize: Size.fromHeight(100),
-          child: AppBar(
-            automaticallyImplyLeading: false,
-            backgroundColor: Colors.black,
-            centerTitle: true,
-            title: Row(
-              children: [
-                IconButton(
-                  onPressed: () {
-                    _scaffoldKey.currentState?.openDrawer();
-                  },
-                  icon: Icon(Icons.menu),
-                  color: Colors.white,
-                ),
-                SizedBox(
-                  width: 40,
-                ),
-                Text(
-                  'Muscle Groups',
-                  style: TextStyle(
+      child: SafeArea(
+        child: Scaffold(
+          key: _scaffoldKey,
+          drawer: Navbar(),
+          appBar: PreferredSize(
+            preferredSize: Size.fromHeight(100),
+            child: AppBar(
+              automaticallyImplyLeading: false,
+              backgroundColor: Colors.black,
+              centerTitle: true,
+              title: Row(
+                children: [
+                  IconButton(
+                    onPressed: () {
+                      _scaffoldKey.currentState?.openDrawer();
+                    },
+                    icon: Icon(Icons.menu),
                     color: Colors.white,
-                    fontSize: 32,
-                    fontWeight: FontWeight.bold,
                   ),
-                ),
-              ],
-            ),
-            bottom: TabBar(
-              indicator: BoxDecoration(
-                border: Border(
-                  bottom: BorderSide(color: Colors.white, width: 2.0),
-                ),
+                  SizedBox(
+                    width: 40,
+                  ),
+                  Text(
+                    'Muscle Groups',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 32,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ],
               ),
-              tabs: [
-                Tab(
-                  child: Text(
-                    'Beginner',
-                    style: TextStyle(color: Colors.white, letterSpacing: 1),
+              bottom: TabBar(
+                indicator: BoxDecoration(
+                  border: Border(
+                    bottom: BorderSide(color: Colors.white, width: 2.0),
                   ),
                 ),
-                Tab(
-                  child: Text(
-                    'Intermediate',
-                    style: TextStyle(color: Colors.white, letterSpacing: 1),
+                tabs: [
+                  Tab(
+                    child: Text(
+                      'Beginner',
+                      style: TextStyle(color: Colors.white, letterSpacing: 1),
+                    ),
                   ),
-                ),
-              ],
+                  Tab(
+                    child: Text(
+                      'Intermediate',
+                      style: TextStyle(color: Colors.white, letterSpacing: 1),
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
-        ),
-        body: TabBarView(
-          children: [
-            // Content for Beginner Tab
-            Biginner_Screen(),
+          body: TabBarView(
+            children: [
+              // Content
+              //for Beginner Tab
+              Biginner_Screen(),
 
-            // Content for Intermediate Tab
-            intermediate_Screen(),
-          ],
+              // Content for Intermediate Tab
+              intermediate_Screen(),
+            ],
+          ),
         ),
       ),
     );

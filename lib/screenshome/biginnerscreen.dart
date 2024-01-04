@@ -10,7 +10,7 @@ class Biginner_Screen extends StatefulWidget {
 class _Biginner_ScreenState extends State<Biginner_Screen> {
   List<Map<String, dynamic>> catagaries = [
     {
-      "image": "assets/images/average-chest-size-men.png",
+      "image": "assets/images/chest_feature.webp",
       "title": "Chest",
     },
     {
@@ -28,7 +28,7 @@ class _Biginner_ScreenState extends State<Biginner_Screen> {
       "title": "Triceps",
     },
     {
-      "image": "assets/images/abs-muscular-muscle-ripped-main.jpg",
+      "image": "assets/images/greatest-abs-exercises-1445673601.jpg",
       "title": "Abs",
     },
     {
@@ -50,7 +50,6 @@ class _Biginner_ScreenState extends State<Biginner_Screen> {
     return Column(
       children: [
         Card(
-          elevation: 20,
           child: Padding(
             padding: const EdgeInsets.all(8.0),
             child: Container(
@@ -69,7 +68,7 @@ class _Biginner_ScreenState extends State<Biginner_Screen> {
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
                     Text(
-                      'STRUCHERS',
+                      'STRETCHES',
                       style: TextStyle(
                           color: Colors.white,
                           fontSize: 24,
@@ -92,7 +91,6 @@ class _Biginner_ScreenState extends State<Biginner_Screen> {
               itemBuilder: (context, index) {
                 final catagarie = catagaries[index];
                 return Card(
-                  elevation: 10,
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Container(
