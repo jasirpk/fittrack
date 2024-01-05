@@ -31,11 +31,6 @@ class Splash_Screen extends StatefulWidget {
 }
 
 class _Splash_ScreenState extends State<Splash_Screen> {
-  // @override
-  // void initState() {
-  //   gotonextScreen();
-  //   super.initState();
-  // }
   void initState() {
     super.initState();
     checkLogin();
@@ -49,7 +44,7 @@ class _Splash_ScreenState extends State<Splash_Screen> {
     // Check if email and password are not null
     if (email != null && password != null) {
       // Perform auto-login using the saved credentials
-      // Modify this part based on your authentication logic
+
       var response = await db.login(
         Users(
           usrName: null,
@@ -61,7 +56,7 @@ class _Splash_ScreenState extends State<Splash_Screen> {
 
       if (response == true) {
         await Future.delayed(Duration(seconds: 1));
-        // If auto-login successful, navigate to Level_Screen
+        // If auto-login successful, navigate to Home screenn
         Navigator.of(context).pushReplacement(
           MaterialPageRoute(
             builder: (ctx) => HomeScreen(),
@@ -87,7 +82,6 @@ class _Splash_ScreenState extends State<Splash_Screen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // backgroundColor: Color.fromARGB(255, 19, 19, 19),
       body: Container(
         decoration: BoxDecoration(
           color: Colors.white,
@@ -162,21 +156,4 @@ class _Splash_ScreenState extends State<Splash_Screen> {
   void dispose() {
     super.dispose();
   }
-
-  // Future<void> gotonextScreen() async {
-  //   AboutScreen();
-  //   await Future.delayed(
-  //     Duration(seconds: 3),
-  //   );
-
-  //   // Navigator.of(context).pushAndRemoveUntil(
-  //   //     MaterialPageRoute(builder: (ctx) => Level_Screen()), (route) => false);
-  //   Navigator.of(context).pushReplacement(
-  //     MaterialPageRoute(
-  //       builder: (ctx) {
-  //         return AboutScreen();
-  //       },
-  //     ),
-  //   );
-  // }
 }

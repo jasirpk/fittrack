@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:fittrack/Sqlite/usermodal.dart';
 import 'package:fittrack/Sqlite/Sqflite.dart';
+import 'package:fittrack/screens_welcome/level_screen.dart';
 import 'package:fittrack/screens_welcome/login_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
@@ -51,8 +52,6 @@ class _SignUp_ScreenState extends State<SignUp_Screen> {
               child: Form(
                 key: formkey,
                 child: Column(
-                  // mainAxisAlignment: MainAxisAlignment.center,
-                  // crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Text('Register New \n Account',
                         style: TextStyle(
@@ -295,7 +294,7 @@ class _SignUp_ScreenState extends State<SignUp_Screen> {
                                     context,
                                     MaterialPageRoute(
                                       builder: (context) {
-                                        return LoginScreen();
+                                        return Level_Screen();
                                       },
                                     ),
                                   );

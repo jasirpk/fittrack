@@ -12,7 +12,7 @@ class _Level_ScreenState extends State<Level_Screen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SingleChildScrollView(
+      body: Expanded(
         child: Container(
           decoration: BoxDecoration(
             image: DecorationImage(
@@ -116,7 +116,7 @@ class _Level_ScreenState extends State<Level_Screen> {
                   ),
                 ),
                 SizedBox(
-                  height: 40,
+                  height: 10,
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
