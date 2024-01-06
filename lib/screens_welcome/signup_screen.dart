@@ -282,6 +282,7 @@ class _SignUp_ScreenState extends State<SignUp_Screen> {
                             if (passwordController.text ==
                                 ConfirmpasswordController.text) {
                               print('Stored ${NameController.text}');
+
                               final db = DatabaseHelper();
                               db.SignUp(Users(
                                 usrName: NameController.text,
@@ -290,6 +291,9 @@ class _SignUp_ScreenState extends State<SignUp_Screen> {
                                 Imagepath: imagepathcontroller.text,
                               )).whenComplete(
                                 () {
+                                  print('Stored ${NameController.text}');
+                                  print(
+                                      "Imagepath: ${imagepathcontroller.text}");
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(
@@ -382,7 +386,7 @@ class _SignUp_ScreenState extends State<SignUp_Screen> {
     }
     setState(() {
       selectedImage = File(returnimage.path);
-      Imagepath = returnimage.path.toString();
+      imagepathcontroller.text = returnimage.path;
       isImageSelected = true;
     });
   }

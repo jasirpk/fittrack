@@ -1,3 +1,7 @@
+import 'dart:io';
+
+import 'package:fittrack/Sqlite/sqflite.dart';
+import 'package:fittrack/Sqlite/usermodal.dart';
 import 'package:fittrack/screens_welcome/addnote.dart';
 import 'package:fittrack/screens_welcome/login_screen.dart';
 import 'package:fittrack/screens_home/home_screen.dart';
@@ -25,6 +29,21 @@ class _NavbarState extends State<Navbar> {
     {"icon": Icons.note, "title": "Admin"},
     {"icon": Icons.logout, "title": "SignOut"},
   ];
+  late DatabaseHelper handler;
+  late Future<List<Users>> users;
+  @override
+  void initState() {
+    handler = DatabaseHelper();
+    users = handler.getUsers();
+    handler.initDB().whenComplete(() {
+      users = getAllUsers();
+    });
+    super.initState();
+  }
+
+  Future<List<Users>> getAllUsers() {
+    return handler.getUsers();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -38,21 +57,43 @@ class _NavbarState extends State<Navbar> {
               Container(
                 height: 160,
                 decoration: BoxDecoration(color: Colors.red),
-                child: Row(
-                  children: [
-                    Container(
-                      child: Padding(
-                        padding: const EdgeInsets.all(10.0),
-                        child: CircleAvatar(
-                          maxRadius: 50,
-                        ),
-                      ),
-                    ),
-                    Text(
-                      'Profile',
-                      style: TextStyle(color: Colors.white, fontSize: 20),
-                    )
-                  ],
+                child: FutureBuilder<List<Users>>(
+                  future: users,
+                  builder: (context, snapshot) {
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      return CircularProgressIndicator();
+                    } else if (snapshot.hasError) {
+                      return Text('Error:${snapshot.error}');
+                    } else {
+                      final user = snapshot.data?.firstOrNull;
+                      final userName = user?.usrName ?? '';
+                      final imagepath = user?.Imagepath ?? '';
+
+                      return Row(
+                        children: [
+                          Container(
+                            child: Padding(
+                              padding: const EdgeInsets.all(10.0),
+                              child: ClipOval(
+                                child: CircleAvatar(
+                                  maxRadius: 50,
+                                  backgroundImage: FileImage(File(imagepath)),
+                                  // child: Image.file(
+                                  //   File(imagepath),
+                                  //   fit: BoxFit.cover,
+                                  // ),
+                                ),
+                              ),
+                            ),
+                          ),
+                          Text(
+                            userName,
+                            style: TextStyle(color: Colors.white, fontSize: 20),
+                          ),
+                        ],
+                      );
+                    }
+                  },
                 ),
               ),
               Padding(

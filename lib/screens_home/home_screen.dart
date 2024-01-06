@@ -60,13 +60,21 @@ class _HomeScreenState extends State<HomeScreen> {
                   Tab(
                     child: Text(
                       'Beginner',
-                      style: TextStyle(color: Colors.white, letterSpacing: 1),
+                      style: TextStyle(
+                        color: Colors.white,
+                        letterSpacing: 1,
+                        fontFamily: 'JacquesFracois',
+                      ),
                     ),
                   ),
                   Tab(
                     child: Text(
                       'Intermediate',
-                      style: TextStyle(color: Colors.white, letterSpacing: 1),
+                      style: TextStyle(
+                        color: Colors.white,
+                        letterSpacing: 1,
+                        fontFamily: 'JacquesFracois',
+                      ),
                     ),
                   ),
                 ],
