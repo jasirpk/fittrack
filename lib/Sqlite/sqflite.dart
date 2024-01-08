@@ -117,4 +117,19 @@ class DatabaseHelper {
         'update users set Imagepath=?,usrName=?,usrMail=?,usrPassword=? where usrid=?',
         [Imagepath, usrName, usrMail, usrPassword, usrId]);
   }
+
+// Update user
+//   Future<int> updateuser({
+//     required String Imagepath,
+//     required String usrName,
+//     required String usrMail,
+//     required String usrPassword,
+//     required String usrId,
+//   }) async {
+//     final Database db = await initDB();
+//     return db.rawUpdate(
+//       'update users set Imagepath=?, usrName=?, usrMail=?, usrPassword=? where usrid=?',
+//       [Imagepath, usrName, usrMail, usrPassword, usrId],
+//     );
+//   }
 }

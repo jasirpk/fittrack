@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:fittrack/Sqlite/sqflite.dart';
 import 'package:fittrack/Sqlite/usermodal.dart';
+import 'package:fittrack/screens_Admin/login_Admin.dart';
 import 'package:fittrack/screens_welcome/addnote.dart';
 import 'package:fittrack/screens_welcome/login_screen.dart';
 import 'package:fittrack/screens_home/home_screen.dart';
@@ -26,7 +27,7 @@ class _NavbarState extends State<Navbar> {
     {"icon": Icons.search, "title": "Search Exercises"},
     {"icon": Icons.message, "title": "Feedback"},
     {"icon": Icons.settings, "title": "Settings"},
-    {"icon": Icons.note, "title": "Admin"},
+    {"icon": Icons.admin_panel_settings, "title": "Admin"},
     {"icon": Icons.logout, "title": "SignOut"},
   ];
   late DatabaseHelper handler;
@@ -298,32 +299,90 @@ class _NavbarState extends State<Navbar> {
                           ),
                         ),
                       );
-                    }
-                    return Padding(
-                      padding:
-                          const EdgeInsets.only(left: 20, top: 12, bottom: 12),
-                      child: Container(
-                        height: 30,
-                        child: Column(
-                          children: [
-                            Row(
+                    } else if (index == exercise.length - -7) {
+                      return InkWell(
+                        splashColor: Colors.grey,
+                        onTap: () {
+                          Navigator.of(context).push(
+                            PageRouteBuilder(
+                              pageBuilder:
+                                  (context, animation, secondaryAnimation) {
+                                return Admin_Login();
+                              },
+                              transitionsBuilder: (context, animation,
+                                  secondaryAnimation, child) {
+                                const begin = Offset(1.0, 0.0);
+                                const end = Offset.zero;
+                                const curve = Curves.easeInOutQuad;
+
+                                var tween = Tween(begin: begin, end: end)
+                                    .chain(CurveTween(curve: curve));
+                                var offsetAnimation = animation.drive(tween);
+
+                                return SlideTransition(
+                                  position: offsetAnimation,
+                                  child: child,
+                                );
+                              },
+                              transitionDuration: Duration(
+                                  milliseconds:
+                                      500), // Adjust the duration as needed
+                            ),
+                          );
+                        },
+                        child: Padding(
+                          padding: const EdgeInsets.only(
+                              left: 20, top: 12, bottom: 12),
+                          child: Container(
+                            height: 30,
+                            child: Column(
                               children: [
-                                Icon(exercise['icon'] as IconData),
-                                SizedBox(
-                                  width: 20,
-                                ),
-                                Text(
-                                  exercise['title'] as String,
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.w500,
-                                      fontSize: 14),
+                                Row(
+                                  children: [
+                                    Icon(exercise['icon'] as IconData),
+                                    SizedBox(
+                                      width: 20,
+                                    ),
+                                    Text(
+                                      exercise['title'] as String,
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.w500,
+                                          fontSize: 14),
+                                    ),
+                                  ],
                                 ),
                               ],
                             ),
-                          ],
+                          ),
                         ),
-                      ),
-                    );
+                      );
+                    } else {
+                      return Padding(
+                        padding: const EdgeInsets.only(
+                            left: 20, top: 12, bottom: 12),
+                        child: Container(
+                          height: 30,
+                          child: Column(
+                            children: [
+                              Row(
+                                children: [
+                                  Icon(exercise['icon'] as IconData),
+                                  SizedBox(
+                                    width: 20,
+                                  ),
+                                  Text(
+                                    exercise['title'] as String,
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.w500,
+                                        fontSize: 14),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                        ),
+                      );
+                    }
                   },
                 ),
               ),

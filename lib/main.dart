@@ -6,6 +6,7 @@ import 'package:fittrack/screens_home/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+const Save_key = 'UserLoggedIn';
 main() {
   runApp(Fit_Track());
 }
