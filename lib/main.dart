@@ -41,6 +41,8 @@ class _Splash_ScreenState extends State<Splash_Screen> {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String? email = prefs.getString('email');
     String? password = prefs.getString('password');
+    String? name = prefs.getString('name');
+    String? imagepath = prefs.getString('imagepat');
     var db = DatabaseHelper();
     // Check if email and password are not null
     if (email != null && password != null) {
@@ -54,8 +56,21 @@ class _Splash_ScreenState extends State<Splash_Screen> {
           Imagepath: null,
         ),
       );
-
+      var result = await db.SignUp(Users(
+          usrName: name,
+          usrMail: email,
+          usrPassword: password,
+          Imagepath: imagepath));
       if (response == true) {
+        await Future.delayed(Duration(seconds: 1));
+        // If auto-login successful, navigate to Home screenn
+        Navigator.of(context).pushReplacement(
+          MaterialPageRoute(
+            builder: (ctx) => HomeScreen(),
+          ),
+        );
+        return;
+      } else if (result == true) {
         await Future.delayed(Duration(seconds: 1));
         // If auto-login successful, navigate to Home screenn
         Navigator.of(context).pushReplacement(
