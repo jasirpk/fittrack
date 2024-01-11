@@ -99,7 +99,7 @@ flutter:
     - assets/images/istockphoto-679305702-170667a.jpg
     - assets/images/chest_feature.webp
     - assets/images/greatest-abs-exercises-1445673601.jpg
-    - assets/images_Items/284-2840011_person-in-gray-hoodie-using-computer-inside-dark.jpg
+    - assets/images/284-2840011_person-in-gray-hoodie-using-computer-inside-dark.jpg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

@@ -22,7 +22,7 @@ class _Admin_LoginState extends State<Admin_Login> {
           decoration: BoxDecoration(
             image: DecorationImage(
                 image: AssetImage(
-                  'assets/images_Items/284-2840011_person-in-gray-hoodie-using-computer-inside-dark.jpg',
+                  'assets/images/284-2840011_person-in-gray-hoodie-using-computer-inside-dark.jpg',
                 ),
                 fit: BoxFit.cover),
           ),
