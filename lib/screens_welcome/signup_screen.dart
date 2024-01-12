@@ -93,13 +93,9 @@ class _SignUp_ScreenState extends State<SignUp_Screen> {
                                 ),
                               ),
                               if (!isImageSelected)
-                                Text(
-                                  'Image is required',
-                                  style: TextStyle(
-                                    color: Colors.red,
-                                    fontSize: 12,
-                                  ),
-                                ),
+                                Text('Image is required',
+                                    style: TextStyle(
+                                        color: Colors.red, fontSize: 12)),
                               Padding(
                                   padding: const EdgeInsets.all(8.0),
                                   child: TextFormField(
@@ -113,120 +109,118 @@ class _SignUp_ScreenState extends State<SignUp_Screen> {
                                     },
                                     controller: NameController,
                                     decoration: InputDecoration(
-                                      prefixIcon: Icon(
-                                        Icons.person,
-                                        color: Colors.white,
-                                      ),
-                                      focusedBorder: OutlineInputBorder(
-                                        borderRadius: BorderRadius.circular(20),
-                                        borderSide:
-                                            BorderSide(color: Colors.blue),
-                                      ),
-                                      enabledBorder: OutlineInputBorder(
-                                        borderRadius: BorderRadius.circular(20),
-                                        borderSide: BorderSide(
-                                            color: Color.fromARGB(
-                                                255, 120, 117, 117)),
-                                      ),
-                                      labelText: 'Name',
-                                      labelStyle:
-                                          TextStyle(color: Colors.white),
-                                    ),
+                                        prefixIcon: Icon(Icons.person,
+                                            color: Colors.white),
+                                        focusedBorder: OutlineInputBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(20),
+                                            borderSide:
+                                                BorderSide(color: Colors.blue)),
+                                        enabledBorder: OutlineInputBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(20),
+                                          borderSide: BorderSide(
+                                              color: Color.fromARGB(
+                                                  255, 120, 117, 117)),
+                                        ),
+                                        labelText: 'Name',
+                                        labelStyle:
+                                            TextStyle(color: Colors.white)),
                                     style: TextStyle(color: Colors.white),
                                   )),
                               Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: TextFormField(
-                                  autovalidateMode:
-                                      AutovalidateMode.onUserInteraction,
-                                  validator: (value) {
-                                    if (value!.isEmpty) {
-                                      return 'Email Address Required';
-                                    }
-                                    bool emailvalid = RegExp(
-                                            r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
-                                        .hasMatch(value);
-                                    if (!emailvalid) {
-                                      return "Enter Valid Email";
-                                    }
-                                    return null;
-                                  },
-                                  controller: EmailAddressController,
-                                  keyboardType: TextInputType.emailAddress,
-                                  decoration: InputDecoration(
-                                    prefixIcon: Icon(
-                                      Icons.email,
-                                      color: Colors.white,
-                                    ),
-                                    focusedBorder: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(20),
-                                      borderSide:
-                                          BorderSide(color: Colors.blue),
-                                    ),
-                                    enabledBorder: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(20),
-                                      borderSide: BorderSide(
-                                          color: Color.fromARGB(
-                                              255, 120, 117, 117)),
-                                    ),
-                                    labelText: 'Email Address',
-                                    labelStyle: TextStyle(color: Colors.white),
-                                  ),
-                                  style: TextStyle(color: Colors.white),
-                                ),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: TextFormField(
-                                  autovalidateMode:
-                                      AutovalidateMode.onUserInteraction,
-                                  validator: (value) {
-                                    if (value!.isEmpty) {
-                                      return "Password required";
-                                    } else if (passwordController.text.length <
-                                        4) {
-                                      return "password Length should be more than 4 characters";
-                                    }
-                                    return null;
-                                  },
-                                  controller: passwordController,
-                                  obscureText: passwordObscuretext,
-                                  keyboardType: TextInputType.visiblePassword,
-                                  decoration: InputDecoration(
-                                    prefixIcon: Icon(
-                                      Icons.key,
-                                      color: Colors.white,
-                                    ),
-                                    suffixIcon: IconButton(
-                                        onPressed: () {
-                                          setState(() {
-                                            passwordObscuretext =
-                                                !passwordObscuretext;
-                                          });
-                                        },
-                                        icon: Icon(
-                                          passwordObscuretext
-                                              ? Icons.visibility_off
-                                              : Icons.visibility,
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: TextFormField(
+                                      autovalidateMode:
+                                          AutovalidateMode.onUserInteraction,
+                                      validator: (value) {
+                                        if (value!.isEmpty) {
+                                          return 'Email Address Required';
+                                        }
+                                        bool emailvalid = RegExp(
+                                                r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+                                            .hasMatch(value);
+                                        if (!emailvalid) {
+                                          return "Enter Valid Email";
+                                        }
+                                        return null;
+                                      },
+                                      controller: EmailAddressController,
+                                      keyboardType: TextInputType.emailAddress,
+                                      decoration: InputDecoration(
+                                        prefixIcon: Icon(
+                                          Icons.email,
                                           color: Colors.white,
-                                        )),
-                                    focusedBorder: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(20),
-                                      borderSide:
-                                          BorderSide(color: Colors.blue),
-                                    ),
-                                    enabledBorder: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(20),
-                                      borderSide: BorderSide(
-                                          color: Color.fromARGB(
-                                              255, 120, 117, 117)),
-                                    ),
-                                    labelText: 'Password',
-                                    labelStyle: TextStyle(color: Colors.white),
-                                  ),
-                                  style: TextStyle(color: Colors.white),
-                                ),
-                              ),
+                                        ),
+                                        focusedBorder: OutlineInputBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(20),
+                                          borderSide:
+                                              BorderSide(color: Colors.blue),
+                                        ),
+                                        enabledBorder: OutlineInputBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(20),
+                                          borderSide: BorderSide(
+                                              color: Color.fromARGB(
+                                                  255, 120, 117, 117)),
+                                        ),
+                                        labelText: 'Email Address',
+                                        labelStyle:
+                                            TextStyle(color: Colors.white),
+                                      ),
+                                      style: TextStyle(color: Colors.white))),
+                              Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: TextFormField(
+                                      autovalidateMode:
+                                          AutovalidateMode.onUserInteraction,
+                                      validator: (value) {
+                                        if (value!.isEmpty) {
+                                          return "Password required";
+                                        } else if (passwordController
+                                                .text.length <
+                                            4) {
+                                          return "password Length should be more than 4 characters";
+                                        }
+                                        return null;
+                                      },
+                                      controller: passwordController,
+                                      obscureText: passwordObscuretext,
+                                      keyboardType:
+                                          TextInputType.visiblePassword,
+                                      decoration: InputDecoration(
+                                        prefixIcon: Icon(Icons.key,
+                                            color: Colors.white),
+                                        suffixIcon: IconButton(
+                                            onPressed: () {
+                                              setState(() {
+                                                passwordObscuretext =
+                                                    !passwordObscuretext;
+                                              });
+                                            },
+                                            icon: Icon(
+                                                passwordObscuretext
+                                                    ? Icons.visibility_off
+                                                    : Icons.visibility,
+                                                color: Colors.white)),
+                                        focusedBorder: OutlineInputBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(20),
+                                          borderSide:
+                                              BorderSide(color: Colors.blue),
+                                        ),
+                                        enabledBorder: OutlineInputBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(20),
+                                            borderSide: BorderSide(
+                                                color: Color.fromARGB(
+                                                    255, 120, 117, 117))),
+                                        labelText: 'Password',
+                                        labelStyle:
+                                            TextStyle(color: Colors.white),
+                                      ),
+                                      style: TextStyle(color: Colors.white))),
                               Padding(
                                   padding: const EdgeInsets.all(8.0),
                                   child: TextFormField(
@@ -242,10 +236,8 @@ class _SignUp_ScreenState extends State<SignUp_Screen> {
                                     obscureText: confirmpasswordobscuretext,
                                     keyboardType: TextInputType.visiblePassword,
                                     decoration: InputDecoration(
-                                      prefixIcon: Icon(
-                                        Icons.key,
-                                        color: Colors.white,
-                                      ),
+                                      prefixIcon:
+                                          Icon(Icons.key, color: Colors.white),
                                       suffixIcon: IconButton(
                                           onPressed: () {
                                             setState(() {
@@ -265,11 +257,11 @@ class _SignUp_ScreenState extends State<SignUp_Screen> {
                                             BorderSide(color: Colors.blue),
                                       ),
                                       enabledBorder: OutlineInputBorder(
-                                        borderRadius: BorderRadius.circular(20),
-                                        borderSide: BorderSide(
-                                            color: Color.fromARGB(
-                                                255, 120, 117, 117)),
-                                      ),
+                                          borderRadius:
+                                              BorderRadius.circular(20),
+                                          borderSide: BorderSide(
+                                              color: Color.fromARGB(
+                                                  255, 120, 117, 117))),
                                       labelText: ' Confirm Password',
                                       labelStyle:
                                           TextStyle(color: Colors.white),
@@ -327,10 +319,9 @@ class _SignUp_ScreenState extends State<SignUp_Screen> {
                                           } else {
                                             ScaffoldMessenger.of(context)
                                                 .showSnackBar(SnackBar(
-                                              backgroundColor: Colors.red,
-                                              content: Text(
-                                                  "Password does not match."),
-                                            ));
+                                                    backgroundColor: Colors.red,
+                                                    content: Text(
+                                                        "Password does not match.")));
                                           }
                                         } else {
                                           setState(() {

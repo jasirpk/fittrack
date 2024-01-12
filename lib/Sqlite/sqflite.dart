@@ -149,7 +149,6 @@ class DatabaseHelper {
         ]);
   }
 
-// Ubdate users
   Future<int> updateuser(
       Imagepath, usrName, usrMail, usrPassword, usrId) async {
     final Database db = await initDB();
