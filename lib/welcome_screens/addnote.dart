@@ -1,6 +1,6 @@
 import 'package:fittrack/Sqlite/notesmodal.dart';
 import 'package:fittrack/Sqlite/sqflite.dart';
-import 'package:fittrack/screens_welcome/feedback_screen.dart';
+import 'package:fittrack/welcome_screens/feedback_screen.dart';
 import 'package:flutter/material.dart';
 
 class create_note extends StatefulWidget {

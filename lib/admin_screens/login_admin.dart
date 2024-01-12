@@ -1,5 +1,5 @@
+import 'package:fittrack/admin_screens/create_Items.dart';
 import 'package:fittrack/main.dart';
-import 'package:fittrack/screens_Admin/create_Items.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -116,7 +116,7 @@ class _Admin_LoginState extends State<Admin_Login> {
       // Go to Home
       final sharedprefs = await SharedPreferences.getInstance();
       await sharedprefs.setBool(Save_key, true);
-      Navigator.of(ctx).pushReplacement(
+      Navigator.of(ctx).push(
         MaterialPageRoute(builder: (ctx1) => Create_ItemsScreen()),
       );
     } else if (UserNameController.text.isNotEmpty &&

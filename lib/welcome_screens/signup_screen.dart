@@ -1,8 +1,8 @@
 import 'dart:io';
 import 'package:fittrack/Sqlite/usermodal.dart';
 import 'package:fittrack/Sqlite/Sqflite.dart';
-import 'package:fittrack/screens_welcome/level_screen.dart';
-import 'package:fittrack/screens_welcome/login_screen.dart';
+import 'package:fittrack/welcome_screens/level_screen.dart';
+import 'package:fittrack/welcome_screens/login_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -42,11 +42,10 @@ class _SignUp_ScreenState extends State<SignUp_Screen> {
         body: SafeArea(
             child: Container(
                 decoration: BoxDecoration(
-                  image: DecorationImage(
-                      image: AssetImage(
-                          'assets/images/Screenshot 2023-12-19 140455.png'),
-                      fit: BoxFit.cover),
-                ),
+                    image: DecorationImage(
+                        image: AssetImage(
+                            'assets/images/Screenshot 2023-12-19 140455.png'),
+                        fit: BoxFit.cover)),
                 child: Center(
                     child: SingleChildScrollView(
                         child: Form(

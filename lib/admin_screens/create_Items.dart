@@ -1,10 +1,10 @@
 import 'dart:io';
 
-import 'package:fittrack/screens_Admin/update_items.dart';
+import 'package:fittrack/admin_screens/admin_panel.dart';
+import 'package:fittrack/admin_screens/update_items.dart';
 import 'package:flutter/material.dart';
 import 'package:fittrack/Sqlite/itemsmodal.dart';
 import 'package:fittrack/Sqlite/sqflite.dart';
-import 'package:fittrack/screens_Admin/adminpanel_Screen.dart';
 
 class Create_ItemsScreen extends StatefulWidget {
   const Create_ItemsScreen({Key? key}) : super(key: key);

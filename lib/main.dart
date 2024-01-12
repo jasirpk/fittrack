@@ -1,8 +1,8 @@
 // import 'package:fittrack/Sqlite/Sqflite.dart';
 import 'package:fittrack/Sqlite/sqflite.dart';
 import 'package:fittrack/Sqlite/usermodal.dart';
-import 'package:fittrack/screens_welcome/welcome_screen.dart';
-import 'package:fittrack/screens_home/home_screen.dart';
+import 'package:fittrack/welcome_screens/welcome_screen.dart';
+import 'package:fittrack/home_screens/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 

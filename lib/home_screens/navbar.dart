@@ -2,10 +2,10 @@ import 'dart:io';
 
 import 'package:fittrack/Sqlite/sqflite.dart';
 import 'package:fittrack/Sqlite/usermodal.dart';
-import 'package:fittrack/screens_Admin/login_Admin.dart';
-import 'package:fittrack/screens_welcome/addnote.dart';
-import 'package:fittrack/screens_welcome/login_screen.dart';
-import 'package:fittrack/screens_home/home_screen.dart';
+import 'package:fittrack/admin_screens/login_admin.dart';
+import 'package:fittrack/welcome_screens/addnote.dart';
+import 'package:fittrack/welcome_screens/login_screen.dart';
+import 'package:fittrack/home_screens/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 

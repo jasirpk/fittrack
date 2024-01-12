@@ -202,7 +202,6 @@ class _Update_ScreenState extends State<Update_Screen> {
                           });
                         },
                         items: <String>[
-                          'STRETCHES',
                           'CHEST',
                           'BACK',
                           'BUTTOCKS',

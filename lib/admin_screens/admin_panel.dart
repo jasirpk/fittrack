@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:fittrack/Sqlite/itemsmodal.dart';
 import 'package:fittrack/Sqlite/sqflite.dart';
-import 'package:fittrack/screens_Admin/create_Items.dart';
+import 'package:fittrack/admin_screens/create_Items.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -176,7 +176,6 @@ class _AdminPanel_ScreenState extends State<AdminPanel_Screen> {
                             });
                           },
                           items: <String>[
-                            'STRETCHES',
                             'CHEST',
                             'BACK',
                             'BUTTOCKS',

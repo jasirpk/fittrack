@@ -1,3 +1,5 @@
+import 'package:fittrack/items_screens/items_screen.dart';
+import 'package:fittrack/items_screens/stretcher_screen.dart';
 import 'package:flutter/material.dart';
 
 class Biginner_Screen extends StatefulWidget {
@@ -43,43 +45,50 @@ class _Biginner_ScreenState extends State<Biginner_Screen> {
       "image":
           "assets/images/Bald-Muscular-Body-Builder-Flexing-His-Biceps.jpg",
       "title": "Biceps",
-    },
+    }
   ];
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Padding(
-          padding: const EdgeInsets.all(12.0),
-          child: Card(
-            elevation: 10,
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Container(
-                height: 200,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(20),
-                  image: DecorationImage(
-                      image: AssetImage(
-                          'assets/images/istockphoto-679305702-170667a.jpg'),
-                      fit: BoxFit.cover),
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.all(12.0),
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      Text(
-                        'STRETCHES',
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 22,
-                            fontWeight: FontWeight.bold,
-                            letterSpacing: 1,
-                            fontFamily: "JacquesFracois"),
-                      ),
-                    ],
+        GestureDetector(
+          onTap: () {
+            Navigator.of(context).push(MaterialPageRoute(builder: (ctx) {
+              return Stretcher_Scree();
+            }));
+          },
+          child: Padding(
+            padding: const EdgeInsets.all(12.0),
+            child: Card(
+              elevation: 10,
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Container(
+                  height: 200,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(20),
+                    image: DecorationImage(
+                        image: AssetImage(
+                            'assets/images/istockphoto-679305702-170667a.jpg'),
+                        fit: BoxFit.cover),
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(12.0),
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        Text(
+                          'STRETCHES',
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 22,
+                              fontWeight: FontWeight.bold,
+                              letterSpacing: 1,
+                              fontFamily: "JacquesFracois"),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),
@@ -96,7 +105,16 @@ class _Biginner_ScreenState extends State<Biginner_Screen> {
               itemCount: catagaries.length,
               itemBuilder: (context, index) {
                 final catagarie = catagaries[index];
-                return Card(
+                return GestureDetector(
+                  onTap: () {
+                    Navigator.of(context)
+                        .push(MaterialPageRoute(builder: (ctx) {
+                      return Items_Screen(
+                        title: catagarie['title'],
+                        imagePath: catagarie['image'],
+                      );
+                    }));
+                  },
                   child: Padding(
                     padding: const EdgeInsets.all(12.0),
                     child: Container(
