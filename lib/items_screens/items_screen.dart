@@ -46,18 +46,6 @@ class _Items_ScreenState extends State<Items_Screen> {
             style: TextStyle(color: Colors.white),
           ),
         ),
-        // body: Center(
-        //     child: Column(
-        //   mainAxisAlignment: MainAxisAlignment.center,
-        //   children: [
-        //     Image.asset(widget.imagePath),
-        //     SizedBox(height: 20),
-        //     Text(
-        //       'Title: ${widget.title}',
-        //       style: TextStyle(fontSize: 20),
-        //     )
-        //   ],
-        // )),
         body: FutureBuilder<List<ItemModal>>(
             future: items,
             builder: (BuildContext context,
@@ -81,20 +69,23 @@ class _Items_ScreenState extends State<Items_Screen> {
                     ),
                     itemCount: items.length,
                     itemBuilder: (BuildContext context, int index) {
-                      return Container(
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(20),
-                            image: DecorationImage(
-                                image: FileImage(
-                                    File(items[index].itemImage ?? '')),
-                                fit: BoxFit.cover)),
-                        child: ListTile(
-                            title: Text(items[index].itemName,
-                                style: TextStyle(
-                                    letterSpacing: 1,
-                                    fontWeight: FontWeight.w900,
-                                    fontSize: 18,
-                                    color: Colors.white))),
+                      return Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Container(
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(20),
+                              image: DecorationImage(
+                                  image: FileImage(
+                                      File(items[index].itemImage ?? '')),
+                                  fit: BoxFit.cover)),
+                          child: ListTile(
+                              title: Text(items[index].itemName,
+                                  style: TextStyle(
+                                      letterSpacing: 1,
+                                      fontWeight: FontWeight.w900,
+                                      fontSize: 18,
+                                      color: Colors.white))),
+                        ),
                       );
                     });
               }

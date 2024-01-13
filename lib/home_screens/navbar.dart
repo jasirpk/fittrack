@@ -209,7 +209,7 @@ class _NavbarState extends State<Navbar> {
                                   return InkWell(
                                       splashColor: Colors.grey,
                                       onTap: () {
-                                        Navigator.of(context).pushReplacement(
+                                        Navigator.of(context).push(
                                             MaterialPageRoute(
                                                 builder: (ctx) =>
                                                     Admin_Login()));

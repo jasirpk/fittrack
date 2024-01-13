@@ -299,10 +299,6 @@ class _SignUp_ScreenState extends State<SignUp_Screen> {
                                               Imagepath:
                                                   imagepathcontroller.text,
                                             )).whenComplete(() {
-                                              print(
-                                                  'Stored ${NameController.text}');
-                                              print(
-                                                  "Imagepath: ${imagepathcontroller.text}");
                                               Navigator.push(context,
                                                   MaterialPageRoute(
                                                       builder: (context) {

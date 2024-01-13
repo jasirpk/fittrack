@@ -25,6 +25,14 @@ class _AdminPanel_ScreenState extends State<AdminPanel_Screen> {
   String? selectedWorkoutLevel;
   String? SelectedCategory;
   String? SelectedWorkoutPlan;
+  bool isItemImageSelected = false;
+  bool isItemDemoImageSelected = false;
+  @override
+  void initState() {
+    removeImageErroMessage();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -89,6 +97,9 @@ class _AdminPanel_ScreenState extends State<AdminPanel_Screen> {
                         },
                         icon: Icon(Icons.image),
                       ),
+                      if (!isItemImageSelected)
+                        Text('Image is required',
+                            style: TextStyle(color: Colors.red, fontSize: 12)),
                       Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: Row(children: [
@@ -121,10 +132,20 @@ class _AdminPanel_ScreenState extends State<AdminPanel_Screen> {
                             pickImageFromGallery('fitnessItemDemo');
                           },
                           icon: Icon(Icons.video_camera_back)),
+                      if (!isItemDemoImageSelected)
+                        Text('Item Demo Image is required',
+                            style: TextStyle(color: Colors.red, fontSize: 12)),
                       SizedBox(
                         height: 20,
                       ),
                       TextFormField(
+                        autovalidateMode: AutovalidateMode.onUserInteraction,
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Item name is required';
+                          }
+                          return null;
+                        },
                         controller: ItemNameController,
                         decoration: InputDecoration(
                             labelText: 'Item name',
@@ -137,6 +158,13 @@ class _AdminPanel_ScreenState extends State<AdminPanel_Screen> {
                         height: 20,
                       ),
                       DropdownButtonFormField<String>(
+                        autovalidateMode: AutovalidateMode.onUserInteraction,
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Workout level is required';
+                          }
+                          return null;
+                        },
                         decoration: InputDecoration(
                             labelText: 'Select Workout level',
                             labelStyle: TextStyle(
@@ -161,6 +189,13 @@ class _AdminPanel_ScreenState extends State<AdminPanel_Screen> {
                       ),
                       SizedBox(height: 20),
                       DropdownButtonFormField<String>(
+                          autovalidateMode: AutovalidateMode.onUserInteraction,
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return 'category is required';
+                            }
+                            return null;
+                          },
                           decoration: InputDecoration(
                               labelText: 'Select category',
                               labelStyle: TextStyle(
@@ -196,6 +231,13 @@ class _AdminPanel_ScreenState extends State<AdminPanel_Screen> {
                         height: 20,
                       ),
                       DropdownButtonFormField<String>(
+                          autovalidateMode: AutovalidateMode.onUserInteraction,
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return 'wrokout plan is required';
+                            }
+                            return null;
+                          },
                           decoration: InputDecoration(
                               labelText: 'Select Workout plan',
                               labelStyle: TextStyle(
@@ -231,6 +273,13 @@ class _AdminPanel_ScreenState extends State<AdminPanel_Screen> {
                                 ))
                           ])),
                       TextFormField(
+                        autovalidateMode: AutovalidateMode.onUserInteraction,
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Description is required';
+                          }
+                          return null;
+                        },
                         controller: DescriptionController,
                         decoration: InputDecoration(
                           labelText: 'Description',
@@ -247,7 +296,14 @@ class _AdminPanel_ScreenState extends State<AdminPanel_Screen> {
                       Row(mainAxisAlignment: MainAxisAlignment.end, children: [
                         ElevatedButton(
                             onPressed: () async {
-                              if (formKey.currentState!.validate()) {
+                              if (!isItemImageSelected &&
+                                  fitnessItemImage != null) {
+                                setState(() {
+                                  isItemImageSelected = false;
+                                });
+                              }
+                              if (formKey.currentState!.validate() &&
+                                  fitnessItemImage != null) {
                                 final db = DatabaseHelper();
                                 int result = await db.createitem(ItemModal(
                                   itemImage:
@@ -262,22 +318,25 @@ class _AdminPanel_ScreenState extends State<AdminPanel_Screen> {
                                 ));
 
                                 if (result > 0) {
-                                  // Item created successfully
-                                  print('Item created successfully');
-                                  print(
-                                      'Item image: ${fitnessItemImagePathController.text}');
-                                  print(
-                                      'Item name: ${ItemNameController.text}');
-                                  print('Selected plan: $SelectedCategory');
-
                                   Navigator.of(context).pushReplacement(
                                       MaterialPageRoute(builder: (ctx) {
                                     return Create_ItemsScreen();
                                   }));
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(
+                                          backgroundColor: Colors.blue,
+                                          content: Text(
+                                              "Item Are Successfully Added")));
                                 } else {
                                   // Item creation failed
                                   print('Item creation failed');
                                 }
+                              } else {
+                                setState(() {
+                                  if (fitnessItemImage == null) {
+                                    isItemImageSelected = false;
+                                  }
+                                });
                               }
                             },
                             style: ElevatedButton.styleFrom(
@@ -297,16 +356,27 @@ class _AdminPanel_ScreenState extends State<AdminPanel_Screen> {
     final returnimage =
         await ImagePicker().pickImage(source: ImageSource.gallery);
     if (returnimage == null) {
+      isItemImageSelected = false;
+
       return;
     }
+
     setState(() {
       if (imageType == 'fitnessItem') {
         fitnessItemImage = File(returnimage.path);
         fitnessItemImagePathController.text = returnimage.path.toString();
+        isItemImageSelected = true;
       } else if (imageType == 'fitnessItemDemo') {
         fitnessItemDemoImage = File(returnimage.path);
         fitnessItemDemoImagePathController.text = returnimage.path.toString();
       }
+    });
+  }
+
+  void removeImageErroMessage() {
+    setState(() {
+      isItemImageSelected = true;
+      isItemDemoImageSelected = true;
     });
   }
 }
