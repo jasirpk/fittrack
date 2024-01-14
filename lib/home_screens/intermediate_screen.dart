@@ -61,32 +61,30 @@ class _intermediate_ScreenState extends State<intermediate_Screen> {
       Padding(
           padding: const EdgeInsets.all(12.0),
           child: Card(
-              elevation: 10,
-              child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Container(
-                      height: 200,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20),
-                        image: DecorationImage(
-                            image: AssetImage(
-                                'assets/images/stretching-man-GettyImages-654424976.jpg'),
-                            fit: BoxFit.cover),
-                      ),
-                      child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Row(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              mainAxisAlignment: MainAxisAlignment.end,
-                              children: [
-                                Text('STRETCHES',
-                                    style: TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 24,
-                                        fontWeight: FontWeight.bold,
-                                        letterSpacing: 1,
-                                        fontFamily: "JacquesFracois"))
-                              ])))))),
+              elevation: 0,
+              child: Container(
+                  height: 200,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(20),
+                    image: DecorationImage(
+                        image: AssetImage(
+                            'assets/images/stretching-man-GettyImages-654424976.jpg'),
+                        fit: BoxFit.cover),
+                  ),
+                  child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            Text('STRETCHES',
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 24,
+                                    fontWeight: FontWeight.bold,
+                                    letterSpacing: 1,
+                                    fontFamily: "JacquesFracois"))
+                          ]))))),
       Expanded(
           child: Container(
               child: GridView.builder(
