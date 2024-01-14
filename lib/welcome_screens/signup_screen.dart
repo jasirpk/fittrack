@@ -3,6 +3,10 @@ import 'package:fittrack/Sqlite/usermodal.dart';
 import 'package:fittrack/Sqlite/Sqflite.dart';
 import 'package:fittrack/welcome_screens/level_screen.dart';
 import 'package:fittrack/welcome_screens/login_screen.dart';
+import 'package:fittrack/welcome_screens/signup_widgets/confirm_password.dart';
+import 'package:fittrack/welcome_screens/signup_widgets/email_field_custom.dart';
+import 'package:fittrack/welcome_screens/signup_widgets/name_field_custom.dart';
+import 'package:fittrack/welcome_screens/signup_widgets/password_field_custom.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -60,26 +64,26 @@ class _SignUp_ScreenState extends State<SignUp_Screen> {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   Container(
-                                      height: 200,
-                                      width: 200,
-                                      decoration: BoxDecoration(
-                                        border: Border.all(),
-                                        borderRadius:
-                                            BorderRadius.circular(100),
-                                        image: DecorationImage(
-                                            image: AssetImage(
-                                                'assets/images/images.png'),
-                                            fit: BoxFit.cover),
-                                      ),
-                                      child: selectedImage != null
-                                          ? ClipRRect(
-                                              borderRadius:
-                                                  BorderRadius.circular(100),
-                                              child: Image.file(
-                                                selectedImage!,
-                                                fit: BoxFit.cover,
-                                              ))
-                                          : SizedBox()),
+                                    height: 200,
+                                    width: 200,
+                                    decoration: BoxDecoration(
+                                      border: Border.all(),
+                                      borderRadius: BorderRadius.circular(100),
+                                      image: DecorationImage(
+                                          image: AssetImage(
+                                              'assets/images/images.png'),
+                                          fit: BoxFit.cover),
+                                    ),
+                                    child: selectedImage != null
+                                        ? ClipRRect(
+                                            borderRadius:
+                                                BorderRadius.circular(100),
+                                            child: Image.file(
+                                              selectedImage!,
+                                              fit: BoxFit.cover,
+                                            ))
+                                        : SizedBox(),
+                                  ),
                                 ],
                               ),
                               IconButton(
@@ -96,176 +100,25 @@ class _SignUp_ScreenState extends State<SignUp_Screen> {
                                     style: TextStyle(
                                         color: Colors.red, fontSize: 12)),
                               Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Custom_Name_field(
+                                    NameController: NameController),
+                              ),
+                              Padding(
                                   padding: const EdgeInsets.all(8.0),
-                                  child: TextFormField(
-                                    autovalidateMode:
-                                        AutovalidateMode.onUserInteraction,
-                                    validator: (value) {
-                                      if (value!.isEmpty) {
-                                        return "UserName required";
-                                      }
-                                      return null;
-                                    },
-                                    controller: NameController,
-                                    decoration: InputDecoration(
-                                        prefixIcon: Icon(Icons.person,
-                                            color: Colors.white),
-                                        focusedBorder: OutlineInputBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(20),
-                                            borderSide:
-                                                BorderSide(color: Colors.blue)),
-                                        enabledBorder: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(20),
-                                          borderSide: BorderSide(
-                                              color: Color.fromARGB(
-                                                  255, 120, 117, 117)),
-                                        ),
-                                        labelText: 'Name',
-                                        labelStyle:
-                                            TextStyle(color: Colors.white)),
-                                    style: TextStyle(color: Colors.white),
+                                  child: Email_field_screen(
+                                      EmailAddressController:
+                                          EmailAddressController)),
+                              Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Password_Field_Screen(
+                                    passwordController: passwordController,
                                   )),
                               Padding(
                                   padding: const EdgeInsets.all(8.0),
-                                  child: TextFormField(
-                                      autovalidateMode:
-                                          AutovalidateMode.onUserInteraction,
-                                      validator: (value) {
-                                        if (value!.isEmpty) {
-                                          return 'Email Address Required';
-                                        }
-                                        bool emailvalid = RegExp(
-                                                r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
-                                            .hasMatch(value);
-                                        if (!emailvalid) {
-                                          return "Enter Valid Email";
-                                        }
-                                        return null;
-                                      },
-                                      controller: EmailAddressController,
-                                      keyboardType: TextInputType.emailAddress,
-                                      decoration: InputDecoration(
-                                        prefixIcon: Icon(
-                                          Icons.email,
-                                          color: Colors.white,
-                                        ),
-                                        focusedBorder: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(20),
-                                          borderSide:
-                                              BorderSide(color: Colors.blue),
-                                        ),
-                                        enabledBorder: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(20),
-                                          borderSide: BorderSide(
-                                              color: Color.fromARGB(
-                                                  255, 120, 117, 117)),
-                                        ),
-                                        labelText: 'Email Address',
-                                        labelStyle:
-                                            TextStyle(color: Colors.white),
-                                      ),
-                                      style: TextStyle(color: Colors.white))),
-                              Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: TextFormField(
-                                      autovalidateMode:
-                                          AutovalidateMode.onUserInteraction,
-                                      validator: (value) {
-                                        if (value!.isEmpty) {
-                                          return "Password required";
-                                        } else if (passwordController
-                                                .text.length <
-                                            4) {
-                                          return "password Length should be more than 4 characters";
-                                        }
-                                        return null;
-                                      },
-                                      controller: passwordController,
-                                      obscureText: passwordObscuretext,
-                                      keyboardType:
-                                          TextInputType.visiblePassword,
-                                      decoration: InputDecoration(
-                                        prefixIcon: Icon(Icons.key,
-                                            color: Colors.white),
-                                        suffixIcon: IconButton(
-                                            onPressed: () {
-                                              setState(() {
-                                                passwordObscuretext =
-                                                    !passwordObscuretext;
-                                              });
-                                            },
-                                            icon: Icon(
-                                                passwordObscuretext
-                                                    ? Icons.visibility_off
-                                                    : Icons.visibility,
-                                                color: Colors.white)),
-                                        focusedBorder: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(20),
-                                          borderSide:
-                                              BorderSide(color: Colors.blue),
-                                        ),
-                                        enabledBorder: OutlineInputBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(20),
-                                            borderSide: BorderSide(
-                                                color: Color.fromARGB(
-                                                    255, 120, 117, 117))),
-                                        labelText: 'Password',
-                                        labelStyle:
-                                            TextStyle(color: Colors.white),
-                                      ),
-                                      style: TextStyle(color: Colors.white))),
-                              Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: TextFormField(
-                                    autovalidateMode:
-                                        AutovalidateMode.onUserInteraction,
-                                    validator: (value) {
-                                      if (value!.isEmpty) {
-                                        return "Password Does Not Match";
-                                      }
-                                      return null;
-                                    },
-                                    controller: ConfirmpasswordController,
-                                    obscureText: confirmpasswordobscuretext,
-                                    keyboardType: TextInputType.visiblePassword,
-                                    decoration: InputDecoration(
-                                      prefixIcon:
-                                          Icon(Icons.key, color: Colors.white),
-                                      suffixIcon: IconButton(
-                                          onPressed: () {
-                                            setState(() {
-                                              confirmpasswordobscuretext =
-                                                  !confirmpasswordobscuretext;
-                                            });
-                                          },
-                                          icon: Icon(
-                                            confirmpasswordobscuretext
-                                                ? Icons.visibility_off
-                                                : Icons.visibility,
-                                            color: Colors.white,
-                                          )),
-                                      focusedBorder: OutlineInputBorder(
-                                        borderRadius: BorderRadius.circular(20),
-                                        borderSide:
-                                            BorderSide(color: Colors.blue),
-                                      ),
-                                      enabledBorder: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(20),
-                                          borderSide: BorderSide(
-                                              color: Color.fromARGB(
-                                                  255, 120, 117, 117))),
-                                      labelText: ' Confirm Password',
-                                      labelStyle:
-                                          TextStyle(color: Colors.white),
-                                    ),
-                                    style: TextStyle(color: Colors.white),
+                                  child: Confirm_Password_Screen(
+                                    ConfirmpasswordController:
+                                        ConfirmpasswordController,
                                   )),
                               Padding(
                                   padding: const EdgeInsets.all(8.0),

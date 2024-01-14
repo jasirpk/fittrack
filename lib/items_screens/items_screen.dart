@@ -63,8 +63,6 @@ class _Items_ScreenState extends State<Items_Screen> {
                 return GridView.builder(
                     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 1,
-                      // crossAxisSpacing: 8.0,
-                      // mainAxisSpacing: 8.0,
                       childAspectRatio: 1.5,
                     ),
                     itemCount: items.length,
