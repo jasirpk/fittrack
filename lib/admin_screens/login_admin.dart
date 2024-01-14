@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:fittrack/admin_screens/create_Items.dart';
 import 'package:fittrack/main.dart';
 import 'package:flutter/material.dart';
@@ -26,78 +28,81 @@ class _Admin_LoginState extends State<Admin_Login> {
                 ),
                 fit: BoxFit.cover),
           ),
-          child: Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Form(
-              key: formkey,
-              child: Container(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: [
-                    TextFormField(
-                      autovalidateMode: AutovalidateMode.onUserInteraction,
-                      validator: (value) {
-                        if (value!.isEmpty) {
-                          return "Message Required";
-                        }
-                        return null;
-                      },
-                      controller: UserNameController,
-                      decoration: InputDecoration(
-                          labelText: 'Message',
-                          labelStyle: TextStyle(
-                            color: Colors.white38,
-                            fontFamily: 'JacquesFracois',
-                          ),
-                          prefixIcon: Icon(
-                            Icons.admin_panel_settings,
-                            color: Colors.white,
-                          )),
-                      style: TextStyle(color: Colors.white),
-                    ),
-                    SizedBox(
-                      height: 30,
-                    ),
-                    TextFormField(
-                      autovalidateMode: AutovalidateMode.onUserInteraction,
-                      validator: (value) {
-                        if (value!.isEmpty) {
-                          return "Password Required";
-                        }
-                        return null;
-                      },
-                      controller: UserPasswordController,
-                      decoration: InputDecoration(
-                          labelText: 'Password',
-                          labelStyle: TextStyle(
-                            color: Colors.white38,
-                            fontFamily: 'JacquesFracois',
-                          ),
-                          prefixIcon: Icon(
-                            Icons.lock,
-                            color: Colors.white,
-                          )),
-                      style: TextStyle(color: Colors.white),
-                    ),
-                    SizedBox(
-                      height: 30,
-                    ),
-                    ElevatedButton(
-                        onPressed: () {
-                          if (formkey.currentState!.validate()) {
-                            // passwordController.clear();
-                            // EmailAddressController.clear();
+          child: BackdropFilter(
+            filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
+            child: Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Form(
+                key: formkey,
+                child: Container(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: [
+                      TextFormField(
+                        autovalidateMode: AutovalidateMode.onUserInteraction,
+                        validator: (value) {
+                          if (value!.isEmpty) {
+                            return "Message Required";
                           }
-                          checkLogin(context);
+                          return null;
                         },
-                        child: Text(
-                          'Login',
-                          style: TextStyle(
+                        controller: UserNameController,
+                        decoration: InputDecoration(
+                            labelText: 'Message',
+                            labelStyle: TextStyle(
+                              color: Colors.white38,
                               fontFamily: 'JacquesFracois',
-                              fontWeight: FontWeight.bold),
-                        ))
-                  ],
+                            ),
+                            prefixIcon: Icon(
+                              Icons.admin_panel_settings,
+                              color: Colors.white,
+                            )),
+                        style: TextStyle(color: Colors.white),
+                      ),
+                      SizedBox(
+                        height: 30,
+                      ),
+                      TextFormField(
+                        autovalidateMode: AutovalidateMode.onUserInteraction,
+                        validator: (value) {
+                          if (value!.isEmpty) {
+                            return "Password Required";
+                          }
+                          return null;
+                        },
+                        controller: UserPasswordController,
+                        decoration: InputDecoration(
+                            labelText: 'Password',
+                            labelStyle: TextStyle(
+                              color: Colors.white38,
+                              fontFamily: 'JacquesFracois',
+                            ),
+                            prefixIcon: Icon(
+                              Icons.lock,
+                              color: Colors.white,
+                            )),
+                        style: TextStyle(color: Colors.white),
+                      ),
+                      SizedBox(
+                        height: 30,
+                      ),
+                      ElevatedButton(
+                          onPressed: () {
+                            if (formkey.currentState!.validate()) {
+                              // passwordController.clear();
+                              // EmailAddressController.clear();
+                            }
+                            checkLogin(context);
+                          },
+                          child: Text(
+                            'Login',
+                            style: TextStyle(
+                                fontFamily: 'JacquesFracois',
+                                fontWeight: FontWeight.bold),
+                          ))
+                    ],
+                  ),
                 ),
               ),
             ),
@@ -116,7 +121,7 @@ class _Admin_LoginState extends State<Admin_Login> {
       // Go to Home
       final sharedprefs = await SharedPreferences.getInstance();
       await sharedprefs.setBool(Save_key, true);
-      Navigator.of(ctx).push(
+      Navigator.of(ctx).pushReplacement(
         MaterialPageRoute(builder: (ctx1) => Create_ItemsScreen()),
       );
     } else if (UserNameController.text.isNotEmpty &&

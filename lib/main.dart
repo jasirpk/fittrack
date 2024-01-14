@@ -141,22 +141,11 @@ class _Splash_ScreenState extends State<Splash_Screen> {
                   padding: const EdgeInsets.all(16.0),
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(30),
-                    child: GestureDetector(
-                      onTap: () {
-                        Navigator.of(context).push(
-                          MaterialPageRoute(
-                            builder: (ctx) {
-                              return AboutScreen();
-                            },
-                          ),
-                        );
-                      },
-                      child: Image(
-                        image: AssetImage(
-                          'assets/images/Screenshot 2023-12-18 185831.png',
-                        ),
-                        fit: BoxFit.cover,
+                    child: Image(
+                      image: AssetImage(
+                        'assets/images/Screenshot 2023-12-18 185831.png',
                       ),
+                      fit: BoxFit.cover,
                     ),
                   ),
                 ),

@@ -1,8 +1,12 @@
 import 'dart:io';
 
-import 'package:fittrack/Sqlite/itemsmodal.dart';
-import 'package:fittrack/Sqlite/sqflite.dart';
-import 'package:fittrack/admin_screens/create_Items.dart';
+import 'package:fittrack/admin_screens/admin_widgets/category_widget.dart';
+import 'package:fittrack/admin_screens/admin_widgets/item_image.dart';
+import 'package:fittrack/admin_screens/admin_widgets/itemdemo_image.dart';
+import 'package:fittrack/admin_screens/admin_widgets/itemname_field.dart';
+import 'package:fittrack/admin_screens/admin_widgets/workoutlevel_widget.dart';
+import 'package:fittrack/admin_screens/admin_widgets/workoutplan_widget.dart';
+import 'package:fittrack/admin_screens/description_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -76,21 +80,7 @@ class _AdminPanel_ScreenState extends State<AdminPanel_Screen> {
                                   letterSpacing: 1,
                                 ))
                           ])),
-                      Container(
-                          height: 180,
-                          width: double.infinity,
-                          decoration: BoxDecoration(
-                            border: Border.all(),
-                            borderRadius: BorderRadius.circular(20),
-                          ),
-                          child: fitnessItemImage != null
-                              ? ClipRRect(
-                                  borderRadius: BorderRadius.circular(20),
-                                  child: Image.file(
-                                    fitnessItemImage!,
-                                    fit: BoxFit.cover,
-                                  ))
-                              : SizedBox()),
+                      Item_Image_Screen(fitnessItemImage: fitnessItemImage),
                       IconButton(
                         onPressed: () {
                           pickImageFromGallery('fitnessItem');
@@ -110,23 +100,8 @@ class _AdminPanel_ScreenState extends State<AdminPanel_Screen> {
                                   letterSpacing: 1,
                                 ))
                           ])),
-                      Container(
-                        height: 180,
-                        width: double.infinity,
-                        decoration: BoxDecoration(
-                          border: Border.all(),
-                          borderRadius: BorderRadius.circular(20),
-                        ),
-                        child: fitnessItemDemoImage != null
-                            ? ClipRRect(
-                                borderRadius: BorderRadius.circular(20),
-                                child: Image.file(
-                                  fitnessItemDemoImage!,
-                                  fit: BoxFit.contain,
-                                ),
-                              )
-                            : SizedBox(),
-                      ),
+                      Item_Demo_Image(
+                          fitnessItemDemoImage: fitnessItemDemoImage),
                       IconButton(
                           onPressed: () {
                             pickImageFromGallery('fitnessItemDemo');
@@ -138,130 +113,19 @@ class _AdminPanel_ScreenState extends State<AdminPanel_Screen> {
                       SizedBox(
                         height: 20,
                       ),
-                      TextFormField(
-                        autovalidateMode: AutovalidateMode.onUserInteraction,
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return 'Item name is required';
-                          }
-                          return null;
-                        },
-                        controller: ItemNameController,
-                        decoration: InputDecoration(
-                            labelText: 'Item name',
-                            labelStyle: TextStyle(
-                                fontFamily: 'JacquesFracois', fontSize: 12),
-                            border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(20))),
-                      ),
+                      ItemName_Screen(ItemNameController: ItemNameController),
                       SizedBox(
                         height: 20,
                       ),
-                      DropdownButtonFormField<String>(
-                        autovalidateMode: AutovalidateMode.onUserInteraction,
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return 'Workout level is required';
-                          }
-                          return null;
-                        },
-                        decoration: InputDecoration(
-                            labelText: 'Select Workout level',
-                            labelStyle: TextStyle(
-                                fontFamily: 'JacquesFracois', fontSize: 12),
-                            border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(20))),
-                        value: selectedWorkoutLevel,
-                        icon: Icon(Icons.arrow_drop_down),
-                        style: TextStyle(color: Colors.deepPurple),
-                        onChanged: (String? newValue) {
-                          setState(() {
-                            selectedWorkoutLevel = newValue;
-                          });
-                        },
-                        items: <String>['BEGINNER', 'INTERMEDIATE']
-                            .map<DropdownMenuItem<String>>((String value) {
-                          return DropdownMenuItem<String>(
-                            value: value,
-                            child: Text(value),
-                          );
-                        }).toList(),
-                      ),
+                      WorkoutLevel_Screen(
+                          selectedWorkoutLevel: selectedWorkoutLevel),
                       SizedBox(height: 20),
-                      DropdownButtonFormField<String>(
-                          autovalidateMode: AutovalidateMode.onUserInteraction,
-                          validator: (value) {
-                            if (value == null || value.isEmpty) {
-                              return 'category is required';
-                            }
-                            return null;
-                          },
-                          decoration: InputDecoration(
-                              labelText: 'Select category',
-                              labelStyle: TextStyle(
-                                  fontFamily: 'JacquesFracois', fontSize: 12),
-                              border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(20))),
-                          value: SelectedCategory,
-                          icon: Icon(Icons.arrow_drop_down),
-                          style: TextStyle(color: Colors.deepPurple),
-                          onChanged: (String? newValue) {
-                            setState(() {
-                              SelectedCategory = newValue;
-                            });
-                          },
-                          items: <String>[
-                            'CHEST',
-                            'BACK',
-                            'BUTTOCKS',
-                            'LEGS',
-                            'TRICEPS',
-                            'ABS',
-                            'FOREARM',
-                            'CALF',
-                            'SHOULDER',
-                            'BICEPS'
-                          ].map<DropdownMenuItem<String>>((String value) {
-                            return DropdownMenuItem<String>(
-                              value: value,
-                              child: Text(value),
-                            );
-                          }).toList()),
+                      Category_Screen(SelectedCategory: SelectedCategory),
                       SizedBox(
                         height: 20,
                       ),
-                      DropdownButtonFormField<String>(
-                          autovalidateMode: AutovalidateMode.onUserInteraction,
-                          validator: (value) {
-                            if (value == null || value.isEmpty) {
-                              return 'wrokout plan is required';
-                            }
-                            return null;
-                          },
-                          decoration: InputDecoration(
-                              labelText: 'Select Workout plan',
-                              labelStyle: TextStyle(
-                                  fontFamily: 'JacquesFracois', fontSize: 12),
-                              border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(20))),
-                          value: SelectedWorkoutPlan,
-                          icon: Icon(Icons.arrow_drop_down),
-                          style: TextStyle(color: Colors.deepPurple),
-                          onChanged: (String? newValue) {
-                            setState(() {
-                              SelectedWorkoutPlan = newValue;
-                            });
-                          },
-                          items: <String>[
-                            'Gym Exercise',
-                            'Home Exercise',
-                            'Stretches'
-                          ].map<DropdownMenuItem<String>>((String value) {
-                            return DropdownMenuItem<String>(
-                              value: value,
-                              child: Text(value),
-                            );
-                          }).toList()),
+                      WorkoutPlan_Screen(
+                          SelectedWorkoutPlan: SelectedWorkoutPlan),
                       Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: Row(children: [
@@ -272,70 +136,20 @@ class _AdminPanel_ScreenState extends State<AdminPanel_Screen> {
                                   letterSpacing: 1,
                                 ))
                           ])),
-                      TextFormField(
-                        autovalidateMode: AutovalidateMode.onUserInteraction,
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return 'Description is required';
-                          }
-                          return null;
-                        },
-                        controller: DescriptionController,
-                        decoration: InputDecoration(
-                          labelText: 'Description',
-                          labelStyle: TextStyle(
-                              fontFamily: 'JacquesFracois', fontSize: 12),
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(20),
-                          ),
-                        ),
-                      ),
+                      DescriptionField_Screen(
+                          DescriptionController: DescriptionController),
                       SizedBox(
                         height: 20,
                       ),
                       Row(mainAxisAlignment: MainAxisAlignment.end, children: [
                         ElevatedButton(
                             onPressed: () async {
-                              if (!isItemImageSelected &&
-                                  fitnessItemImage != null) {
-                                setState(() {
-                                  isItemImageSelected = false;
-                                });
-                              }
-                              if (formKey.currentState!.validate() &&
-                                  fitnessItemImage != null) {
-                                final db = DatabaseHelper();
-                                int result = await db.createitem(ItemModal(
-                                  itemImage:
-                                      fitnessItemImagePathController.text,
-                                  itemDemo:
-                                      fitnessItemDemoImagePathController.text,
-                                  itemName: ItemNameController.text,
-                                  workoutLevel: selectedWorkoutLevel ?? '',
-                                  category: SelectedCategory ?? '',
-                                  workoutPlan: SelectedWorkoutPlan ?? '',
-                                  description: DescriptionController.text,
-                                ));
-
-                                if (result > 0) {
-                                  Navigator.of(context).pushReplacement(
-                                      MaterialPageRoute(builder: (ctx) {
-                                    return Create_ItemsScreen();
-                                  }));
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                      SnackBar(
-                                          backgroundColor: Colors.blue,
-                                          content: Text(
-                                              "Item Are Successfully Added")));
-                                } else {
-                                  // Item creation failed
-                                  print('Item creation failed');
-                                }
+                              if (fitnessItemImage != null) {
                               } else {
                                 setState(() {
                                   if (fitnessItemImage == null) {
                                     isItemImageSelected = false;
-                                  }
+                                  } else if (fitnessItemDemoImage == null) {}
                                 });
                               }
                             },
@@ -357,10 +171,8 @@ class _AdminPanel_ScreenState extends State<AdminPanel_Screen> {
         await ImagePicker().pickImage(source: ImageSource.gallery);
     if (returnimage == null) {
       isItemImageSelected = false;
-
       return;
     }
-
     setState(() {
       if (imageType == 'fitnessItem') {
         fitnessItemImage = File(returnimage.path);
@@ -369,6 +181,7 @@ class _AdminPanel_ScreenState extends State<AdminPanel_Screen> {
       } else if (imageType == 'fitnessItemDemo') {
         fitnessItemDemoImage = File(returnimage.path);
         fitnessItemDemoImagePathController.text = returnimage.path.toString();
+        isItemDemoImageSelected = true;
       }
     });
   }
