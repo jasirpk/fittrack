@@ -7,6 +7,7 @@ import 'package:fittrack/welcome_screens/signup_widgets/confirm_password.dart';
 import 'package:fittrack/welcome_screens/signup_widgets/email_field_custom.dart';
 import 'package:fittrack/welcome_screens/signup_widgets/name_field_custom.dart';
 import 'package:fittrack/welcome_screens/signup_widgets/password_field_custom.dart';
+import 'package:fittrack/welcome_screens/signup_widgets/profile_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -63,27 +64,8 @@ class _SignUp_ScreenState extends State<SignUp_Screen> {
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  Container(
-                                    height: 200,
-                                    width: 200,
-                                    decoration: BoxDecoration(
-                                      border: Border.all(),
-                                      borderRadius: BorderRadius.circular(100),
-                                      image: DecorationImage(
-                                          image: AssetImage(
-                                              'assets/images/images.png'),
-                                          fit: BoxFit.cover),
-                                    ),
-                                    child: selectedImage != null
-                                        ? ClipRRect(
-                                            borderRadius:
-                                                BorderRadius.circular(100),
-                                            child: Image.file(
-                                              selectedImage!,
-                                              fit: BoxFit.cover,
-                                            ))
-                                        : SizedBox(),
-                                  ),
+                                  Profile_Custom_Screen(
+                                      selectedImage: selectedImage),
                                 ],
                               ),
                               IconButton(
@@ -121,72 +103,69 @@ class _SignUp_ScreenState extends State<SignUp_Screen> {
                                         ConfirmpasswordController,
                                   )),
                               Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: ElevatedButton(
-                                      style: ElevatedButton.styleFrom(
-                                        backgroundColor: Colors.blue,
-                                        minimumSize: Size(280, 60),
-                                      ),
-                                      onPressed: () {
-                                        if (!isImageSelected &&
-                                            selectedImage != null) {
-                                          setState(() {
-                                            isImageSelected = false;
-                                          });
-                                        }
+                                padding: const EdgeInsets.all(8.0),
+                                child: ElevatedButton(
+                                  style: ElevatedButton.styleFrom(
+                                    backgroundColor: Colors.blue,
+                                    minimumSize: Size(280, 60),
+                                  ),
+                                  onPressed: () {
+                                    if (!isImageSelected &&
+                                        selectedImage != null) {
+                                      setState(() {
+                                        isImageSelected = false;
+                                      });
+                                    }
 
-                                        if (formkey.currentState!.validate() &&
-                                            selectedImage != null) {
-                                          if (passwordController.text ==
-                                              ConfirmpasswordController.text) {
-                                            print(
-                                                'Stored ${NameController.text}');
+                                    if (formkey.currentState!.validate() &&
+                                        selectedImage != null) {
+                                      if (passwordController.text ==
+                                          ConfirmpasswordController.text) {
+                                        print('Stored ${NameController.text}');
 
-                                            final db = DatabaseHelper();
-                                            db.SignUp(Users(
-                                              usrName: NameController.text,
-                                              usrMail:
-                                                  EmailAddressController.text,
-                                              usrPassword:
-                                                  passwordController.text,
-                                              Imagepath:
-                                                  imagepathcontroller.text,
-                                            )).whenComplete(() {
-                                              Navigator.push(context,
-                                                  MaterialPageRoute(
-                                                      builder: (context) {
-                                                return Level_Screen();
-                                              }));
-                                            });
-                                            ScaffoldMessenger.of(context)
-                                                .showSnackBar(SnackBar(
-                                                    backgroundColor:
-                                                        Colors.blue,
-                                                    content: Text(
-                                                        "You've Successfully Added")));
-                                          } else {
-                                            ScaffoldMessenger.of(context)
-                                                .showSnackBar(SnackBar(
-                                                    backgroundColor: Colors.red,
-                                                    content: Text(
-                                                        "Password does not match.")));
-                                          }
-                                        } else {
-                                          setState(() {
-                                            if (selectedImage == null) {
-                                              isImageSelected = false;
-                                            }
-                                          });
+                                        final db = DatabaseHelper();
+                                        db.SignUp(Users(
+                                          usrName: NameController.text,
+                                          usrMail: EmailAddressController.text,
+                                          usrPassword: passwordController.text,
+                                          Imagepath: imagepathcontroller.text,
+                                        )).whenComplete(() {
+                                          Navigator.push(context,
+                                              MaterialPageRoute(
+                                                  builder: (context) {
+                                            return Level_Screen();
+                                          }));
+                                        });
+                                        ScaffoldMessenger.of(context)
+                                            .showSnackBar(SnackBar(
+                                                backgroundColor: Colors.blue,
+                                                content: Text(
+                                                    "You've Successfully Added")));
+                                      } else {
+                                        ScaffoldMessenger.of(context)
+                                            .showSnackBar(SnackBar(
+                                                backgroundColor: Colors.red,
+                                                content: Text(
+                                                    "Password does not match.")));
+                                      }
+                                    } else {
+                                      setState(() {
+                                        if (selectedImage == null) {
+                                          isImageSelected = false;
                                         }
-                                      },
-                                      child: Text(
-                                        'Sign Up',
-                                        style: TextStyle(
-                                            color: Colors.white,
-                                            fontWeight: FontWeight.w400,
-                                            letterSpacing: 1,
-                                            fontSize: 20),
-                                      ))),
+                                      });
+                                    }
+                                  },
+                                  child: Text(
+                                    'Sign Up',
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.w400,
+                                        letterSpacing: 1,
+                                        fontSize: 20),
+                                  ),
+                                ),
+                              ),
                               TextButton(
                                   onPressed: () async {},
                                   child: Row(
@@ -225,6 +204,7 @@ class _SignUp_ScreenState extends State<SignUp_Screen> {
       });
       return;
     }
+
     setState(() {
       selectedImage = File(returnimage.path);
       imagepathcontroller.text = returnimage.path;
