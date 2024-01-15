@@ -118,11 +118,15 @@ class _Admin_LoginState extends State<Admin_Login> {
     const Message = '1';
     const scrtCode = '1';
     if (Message == username && scrtCode == password) {
+      List<Map<String, dynamic>> item = [];
       // Go to Home
       final sharedprefs = await SharedPreferences.getInstance();
       await sharedprefs.setBool(Save_key, true);
       Navigator.of(ctx).pushReplacement(
-        MaterialPageRoute(builder: (ctx1) => Create_ItemsScreen()),
+        MaterialPageRoute(
+            builder: (ctx1) => Create_ItemsScreen(
+                  items: item,
+                )),
       );
     } else if (UserNameController.text.isNotEmpty &&
         UserPasswordController.text.isNotEmpty) {

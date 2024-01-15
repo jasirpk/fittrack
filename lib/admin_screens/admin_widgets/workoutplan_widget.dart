@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 
 class WorkoutPlan_Screen extends StatefulWidget {
-  const WorkoutPlan_Screen({
-    super.key,
-    required this.SelectedWorkoutPlan,
-  });
+  const WorkoutPlan_Screen(
+      {super.key, required this.SelectedWorkoutPlan, required this.onChanged});
 
   final String? SelectedWorkoutPlan;
+  final ValueChanged<String?>? onChanged;
 
   @override
   State<WorkoutPlan_Screen> createState() => _WorkoutPlan_ScreenState();
@@ -32,11 +31,7 @@ class _WorkoutPlan_ScreenState extends State<WorkoutPlan_Screen> {
         value: widget.SelectedWorkoutPlan,
         icon: Icon(Icons.arrow_drop_down),
         style: TextStyle(color: Colors.deepPurple),
-        onChanged: (String? newValue) {
-          setState(() {
-            SelectedWorkoutPlan = newValue;
-          });
-        },
+        onChanged: widget.onChanged,
         items: <String>['Gym Exercise', 'Home Exercise', 'Stretches']
             .map<DropdownMenuItem<String>>((String value) {
           return DropdownMenuItem<String>(

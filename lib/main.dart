@@ -4,10 +4,14 @@ import 'package:fittrack/Sqlite/usermodal.dart';
 import 'package:fittrack/welcome_screens/welcome_screen.dart';
 import 'package:fittrack/home_screens/home_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 const Save_key = 'UserLoggedIn';
-main() {
+main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Hive.initFlutter();
+  await Hive.openBox('taskBox');
   runApp(Fit_Track());
 }
 

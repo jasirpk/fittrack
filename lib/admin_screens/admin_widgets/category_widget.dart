@@ -2,18 +2,19 @@ import 'package:flutter/material.dart';
 
 class Category_Screen extends StatefulWidget {
   const Category_Screen({
-    super.key,
+    Key? key,
     required this.SelectedCategory,
-  });
+    required this.onChanged,
+  }) : super(key: key);
 
   final String? SelectedCategory;
+  final ValueChanged<String?>? onChanged;
 
   @override
   State<Category_Screen> createState() => _Category_ScreenState();
 }
 
 class _Category_ScreenState extends State<Category_Screen> {
-  String? SelectedCategory;
   @override
   Widget build(BuildContext context) {
     return DropdownButtonFormField<String>(
@@ -32,11 +33,7 @@ class _Category_ScreenState extends State<Category_Screen> {
         value: widget.SelectedCategory,
         icon: Icon(Icons.arrow_drop_down),
         style: TextStyle(color: Colors.deepPurple),
-        onChanged: (String? newValue) {
-          setState(() {
-            SelectedCategory = newValue;
-          });
-        },
+        onChanged: widget.onChanged,
         items: <String>[
           'CHEST',
           'BACK',
