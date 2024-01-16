@@ -7,7 +7,7 @@ import 'package:fittrack/admin_screens/admin_widgets/itemname_field.dart';
 import 'package:fittrack/admin_screens/admin_widgets/workoutlevel_widget.dart';
 import 'package:fittrack/admin_screens/admin_widgets/workoutplan_widget.dart';
 import 'package:fittrack/admin_screens/admin_widgets/description_widget.dart';
-import 'package:fittrack/admin_screens/create_Items.dart';
+import 'package:fittrack/hive/modal.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:image_picker/image_picker.dart';
@@ -33,49 +33,11 @@ class _AdminPanel_ScreenState extends State<AdminPanel_Screen> {
   String? SelectedWorkoutPlan;
   bool isItemImageSelected = false;
   bool isItemDemoImageSelected = false;
-  List<Map<String, dynamic>> items = [];
-  var taskBox = Hive.box('taskBox');
-
-  // create data
-
-  createData(Map<String, dynamic> data) async {
-    await taskBox.add(data);
-    readData();
-    print(taskBox.length);
-  }
-
-// read data
-  Future readData() async {
-    var data = taskBox.keys.map((Key) {
-      final item = taskBox.get(Key);
-      return {
-        'Key': Key,
-        'itemImage': item['itemImage'],
-        'itemDemoImage': item['itemDemoImage'],
-        'itemName': item['itemName'],
-        'workoutLevel': item['workoutLevel'],
-        'category': item['category'],
-        'workoutPlan': item['workoutPlan'],
-        'description': item['description']
-      };
-    }).toList();
-    setState(() {
-      items = data.reversed.toList();
-      print(items);
-      print(items.length);
-    });
-  }
-
-// update data
-  UpdateData(int? key, Map<String, dynamic> data) async {
-    await taskBox.put(key, data);
-    readData();
-  }
 
   @override
   void initState() {
     removeImageErroMessage();
-    readData();
+
     super.initState();
   }
 
@@ -205,18 +167,8 @@ class _AdminPanel_ScreenState extends State<AdminPanel_Screen> {
                       Row(mainAxisAlignment: MainAxisAlignment.end, children: [
                         ElevatedButton(
                             onPressed: () async {
-                              var data = {
-                                'itemImage':
-                                    fitnessItemImagePathController.text,
-                                'itemDemoImage':
-                                    fitnessItemDemoImagePathController.text,
-                                'itemName': ItemNameController.text,
-                                'workoutLevel': selectedWorkoutLevel,
-                                'category': SelectedCategory,
-                                'workoutPlan': SelectedWorkoutPlan ?? '',
-                                'description': DescriptionController.text,
-                              };
-                              await createData(data);
+                              saveToDatabase();
+
                               print(
                                   'item image:{$fitnessItemImagePathController.text}');
                               print(
@@ -226,10 +178,8 @@ class _AdminPanel_ScreenState extends State<AdminPanel_Screen> {
                               print(" category is  :{$SelectedCategory}");
                               print(" plan is  :{$SelectedWorkoutPlan}");
                               print(DescriptionController.text);
-                              Navigator.of(context)
-                                  .push(MaterialPageRoute(builder: (ctx) {
-                                return Create_ItemsScreen(items: items);
-                              }));
+                              Navigator.pop(context);
+
                               if (fitnessItemImage != null) {
                               } else {
                                 setState(() {
@@ -277,5 +227,25 @@ class _AdminPanel_ScreenState extends State<AdminPanel_Screen> {
       isItemImageSelected = true;
       isItemDemoImageSelected = true;
     });
+  }
+
+  void saveToDatabase() async {
+    final data = ItemsModal(
+        fitnessItemImage: fitnessItemImagePathController.text,
+        fitnessItemDemoImage: fitnessItemDemoImagePathController.text,
+        itemName: ItemNameController.text,
+        SelectedWorkoutLevel: selectedWorkoutLevel ?? '',
+        SelectedCategory: SelectedCategory ?? '',
+        SelctedWorkoutPlan: SelectedWorkoutPlan ?? '',
+        Description: DescriptionController.text);
+
+    // Open Hive box
+    var box = await Hive.openBox<ItemsModal>('items');
+    // Save data to box
+    await box.add(data);
+
+    // Close the box to release resources
+    // await box.close();
+    print(box);
   }
 }

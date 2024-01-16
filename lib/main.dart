@@ -1,17 +1,20 @@
-// import 'package:fittrack/Sqlite/Sqflite.dart';
 import 'package:fittrack/Sqlite/sqflite.dart';
 import 'package:fittrack/Sqlite/usermodal.dart';
+import 'package:fittrack/hive/modal.dart';
 import 'package:fittrack/welcome_screens/welcome_screen.dart';
 import 'package:fittrack/home_screens/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 const Save_key = 'UserLoggedIn';
 main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Hive.initFlutter();
-  await Hive.openBox('taskBox');
+  var directory = await getApplicationDocumentsDirectory();
+  Hive.init(directory.path);
+  Hive.registerAdapter(ItemsModalAdapter());
+  await Hive.openBox<ItemsModal>('items');
   runApp(Fit_Track());
 }
 
