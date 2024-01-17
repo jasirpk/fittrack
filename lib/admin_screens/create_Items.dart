@@ -1,12 +1,14 @@
 import 'dart:io';
 
 import 'package:fittrack/admin_screens/admin_panel.dart';
+import 'package:fittrack/admin_screens/login_admin.dart';
 import 'package:fittrack/admin_screens/update_item.dart';
 import 'package:fittrack/hive/box.dart';
 import 'package:fittrack/hive/modal.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Create_ItemsScreen extends StatefulWidget {
   @override
@@ -40,6 +42,34 @@ class _Create_ItemsScreenState extends State<Create_ItemsScreen> {
     return SafeArea(
         child: Scaffold(
       appBar: AppBar(
+        actions: [
+          IconButton(
+              onPressed: () {
+                showDialog(
+                    context: context,
+                    builder: (context) {
+                      return AlertDialog(
+                        content: Text('Are you sure you want to logout?'),
+                        actions: [
+                          TextButton(
+                              onPressed: () {
+                                Navigator.pop(context);
+                              },
+                              child: Text('Cancel')),
+                          TextButton(
+                              onPressed: () {
+                                Navigator.of(context).pushAndRemoveUntil(
+                                    MaterialPageRoute(builder: (ctx) {
+                                  return Admin_Login();
+                                }), (route) => false);
+                              },
+                              child: Text('Signout')),
+                        ],
+                      );
+                    });
+              },
+              icon: Icon(Icons.logout))
+        ],
         centerTitle: true,
         iconTheme: IconThemeData(color: Colors.white),
         backgroundColor: Colors.black,
@@ -120,7 +150,7 @@ class _Create_ItemsScreenState extends State<Create_ItemsScreen> {
                                             builder: (context) {
                                               return AlertDialog(
                                                   content: Text(
-                                                      'Are you sure to want to Delete?'),
+                                                      'Are you sure you want to Delete?'),
                                                   actions: [
                                                     TextButton(
                                                         onPressed: () {
@@ -202,5 +232,13 @@ class _Create_ItemsScreenState extends State<Create_ItemsScreen> {
       isItemImageSelected = true;
       isItemDemoImageSelected = true;
     });
+  }
+
+  signout(BuildContext ctx) async {
+    final sharedprefs = await SharedPreferences.getInstance();
+    await sharedprefs.clear();
+
+    Navigator.of(ctx).pushAndRemoveUntil(
+        MaterialPageRoute(builder: (ctx1) => Admin_Login()), (route) => false);
   }
 }

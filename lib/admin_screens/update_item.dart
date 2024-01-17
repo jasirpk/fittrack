@@ -97,9 +97,6 @@ class _UpdateItem_ScreenState extends State<UpdateItem_Screen> {
                         },
                         icon: Icon(Icons.image),
                       ),
-                      if (!isItemImageSelected)
-                        Text('Image is required',
-                            style: TextStyle(color: Colors.red, fontSize: 12)),
                       Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: Row(children: [
@@ -117,9 +114,6 @@ class _UpdateItem_ScreenState extends State<UpdateItem_Screen> {
                             pickImageFromGallery('fitnessItemDemo');
                           },
                           icon: Icon(Icons.video_camera_back)),
-                      if (!isItemDemoImageSelected)
-                        Text('Item Demo Image is required',
-                            style: TextStyle(color: Colors.red, fontSize: 12)),
                       SizedBox(
                         height: 20,
                       ),

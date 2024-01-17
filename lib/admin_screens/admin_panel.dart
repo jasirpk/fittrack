@@ -7,10 +7,12 @@ import 'package:fittrack/admin_screens/admin_widgets/itemname_field.dart';
 import 'package:fittrack/admin_screens/admin_widgets/workoutlevel_widget.dart';
 import 'package:fittrack/admin_screens/admin_widgets/workoutplan_widget.dart';
 import 'package:fittrack/admin_screens/admin_widgets/description_widget.dart';
+import 'package:fittrack/admin_screens/login_admin.dart';
 import 'package:fittrack/hive/modal.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class AdminPanel_Screen extends StatefulWidget {
   const AdminPanel_Screen({Key? key}) : super(key: key);
@@ -49,15 +51,6 @@ class _AdminPanel_ScreenState extends State<AdminPanel_Screen> {
             child: AppBar(
               iconTheme: IconThemeData(color: Colors.white),
               backgroundColor: Colors.black,
-              actions: [
-                Padding(
-                  padding: const EdgeInsets.only(right: 30, top: 10),
-                  child: Icon(
-                    Icons.admin_panel_settings,
-                    color: Colors.white,
-                  ),
-                )
-              ],
               centerTitle: true,
               title: Text(
                 'Admin Panel',
@@ -167,17 +160,22 @@ class _AdminPanel_ScreenState extends State<AdminPanel_Screen> {
                       Row(mainAxisAlignment: MainAxisAlignment.end, children: [
                         ElevatedButton(
                             onPressed: () async {
-                              saveToDatabase();
+                              if (formKey.currentState!.validate()) {
+                                if (fitnessItemDemoImage != null) {
+                                  saveToDatabase();
+                                } else {
+                                  setState(() {
+                                    isItemDemoImageSelected = false;
+                                  });
+                                }
 
-                              Navigator.pop(context);
-
-                              if (fitnessItemImage != null) {
-                              } else {
-                                setState(() {
-                                  if (fitnessItemImage == null) {
-                                    isItemImageSelected = true;
-                                  } else if (fitnessItemDemoImage == null) {}
-                                });
+                                // if (fitnessItemImage != null) {
+                                //   saveToDatabase();
+                                // } else {
+                                //   setState(() {
+                                //     isItemImageSelected = false;
+                                //   });
+                                // }
                               }
                             },
                             style: ElevatedButton.styleFrom(
@@ -239,5 +237,6 @@ class _AdminPanel_ScreenState extends State<AdminPanel_Screen> {
     // Close the box to release resources
     // await box.close();
     print(box);
+    Navigator.pop(context);
   }
 }
