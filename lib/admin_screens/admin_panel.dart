@@ -169,22 +169,13 @@ class _AdminPanel_ScreenState extends State<AdminPanel_Screen> {
                             onPressed: () async {
                               saveToDatabase();
 
-                              print(
-                                  'item image:{$fitnessItemImagePathController.text}');
-                              print(
-                                  'item demo image:{$fitnessItemDemoImagePathController.text}');
-                              print(" Name is  :{$ItemNameController.text}");
-                              print(" Level is  :{$selectedWorkoutLevel }");
-                              print(" category is  :{$SelectedCategory}");
-                              print(" plan is  :{$SelectedWorkoutPlan}");
-                              print(DescriptionController.text);
                               Navigator.pop(context);
 
                               if (fitnessItemImage != null) {
                               } else {
                                 setState(() {
                                   if (fitnessItemImage == null) {
-                                    isItemImageSelected = false;
+                                    isItemImageSelected = true;
                                   } else if (fitnessItemDemoImage == null) {}
                                 });
                               }
@@ -207,6 +198,7 @@ class _AdminPanel_ScreenState extends State<AdminPanel_Screen> {
         await ImagePicker().pickImage(source: ImageSource.gallery);
     if (returnimage == null) {
       isItemImageSelected = false;
+      isItemDemoImageSelected = false;
       return;
     }
     setState(() {

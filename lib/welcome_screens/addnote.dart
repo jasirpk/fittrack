@@ -99,9 +99,15 @@ class _create_noteState extends State<create_note> {
                             context: context,
                             builder: (context) {
                               return AlertDialog(
-                                content: const Text(
-                                    'Are you sure you want to Delete?'),
+                                content:
+                                    const Text('Are you sure to want Delete?'),
                                 actions: [
+                                  TextButton(
+                                    onPressed: () {
+                                      Navigator.of(context).pop();
+                                    },
+                                    child: const Text('Cancel'),
+                                  ),
                                   TextButton(
                                     onPressed: () async {
                                       await db.deleteNote(items[index].noteId!);
@@ -113,12 +119,6 @@ class _create_noteState extends State<create_note> {
                                     },
                                     child: const Text('Delete'),
                                   ),
-                                  TextButton(
-                                    onPressed: () {
-                                      Navigator.of(context).pop();
-                                    },
-                                    child: const Text('Cancel'),
-                                  )
                                 ],
                               );
                             },
