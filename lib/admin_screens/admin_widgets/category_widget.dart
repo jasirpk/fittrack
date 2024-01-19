@@ -35,6 +35,7 @@ class _Category_ScreenState extends State<Category_Screen> {
         style: TextStyle(color: Colors.deepPurple),
         onChanged: widget.onChanged,
         items: <String>[
+          'STRETCHERS',
           'CHEST',
           'BACK',
           'BUTTOCKS',

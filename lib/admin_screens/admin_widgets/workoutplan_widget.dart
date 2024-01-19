@@ -32,8 +32,10 @@ class _WorkoutPlan_ScreenState extends State<WorkoutPlan_Screen> {
         icon: Icon(Icons.arrow_drop_down),
         style: TextStyle(color: Colors.deepPurple),
         onChanged: widget.onChanged,
-        items: <String>['Gym Exercise', 'Home Exercise', 'Stretches']
-            .map<DropdownMenuItem<String>>((String value) {
+        items: <String>[
+          'Gym Exercise',
+          'Home Exercise',
+        ].map<DropdownMenuItem<String>>((String value) {
           return DropdownMenuItem<String>(
             value: value,
             child: Text(value),

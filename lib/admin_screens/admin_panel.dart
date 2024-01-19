@@ -8,8 +8,6 @@ import 'package:fittrack/admin_screens/admin_widgets/workoutlevel_widget.dart';
 import 'package:fittrack/admin_screens/admin_widgets/workoutplan_widget.dart';
 import 'package:fittrack/admin_screens/admin_widgets/description_widget.dart';
 import 'package:fittrack/hive/modal.dart';
-import 'package:fittrack/items_screens/back.dart';
-import 'package:fittrack/items_screens/chest.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:image_picker/image_picker.dart';
@@ -239,7 +237,7 @@ class _AdminPanel_ScreenState extends State<AdminPanel_Screen> {
     // Close the box to release resources
     // await box.close();
     print(box);
-    Navigator.pop(context);
+    // Navigator.pop(context);
     if (SelectedCategory == 'CHEST') {
       navigateToChestScreen(SelectedCategory.toString());
     } else if (SelectedCategory == "BACK") {
@@ -260,116 +258,52 @@ class _AdminPanel_ScreenState extends State<AdminPanel_Screen> {
       navigateToShoulderScreen(SelectedCategory.toString());
     } else if (SelectedCategory == 'BICEPS') {
       navigateToBicepsScreen(SelectedCategory.toString());
+    } else if (SelectedCategory == 'STRETCHERS') {
+      navigateToStrecherScreen(SelectedCategory.toString());
     }
+  }
+
+  void navigateToStrecherScreen(String selectedCategory) {
+    Navigator.pop(context);
   }
 
   void navigateToChestScreen(String selectedCategory) {
     Navigator.pop(context);
-    // Navigator.of(context).push(
-    //   MaterialPageRoute(builder: (ctx) {
-    //     return Chest_Screen(
-    //       selectedCategory: selectedCategory,
-    //     );
-    //   }),
-    // );
   }
 
   void navigateToBackScreen(String selectedCategory) {
     Navigator.pop(context);
-    // Navigator.of(context).push(
-    //   MaterialPageRoute(builder: (ctx) {
-    //     return BackItem_Screen(
-    //       selectedCategory: selectedCategory,
-    //     );
-    //   }),
-    // );
   }
 
   void navigateToButtocksScreen(String selectedCategory) {
     Navigator.pop(context);
-    // Navigator.of(context).push(
-    //   MaterialPageRoute(builder: (ctx) {
-    //     return Chest_Screen(
-    //       selectedCategory: selectedCategory,
-    //     );
-    //   }),
-    // );
   }
 
   void navigateToLegsScreen(String selectedCategory) {
     Navigator.pop(context);
-    // Navigator.of(context).push(
-    //   MaterialPageRoute(builder: (ctx) {
-    //     return Chest_Screen(
-    //       selectedCategory: selectedCategory,
-    //     );
-    //   }),
-    // );
   }
 
   void navigateToTricepsScreen(String selectedCategory) {
     Navigator.pop(context);
-    //   Navigator.of(context).push(
-    //     MaterialPageRoute(builder: (ctx) {
-    //       return Chest_Screen(
-    //         selectedCategory: selectedCategory,
-    //       );
-    //     }),
-    //   );
   }
 
   void navigateToAbsScreen(String selectedCategory) {
     Navigator.pop(context);
-    // Navigator.of(context).push(
-    //   MaterialPageRoute(builder: (ctx) {
-    //     return Chest_Screen(
-    //       selectedCategory: selectedCategory,
-    //     );
-    //   }),
-    // );
   }
 
   void navigateToForearmScreen(String selectedCategory) {
     Navigator.pop(context);
-    // Navigator.of(context).push(
-    //   MaterialPageRoute(builder: (ctx) {
-    //     return Chest_Screen(
-    //       selectedCategory: selectedCategory,
-    //     );
-    //   }),
-    // );
   }
 
   void navigateToCalfScreen(String selectedCategory) {
     Navigator.pop(context);
-    // Navigator.of(context).push(
-    //   MaterialPageRoute(builder: (ctx) {
-    //     return Chest_Screen(
-    //       selectedCategory: selectedCategory,
-    //     );
-    //   }),
-    // );
   }
 
   void navigateToShoulderScreen(String selectedCategory) {
     Navigator.pop(context);
-    // Navigator.of(context).push(
-    //   MaterialPageRoute(builder: (ctx) {
-    //     return Chest_Screen(
-    //       selectedCategory: selectedCategory,
-    //     );
-    //   }),
-    // );
   }
 
   void navigateToBicepsScreen(String selectedCategory) {
     Navigator.pop(context);
-    //   Navigator.of(context).push(
-    //     MaterialPageRoute(builder: (ctx) {
-    //       return Chest_Screen(
-    //         selectedCategory: selectedCategory,
-    //       );
-    //     }),
-    //   );
   }
 }

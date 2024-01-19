@@ -54,7 +54,7 @@ class _Biginner_ScreenState extends State<Biginner_Screen> {
         GestureDetector(
           onTap: () {
             Navigator.of(context).push(MaterialPageRoute(builder: (ctx) {
-              return Stretcher_Scree();
+              return Stretcher_Scree(selectedCategory: 'STRETCHER');
             }));
           },
           child: Padding(
