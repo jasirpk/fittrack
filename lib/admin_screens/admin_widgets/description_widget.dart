@@ -26,6 +26,7 @@ class DescriptionField_Screen extends StatelessWidget {
           borderRadius: BorderRadius.circular(20),
         ),
       ),
+      maxLines: 6,
     );
   }
 }

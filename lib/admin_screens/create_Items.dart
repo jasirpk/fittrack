@@ -81,7 +81,8 @@ class _Create_ItemsScreenState extends State<Create_ItemsScreen> {
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           Navigator.of(context).push(MaterialPageRoute(
-            builder: (ctx) => AdminPanel_Screen(),
+            builder: (ctx) =>
+                AdminPanel_Screen(selectedCategory: SelectedCategory),
           ));
         },
         child: Icon(
@@ -94,16 +95,21 @@ class _Create_ItemsScreenState extends State<Create_ItemsScreen> {
       body: ValueListenableBuilder<Box<ItemsModal>>(
           valueListenable: Boxes.getData().listenable(),
           builder: (Context, box, _) {
-            return GridView.builder(
-                itemCount: box.length,
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  mainAxisSpacing: 2,
-                  crossAxisSpacing: 2,
-                ),
-                itemBuilder: (Context, index) {
-                  var data = box.values.toList().cast<ItemsModal>();
-                  return GestureDetector(
+            var data = box.values.toList().cast<ItemsModal>();
+            if (data.isEmpty) {
+              return Center(
+                child: Text('No Data'),
+              );
+            } else
+              return GridView.builder(
+                  itemCount: box.length,
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2,
+                    mainAxisSpacing: 2,
+                    crossAxisSpacing: 2,
+                  ),
+                  itemBuilder: (Context, index) {
+                    return GestureDetector(
                       onTap: () {
                         editDialog(
                             data[index],
@@ -116,64 +122,86 @@ class _Create_ItemsScreenState extends State<Create_ItemsScreen> {
                             data[index].Description.toString());
                       },
                       child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Container(
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(20),
-                                image: DecorationImage(
-                                    image: FileImage(File(data[index]
-                                        .fitnessItemImage
-                                        .toString())),
-                                    fit: BoxFit.cover),
-                              ),
-                              child: Row(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Padding(
-                                      padding: const EdgeInsets.all(8.0),
-                                      child: Text(
-                                        data[index].itemName.toString(),
-                                        style: TextStyle(
-                                            color: Colors.white,
-                                            fontSize: 16,
-                                            fontWeight: FontWeight.bold,
-                                            letterSpacing: 1,
-                                            fontFamily: "JacquesFracois"),
-                                      ),
+                        padding: const EdgeInsets.all(8.0),
+                        child: Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(20),
+                            image: DecorationImage(
+                                image: FileImage(File(
+                                    data[index].fitnessItemImage.toString())),
+                                fit: BoxFit.cover),
+                          ),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Text(
+                                      data[index].SelectedCategory.toString(),
+                                      style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.bold,
+                                          letterSpacing: 1,
+                                          fontFamily: "JacquesFracois"),
                                     ),
-                                    IconButton(
-                                      onPressed: () {
-                                        showDialog(
-                                            context: context,
-                                            builder: (context) {
-                                              return AlertDialog(
-                                                  content: Text(
-                                                      'Are you sure you want to Delete?'),
-                                                  actions: [
-                                                    TextButton(
-                                                        onPressed: () {
-                                                          Navigator.pop(
-                                                              context);
-                                                        },
-                                                        child: Text('Cancel')),
-                                                    TextButton(
+                                  ),
+                                  IconButton(
+                                    onPressed: () {
+                                      showDialog(
+                                          context: context,
+                                          builder: (context) {
+                                            return AlertDialog(
+                                                content: Text(
+                                                    'Are you sure you want to Delete?'),
+                                                actions: [
+                                                  TextButton(
                                                       onPressed: () {
-                                                        deleteItem(data[index]);
-                                                        Navigator.of(context)
-                                                            .pop();
+                                                        Navigator.pop(context);
                                                       },
-                                                      child: Text('Delete'),
-                                                    ),
-                                                  ]);
-                                            });
-                                      },
-                                      icon: Icon(Icons.delete),
-                                      color: Colors.red,
-                                    )
-                                  ]))));
-                });
+                                                      child: Text('Cancel')),
+                                                  TextButton(
+                                                    onPressed: () {
+                                                      deleteItem(data[index]);
+                                                      Navigator.of(context)
+                                                          .pop();
+                                                    },
+                                                    child: Text('Delete'),
+                                                  ),
+                                                ]);
+                                          });
+                                    },
+                                    icon: Icon(Icons.delete),
+                                    color: Colors.red,
+                                  )
+                                ],
+                              ),
+                              Row(
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Text(
+                                      data[index].itemName.toString(),
+                                      style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.bold,
+                                          letterSpacing: 1,
+                                          fontFamily: "JacquesFracois"),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    );
+                  });
           }),
     ));
   }

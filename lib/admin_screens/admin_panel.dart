@@ -7,16 +7,17 @@ import 'package:fittrack/admin_screens/admin_widgets/itemname_field.dart';
 import 'package:fittrack/admin_screens/admin_widgets/workoutlevel_widget.dart';
 import 'package:fittrack/admin_screens/admin_widgets/workoutplan_widget.dart';
 import 'package:fittrack/admin_screens/admin_widgets/description_widget.dart';
-import 'package:fittrack/admin_screens/login_admin.dart';
 import 'package:fittrack/hive/modal.dart';
+import 'package:fittrack/items_screens/back.dart';
+import 'package:fittrack/items_screens/chest.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class AdminPanel_Screen extends StatefulWidget {
-  const AdminPanel_Screen({Key? key}) : super(key: key);
+  final String? selectedCategory;
 
+  const AdminPanel_Screen({super.key, required this.selectedCategory});
   @override
   State<AdminPanel_Screen> createState() => _AdminPanel_ScreenState();
 }
@@ -125,9 +126,9 @@ class _AdminPanel_ScreenState extends State<AdminPanel_Screen> {
                       SizedBox(height: 20),
                       Category_Screen(
                         SelectedCategory: SelectedCategory,
-                        onChanged: (newValue) {
+                        onChanged: (String? newValue) {
                           setState(() {
-                            SelectedCategory = newValue;
+                            SelectedCategory = newValue!;
                           });
                         },
                       ),
@@ -221,13 +222,14 @@ class _AdminPanel_ScreenState extends State<AdminPanel_Screen> {
 
   void saveToDatabase() async {
     final data = ItemsModal(
-        fitnessItemImage: fitnessItemImagePathController.text,
-        fitnessItemDemoImage: fitnessItemDemoImagePathController.text,
-        itemName: ItemNameController.text,
-        SelectedWorkoutLevel: selectedWorkoutLevel ?? '',
-        SelectedCategory: SelectedCategory ?? '',
-        SelctedWorkoutPlan: SelectedWorkoutPlan ?? '',
-        Description: DescriptionController.text);
+        fitnessItemImage: fitnessItemImagePathController.text.toString(),
+        fitnessItemDemoImage:
+            fitnessItemDemoImagePathController.text.toString(),
+        itemName: ItemNameController.text.toString(),
+        SelectedWorkoutLevel: selectedWorkoutLevel.toString(),
+        SelectedCategory: SelectedCategory.toString(),
+        SelctedWorkoutPlan: SelectedWorkoutPlan.toString(),
+        Description: DescriptionController.text.toString());
 
     // Open Hive box
     var box = await Hive.openBox<ItemsModal>('items');
@@ -238,5 +240,136 @@ class _AdminPanel_ScreenState extends State<AdminPanel_Screen> {
     // await box.close();
     print(box);
     Navigator.pop(context);
+    if (SelectedCategory == 'CHEST') {
+      navigateToChestScreen(SelectedCategory.toString());
+    } else if (SelectedCategory == "BACK") {
+      navigateToBackScreen(SelectedCategory.toString());
+    } else if (SelectedCategory == 'BUTTOCKS') {
+      navigateToButtocksScreen(SelectedCategory.toString());
+    } else if (SelectedCategory == 'LEGS') {
+      navigateToLegsScreen(SelectedCategory.toString());
+    } else if (SelectedCategory == 'TRICEPS') {
+      navigateToTricepsScreen(SelectedCategory.toString());
+    } else if (SelectedCategory == 'ABS') {
+      navigateToAbsScreen(SelectedCategory.toString());
+    } else if (SelectedCategory == 'FOREARM') {
+      navigateToForearmScreen(SelectedCategory.toString());
+    } else if (SelectedCategory == 'CALF') {
+      navigateToCalfScreen(SelectedCategory.toString());
+    } else if (SelectedCategory == 'SHOULDER') {
+      navigateToShoulderScreen(SelectedCategory.toString());
+    } else if (SelectedCategory == 'BICEPS') {
+      navigateToBicepsScreen(SelectedCategory.toString());
+    }
+  }
+
+  void navigateToChestScreen(String selectedCategory) {
+    Navigator.pop(context);
+    // Navigator.of(context).push(
+    //   MaterialPageRoute(builder: (ctx) {
+    //     return Chest_Screen(
+    //       selectedCategory: selectedCategory,
+    //     );
+    //   }),
+    // );
+  }
+
+  void navigateToBackScreen(String selectedCategory) {
+    Navigator.pop(context);
+    // Navigator.of(context).push(
+    //   MaterialPageRoute(builder: (ctx) {
+    //     return BackItem_Screen(
+    //       selectedCategory: selectedCategory,
+    //     );
+    //   }),
+    // );
+  }
+
+  void navigateToButtocksScreen(String selectedCategory) {
+    Navigator.pop(context);
+    // Navigator.of(context).push(
+    //   MaterialPageRoute(builder: (ctx) {
+    //     return Chest_Screen(
+    //       selectedCategory: selectedCategory,
+    //     );
+    //   }),
+    // );
+  }
+
+  void navigateToLegsScreen(String selectedCategory) {
+    Navigator.pop(context);
+    // Navigator.of(context).push(
+    //   MaterialPageRoute(builder: (ctx) {
+    //     return Chest_Screen(
+    //       selectedCategory: selectedCategory,
+    //     );
+    //   }),
+    // );
+  }
+
+  void navigateToTricepsScreen(String selectedCategory) {
+    Navigator.pop(context);
+    //   Navigator.of(context).push(
+    //     MaterialPageRoute(builder: (ctx) {
+    //       return Chest_Screen(
+    //         selectedCategory: selectedCategory,
+    //       );
+    //     }),
+    //   );
+  }
+
+  void navigateToAbsScreen(String selectedCategory) {
+    Navigator.pop(context);
+    // Navigator.of(context).push(
+    //   MaterialPageRoute(builder: (ctx) {
+    //     return Chest_Screen(
+    //       selectedCategory: selectedCategory,
+    //     );
+    //   }),
+    // );
+  }
+
+  void navigateToForearmScreen(String selectedCategory) {
+    Navigator.pop(context);
+    // Navigator.of(context).push(
+    //   MaterialPageRoute(builder: (ctx) {
+    //     return Chest_Screen(
+    //       selectedCategory: selectedCategory,
+    //     );
+    //   }),
+    // );
+  }
+
+  void navigateToCalfScreen(String selectedCategory) {
+    Navigator.pop(context);
+    // Navigator.of(context).push(
+    //   MaterialPageRoute(builder: (ctx) {
+    //     return Chest_Screen(
+    //       selectedCategory: selectedCategory,
+    //     );
+    //   }),
+    // );
+  }
+
+  void navigateToShoulderScreen(String selectedCategory) {
+    Navigator.pop(context);
+    // Navigator.of(context).push(
+    //   MaterialPageRoute(builder: (ctx) {
+    //     return Chest_Screen(
+    //       selectedCategory: selectedCategory,
+    //     );
+    //   }),
+    // );
+  }
+
+  void navigateToBicepsScreen(String selectedCategory) {
+    Navigator.pop(context);
+    //   Navigator.of(context).push(
+    //     MaterialPageRoute(builder: (ctx) {
+    //       return Chest_Screen(
+    //         selectedCategory: selectedCategory,
+    //       );
+    //     }),
+    //   );
   }
 }

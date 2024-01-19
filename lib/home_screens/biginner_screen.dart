@@ -1,5 +1,5 @@
-import 'package:fittrack/items_screens/items_screen.dart';
-import 'package:fittrack/items_screens/stretcher_screen.dart';
+import 'package:fittrack/items_screens/chest.dart';
+import 'package:fittrack/items_screens/stretcher.dart';
 import 'package:flutter/material.dart';
 
 class Biginner_Screen extends StatefulWidget {
@@ -106,9 +106,8 @@ class _Biginner_ScreenState extends State<Biginner_Screen> {
                   onTap: () {
                     Navigator.of(context)
                         .push(MaterialPageRoute(builder: (ctx) {
-                      return Items_Screen(
-                        title: catagarie['title'],
-                        imagePath: catagarie['image'],
+                      return Chest_Screen(
+                        selectedCategory: catagarie['title'],
                       );
                     }));
                   },

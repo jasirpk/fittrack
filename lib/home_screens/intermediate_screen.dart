@@ -1,4 +1,13 @@
-import 'package:fittrack/items_screens/items_screen.dart';
+import 'package:fittrack/items_screens/abs.dart';
+import 'package:fittrack/items_screens/back.dart';
+import 'package:fittrack/items_screens/biceps.dart';
+import 'package:fittrack/items_screens/buttocks.dart';
+import 'package:fittrack/items_screens/calf.dart';
+import 'package:fittrack/items_screens/chest.dart';
+import 'package:fittrack/items_screens/forearm.dart';
+import 'package:fittrack/items_screens/legs.dart';
+import 'package:fittrack/items_screens/shoulder.dart';
+import 'package:fittrack/items_screens/triceps.dart';
 import 'package:flutter/material.dart';
 
 class intermediate_Screen extends StatefulWidget {
@@ -55,6 +64,36 @@ class _intermediate_ScreenState extends State<intermediate_Screen> {
       "title": "Biceps",
     },
   ];
+  void navigateToCategoryScreen(String selectedCategory) {
+    // Convert the selected category to uppercase for case-insensitive comparison
+    selectedCategory = selectedCategory.toUpperCase();
+
+    // Map each category title to a specific screen
+    Map<String, Widget> categoryScreens = {
+      "CHEST": Chest_Screen(selectedCategory: selectedCategory),
+      "BACK": BackItem_Screen(selectedCategory: selectedCategory),
+      "BUTTOCKS": ButtocksItem_Screen(selectedCategory: selectedCategory),
+      "LEGS": LegsItem_Screen(selectedCategory: selectedCategory),
+      "TRICEPS": TricepsItem_Screen(selectedCategory: selectedCategory),
+      "ABS": AbsItem_Screen(selectedCategory: selectedCategory),
+      "FOREARM": ForearmItem_Screen(selectedCategory: selectedCategory),
+      "CALF": CalfItem_Screen(selectedCategory: selectedCategory),
+      "SHOULDER": ShoulderItem_Screen(selectedCategory: selectedCategory),
+      "BICEPS": BicepsItem_Screen(selectedCategory: selectedCategory),
+    };
+
+    // Get the corresponding screen for the selected category
+    Widget? categoryScreen = categoryScreens[selectedCategory];
+
+    if (categoryScreen != null) {
+      Navigator.of(context).push(
+        MaterialPageRoute(builder: (ctx) {
+          return categoryScreen;
+        }),
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(children: [
@@ -95,12 +134,7 @@ class _intermediate_ScreenState extends State<intermediate_Screen> {
                     final catagarie = catagaries[index];
                     return GestureDetector(
                       onTap: () {
-                        Navigator.of(context)
-                            .push(MaterialPageRoute(builder: (ctx) {
-                          return Items_Screen(
-                              title: catagarie['title'],
-                              imagePath: catagarie['image']);
-                        }));
+                        navigateToCategoryScreen(catagarie['title']);
                       },
                       child: Padding(
                           padding: const EdgeInsets.all(12.0),
