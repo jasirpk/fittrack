@@ -100,6 +100,8 @@ flutter:
     - assets/images/chest_feature.webp
     - assets/images/greatest-abs-exercises-1445673601.jpg
     - assets/images/284-2840011_person-in-gray-hoodie-using-computer-inside-dark.jpg
+    - assets/images/flat-lay-crossfit-gym-equipment_403156-27.avif
+  
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

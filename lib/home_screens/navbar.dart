@@ -5,7 +5,9 @@ import 'package:fittrack/Sqlite/usermodal.dart';
 import 'package:fittrack/home_screens/navbar_widgets/admin_custom.dart';
 import 'package:fittrack/home_screens/navbar_widgets/feedback_custom.dart';
 import 'package:fittrack/home_screens/navbar_widgets/home_custom.dart';
+import 'package:fittrack/home_screens/navbar_widgets/search_custom.dart';
 import 'package:fittrack/home_screens/navbar_widgets/signout_custom.dart';
+import 'package:fittrack/home_screens/navbar_widgets/stretcher_custom.dart';
 import 'package:flutter/material.dart';
 
 class Navbar extends StatefulWidget {
@@ -121,6 +123,10 @@ class _NavbarState extends State<Navbar> {
                       return Custom_SignOut(exercise: exercise);
                     } else if (index == exercise.length - -7) {
                       return Custom_Admin(exercise: exercise);
+                    } else if (index == exercise.length - -2) {
+                      return Searchwidget_Screen(exercise: exercise);
+                    } else if (index == exercise.length - -0) {
+                      return Stretcherwidget_Screen(exercise: exercise);
                     } else {
                       return Padding(
                         padding: const EdgeInsets.only(

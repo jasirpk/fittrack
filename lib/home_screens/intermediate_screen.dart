@@ -1,14 +1,14 @@
-import 'package:fittrack/items_screens/abs.dart';
-import 'package:fittrack/items_screens/back.dart';
-import 'package:fittrack/items_screens/biceps.dart';
-import 'package:fittrack/items_screens/buttocks.dart';
-import 'package:fittrack/items_screens/calf.dart';
-import 'package:fittrack/items_screens/chest.dart';
-import 'package:fittrack/items_screens/forearm.dart';
-import 'package:fittrack/items_screens/legs.dart';
-import 'package:fittrack/items_screens/shoulder.dart';
-import 'package:fittrack/items_screens/stretcher.dart';
-import 'package:fittrack/items_screens/triceps.dart';
+import 'package:fittrack/items_screens/items/abs.dart';
+import 'package:fittrack/items_screens/items/back.dart';
+import 'package:fittrack/items_screens/items/biceps.dart';
+import 'package:fittrack/items_screens/items/buttocks.dart';
+import 'package:fittrack/items_screens/items/calf.dart';
+import 'package:fittrack/items_screens/items/chest.dart';
+import 'package:fittrack/items_screens/items/forearm.dart';
+import 'package:fittrack/items_screens/items/legs.dart';
+import 'package:fittrack/items_screens/items/shoulder.dart';
+import 'package:fittrack/items_screens/items/stretcher.dart';
+import 'package:fittrack/items_screens/items/triceps.dart';
 import 'package:flutter/material.dart';
 
 class intermediate_Screen extends StatefulWidget {
@@ -99,7 +99,7 @@ class _intermediate_ScreenState extends State<intermediate_Screen> {
   Widget build(BuildContext context) {
     return Column(children: [
       Padding(
-          padding: const EdgeInsets.all(12.0),
+          padding: const EdgeInsets.all(8.0),
           child: GestureDetector(
             onTap: () {
               Navigator.of(context).push(MaterialPageRoute(builder: (ctx) {
@@ -111,7 +111,7 @@ class _intermediate_ScreenState extends State<intermediate_Screen> {
                 child: Container(
                     height: 200,
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(20),
+                      borderRadius: BorderRadius.circular(10),
                       image: DecorationImage(
                           image: AssetImage(
                               'assets/images/stretching-man-GettyImages-654424976.jpg'),
@@ -123,7 +123,7 @@ class _intermediate_ScreenState extends State<intermediate_Screen> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             mainAxisAlignment: MainAxisAlignment.end,
                             children: [
-                              Text('STRETCHES',
+                              Text('STRETCHER',
                                   style: TextStyle(
                                       color: Colors.white,
                                       fontSize: 24,
@@ -136,7 +136,8 @@ class _intermediate_ScreenState extends State<intermediate_Screen> {
           child: Container(
               child: GridView.builder(
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2, crossAxisSpacing: 10),
+                    crossAxisCount: 2,
+                  ),
                   itemCount: catagaries.length,
                   itemBuilder: (context, index) {
                     final catagarie = catagaries[index];
@@ -145,7 +146,7 @@ class _intermediate_ScreenState extends State<intermediate_Screen> {
                         navigateToCategoryScreen(catagarie['title']);
                       },
                       child: Padding(
-                          padding: const EdgeInsets.all(12.0),
+                          padding: const EdgeInsets.all(8.0),
                           child: Container(
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(10),

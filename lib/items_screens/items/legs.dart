@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:fittrack/hive/box.dart';
 import 'package:fittrack/hive/modal.dart';
+import 'package:fittrack/items_screens/details.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
@@ -53,28 +54,43 @@ class _LegsItem_ScreenState extends State<LegsItem_Screen> {
                     itemBuilder: (context, index) {
                       return Padding(
                         padding: EdgeInsets.all(8),
-                        child: Container(
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10),
-                              image: DecorationImage(
-                                  image: FileImage(File(
-                                      data[index].fitnessItemImage.toString())),
-                                  fit: BoxFit.cover)),
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Row(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  data[index].itemName.toString(),
-                                  style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 22,
-                                      fontWeight: FontWeight.bold,
-                                      letterSpacing: 1,
-                                      fontFamily: "JacquesFracois"),
-                                )
-                              ],
+                        child: GestureDetector(
+                          onTap: () {
+                            Navigator.of(context)
+                                .push(MaterialPageRoute(builder: (ctx) {
+                              return Details_Screen(
+                                selectedCategory: data[index].itemName,
+                                itemDemoImagePath:
+                                    data[index].fitnessItemDemoImage,
+                                Description: data[index].Description,
+                              );
+                              // Pass the item name to the Details_Screen
+                            }));
+                          },
+                          child: Container(
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10),
+                                image: DecorationImage(
+                                    image: FileImage(File(data[index]
+                                        .fitnessItemImage
+                                        .toString())),
+                                    fit: BoxFit.cover)),
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Row(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    data[index].itemName.toString(),
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 22,
+                                        fontWeight: FontWeight.bold,
+                                        letterSpacing: 1,
+                                        fontFamily: "JacquesFracois"),
+                                  )
+                                ],
+                              ),
                             ),
                           ),
                         ),

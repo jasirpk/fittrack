@@ -1,5 +1,12 @@
-import 'package:fittrack/items_screens/chest.dart';
-import 'package:fittrack/items_screens/stretcher.dart';
+import 'package:fittrack/items_screens/items/abs.dart';
+import 'package:fittrack/items_screens/items/back.dart';
+import 'package:fittrack/items_screens/items/biceps.dart';
+import 'package:fittrack/items_screens/items/chest.dart';
+import 'package:fittrack/items_screens/items/forearm.dart';
+import 'package:fittrack/items_screens/items/legs.dart';
+import 'package:fittrack/items_screens/items/shoulder.dart';
+import 'package:fittrack/items_screens/items/stretcher.dart';
+import 'package:fittrack/items_screens/items/triceps.dart';
 import 'package:flutter/material.dart';
 
 class Biginner_Screen extends StatefulWidget {
@@ -47,24 +54,52 @@ class _Biginner_ScreenState extends State<Biginner_Screen> {
       "title": "Biceps",
     }
   ];
+  void navigateToCategoryScreen(String selectedCategory) {
+    // Convert the selected category to uppercase for case-insensitive comparison
+    selectedCategory = selectedCategory.toUpperCase();
+
+    // Map each category title to a specific screen
+    Map<String, Widget> categoryScreens = {
+      "CHEST": Chest_Screen(selectedCategory: selectedCategory),
+      "BACK": BackItem_Screen(selectedCategory: selectedCategory),
+      "LEGS": LegsItem_Screen(selectedCategory: selectedCategory),
+      "TRICEPS": TricepsItem_Screen(selectedCategory: selectedCategory),
+      "ABS": AbsItem_Screen(selectedCategory: selectedCategory),
+      "FOREARM": ForearmItem_Screen(selectedCategory: selectedCategory),
+      "SHOULDER": ShoulderItem_Screen(selectedCategory: selectedCategory),
+      "BICEPS": BicepsItem_Screen(selectedCategory: selectedCategory),
+    };
+
+    // Get the corresponding screen for the selected category
+    Widget? categoryScreen = categoryScreens[selectedCategory];
+
+    if (categoryScreen != null) {
+      Navigator.of(context).push(
+        MaterialPageRoute(builder: (ctx) {
+          return categoryScreen;
+        }),
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        GestureDetector(
-          onTap: () {
-            Navigator.of(context).push(MaterialPageRoute(builder: (ctx) {
-              return Stretcher_Scree(selectedCategory: 'STRETCHER');
-            }));
-          },
-          child: Padding(
-            padding: const EdgeInsets.all(12.0),
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: GestureDetector(
+            onTap: () {
+              Navigator.of(context).push(MaterialPageRoute(builder: (ctx) {
+                return Stretcher_Scree(selectedCategory: 'STRETCHERS');
+              }));
+            },
             child: Card(
               elevation: 0,
               child: Container(
                 height: 200,
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(20),
+                  borderRadius: BorderRadius.circular(10),
                   image: DecorationImage(
                       image: AssetImage(
                           'assets/images/istockphoto-679305702-170667a.jpg'),
@@ -97,22 +132,18 @@ class _Biginner_ScreenState extends State<Biginner_Screen> {
             child: GridView.builder(
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2,
-                crossAxisSpacing: 12,
+                // crossAxisSpacing: 6,
+                // mainAxisSpacing: 6,
               ),
               itemCount: catagaries.length,
               itemBuilder: (context, index) {
                 final catagarie = catagaries[index];
                 return GestureDetector(
                   onTap: () {
-                    Navigator.of(context)
-                        .push(MaterialPageRoute(builder: (ctx) {
-                      return Chest_Screen(
-                        selectedCategory: catagarie['title'],
-                      );
-                    }));
+                    navigateToCategoryScreen(catagarie['title']);
                   },
                   child: Padding(
-                    padding: const EdgeInsets.all(12.0),
+                    padding: const EdgeInsets.all(8),
                     child: Container(
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10),
