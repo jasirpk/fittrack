@@ -1,5 +1,5 @@
 import 'package:hive/hive.dart';
-part 'items_modal.g.dart';
+part 'modal.g.dart';
 
 @HiveType(typeId: 0)
 class ItemsModal extends HiveObject {
@@ -17,6 +17,8 @@ class ItemsModal extends HiveObject {
   String SelctedWorkoutPlan;
   @HiveField(6)
   String Description;
+  @HiveField(7)
+  bool isFavorite;
   ItemsModal(
       {required this.fitnessItemImage,
       required this.fitnessItemDemoImage,
@@ -24,5 +26,6 @@ class ItemsModal extends HiveObject {
       required this.SelectedWorkoutLevel,
       required this.SelectedCategory,
       required this.SelctedWorkoutPlan,
-      required this.Description});
+      required this.Description,
+      required this.isFavorite});
 }

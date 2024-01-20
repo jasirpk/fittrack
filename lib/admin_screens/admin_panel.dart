@@ -220,14 +220,15 @@ class _AdminPanel_ScreenState extends State<AdminPanel_Screen> {
 
   void saveToDatabase() async {
     final data = ItemsModal(
-        fitnessItemImage: fitnessItemImagePathController.text.toString(),
-        fitnessItemDemoImage:
-            fitnessItemDemoImagePathController.text.toString(),
-        itemName: ItemNameController.text.toString(),
-        SelectedWorkoutLevel: selectedWorkoutLevel.toString(),
-        SelectedCategory: SelectedCategory.toString(),
-        SelctedWorkoutPlan: SelectedWorkoutPlan.toString(),
-        Description: DescriptionController.text.toString());
+      fitnessItemImage: fitnessItemImagePathController.text.toString(),
+      fitnessItemDemoImage: fitnessItemDemoImagePathController.text.toString(),
+      itemName: ItemNameController.text.toString(),
+      SelectedWorkoutLevel: selectedWorkoutLevel.toString(),
+      SelectedCategory: SelectedCategory.toString(),
+      SelctedWorkoutPlan: SelectedWorkoutPlan.toString(),
+      Description: DescriptionController.text.toString(),
+      isFavorite: false,
+    );
 
     // Open Hive box
     var box = await Hive.openBox<ItemsModal>('items');

@@ -1,5 +1,4 @@
 import 'dart:io';
-import 'dart:ui';
 
 import 'package:fittrack/admin_screens/admin_widgets/category_widget.dart';
 import 'package:fittrack/admin_screens/admin_widgets/description_widget.dart';
@@ -187,14 +186,6 @@ class _UpdateItem_ScreenState extends State<UpdateItem_Screen> {
                               // Save the updated model back to Hive
                               await widget.updateModal.save();
                               Navigator.pop(context);
-                              if (fitnessItemImage != null) {
-                              } else {
-                                setState(() {
-                                  if (fitnessItemImage == null) {
-                                    isItemImageSelected = true;
-                                  } else if (fitnessItemDemoImage == null) {}
-                                });
-                              }
                             },
                             style: ElevatedButton.styleFrom(
                                 backgroundColor: Colors.black),

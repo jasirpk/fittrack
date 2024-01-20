@@ -39,7 +39,7 @@ class _BicepsItem_ScreenState extends State<BicepsItem_Screen> {
               // var data = box.values.toList().cast<ItemsModal>();
               if (data.isEmpty) {
                 return Center(
-                  child: Text('No Data'),
+                  child: Text('No Exercieses'),
                 );
               } else {
                 print("Widget Category: ${widget.selectedCategory}");
@@ -78,6 +78,8 @@ class _BicepsItem_ScreenState extends State<BicepsItem_Screen> {
                             child: Padding(
                               padding: const EdgeInsets.all(8.0),
                               child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
@@ -88,6 +90,22 @@ class _BicepsItem_ScreenState extends State<BicepsItem_Screen> {
                                         fontWeight: FontWeight.bold,
                                         letterSpacing: 1,
                                         fontFamily: "JacquesFracois"),
+                                  ),
+                                  IconButton(
+                                    onPressed: () {
+                                      setState(() {
+                                        data[index].isFavorite =
+                                            !data[index].isFavorite;
+                                        data[index].save();
+                                      });
+                                    },
+                                    icon: Icon(
+                                        data[index].isFavorite
+                                            ? Icons.favorite
+                                            : Icons.favorite_border,
+                                        color: data[index].isFavorite
+                                            ? Colors.red
+                                            : Colors.white),
                                   )
                                 ],
                               ),

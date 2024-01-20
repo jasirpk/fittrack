@@ -24,13 +24,14 @@ class ItemsModalAdapter extends TypeAdapter<ItemsModal> {
       SelectedCategory: fields[4] as String,
       SelctedWorkoutPlan: fields[5] as String,
       Description: fields[6] as String,
+      isFavorite: fields[7] as bool,
     );
   }
 
   @override
   void write(BinaryWriter writer, ItemsModal obj) {
     writer
-      ..writeByte(7)
+      ..writeByte(8)
       ..writeByte(0)
       ..write(obj.fitnessItemImage)
       ..writeByte(1)
@@ -44,7 +45,9 @@ class ItemsModalAdapter extends TypeAdapter<ItemsModal> {
       ..writeByte(5)
       ..write(obj.SelctedWorkoutPlan)
       ..writeByte(6)
-      ..write(obj.Description);
+      ..write(obj.Description)
+      ..writeByte(7)
+      ..write(obj.isFavorite);
   }
 
   @override
