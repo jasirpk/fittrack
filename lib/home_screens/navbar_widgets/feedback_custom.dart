@@ -1,4 +1,4 @@
-import 'package:fittrack/welcome_screens/addnote.dart';
+import 'package:fittrack/feedback/addnote.dart';
 import 'package:flutter/material.dart';
 
 class Custom_Feedback extends StatelessWidget {

@@ -37,7 +37,7 @@ class _UpdateItem_ScreenState extends State<UpdateItem_Screen> {
   @override
   void initState() {
     super.initState();
-    removeImageErroMessage();
+
     // Set initial values for controllers and variables
     fitnessItemImagePathController.text = widget.updateModal.fitnessItemImage;
     fitnessItemDemoImagePathController.text =
@@ -222,13 +222,6 @@ class _UpdateItem_ScreenState extends State<UpdateItem_Screen> {
         fitnessItemDemoImagePathController.text = returnimage.path.toString();
         isItemDemoImageSelected = true;
       }
-    });
-  }
-
-  void removeImageErroMessage() {
-    setState(() {
-      isItemImageSelected = true;
-      isItemDemoImageSelected = true;
     });
   }
 }

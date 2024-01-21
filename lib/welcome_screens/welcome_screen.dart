@@ -54,7 +54,7 @@ class _AboutScreenState extends State<AboutScreen> {
                               'FitTrack Fitness Application',
                               style: TextStyle(
                                   fontFamily: 'JacquesFracois',
-                                  fontSize: 24,
+                                  fontSize: 20,
                                   color: Colors.white,
                                   fontWeight: FontWeight.w500,
                                   letterSpacing: 1),

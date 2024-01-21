@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class Custom_SignOut extends StatelessWidget {
-  const Custom_SignOut({
+  Custom_SignOut({
     super.key,
     required this.exercise,
   });
@@ -32,7 +32,7 @@ class Custom_SignOut extends StatelessWidget {
                       width: 20,
                     ),
                     Text(
-                      exercise['title'] as String,
+                      exercise['title'],
                       style:
                           TextStyle(fontWeight: FontWeight.w500, fontSize: 14),
                     )

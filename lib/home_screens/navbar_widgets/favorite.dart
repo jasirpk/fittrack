@@ -1,8 +1,8 @@
-import 'package:fittrack/items_screens/searchitems.dart';
+import 'package:fittrack/items_screens/favorite.dart';
 import 'package:flutter/material.dart';
 
-class Searchwidget_Screen extends StatelessWidget {
-  const Searchwidget_Screen({
+class FavoriteItems_Screen extends StatelessWidget {
+  const FavoriteItems_Screen({
     super.key,
     required this.exercise,
   });
@@ -15,7 +15,7 @@ class Searchwidget_Screen extends StatelessWidget {
       onTap: () {
         Navigator.of(context).push(
           MaterialPageRoute(
-            builder: (ctx) => Search_Screen(),
+            builder: (ctx) => Favorite_Screen(),
           ),
         );
       },

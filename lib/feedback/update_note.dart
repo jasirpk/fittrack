@@ -2,7 +2,7 @@ import 'dart:ui';
 
 import 'package:fittrack/Sqlite/Sqflite.dart';
 import 'package:fittrack/Sqlite/notesmodal.dart';
-import 'package:fittrack/welcome_screens/addnote.dart';
+import 'package:fittrack/feedback/addnote.dart';
 import 'package:flutter/material.dart';
 
 class UpdateNoteScreen extends StatefulWidget {

@@ -4,6 +4,7 @@ import 'package:fittrack/admin_screens/admin_widgets/category_widget.dart';
 import 'package:fittrack/admin_screens/admin_widgets/item_image.dart';
 import 'package:fittrack/admin_screens/admin_widgets/itemdemo_image.dart';
 import 'package:fittrack/admin_screens/admin_widgets/itemname_field.dart';
+import 'package:fittrack/admin_screens/admin_widgets/navigaiton.dart';
 import 'package:fittrack/admin_screens/admin_widgets/workoutlevel_widget.dart';
 import 'package:fittrack/admin_screens/admin_widgets/workoutplan_widget.dart';
 import 'package:fittrack/admin_screens/admin_widgets/description_widget.dart';
@@ -34,13 +35,6 @@ class _AdminPanel_ScreenState extends State<AdminPanel_Screen> {
   String? SelectedWorkoutPlan;
   bool isItemImageSelected = false;
   bool isItemDemoImageSelected = false;
-
-  @override
-  void initState() {
-    removeImageErroMessage();
-
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -83,9 +77,6 @@ class _AdminPanel_ScreenState extends State<AdminPanel_Screen> {
                         },
                         icon: Icon(Icons.image),
                       ),
-                      if (!isItemImageSelected)
-                        Text('Image is required',
-                            style: TextStyle(color: Colors.red, fontSize: 12)),
                       Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: Row(children: [
@@ -104,11 +95,9 @@ class _AdminPanel_ScreenState extends State<AdminPanel_Screen> {
                           },
                           icon: Icon(Icons.video_camera_back)),
                       if (!isItemDemoImageSelected)
-                        Text('Item Demo Image is required',
-                            style: TextStyle(color: Colors.red, fontSize: 12)),
-                      SizedBox(
-                        height: 20,
-                      ),
+                        SizedBox(
+                          height: 20,
+                        ),
                       ItemName_Screen(ItemNameController: ItemNameController),
                       SizedBox(
                         height: 20,
@@ -167,14 +156,6 @@ class _AdminPanel_ScreenState extends State<AdminPanel_Screen> {
                                     isItemDemoImageSelected = false;
                                   });
                                 }
-
-                                // if (fitnessItemImage != null) {
-                                //   saveToDatabase();
-                                // } else {
-                                //   setState(() {
-                                //     isItemImageSelected = false;
-                                //   });
-                                // }
                               }
                             },
                             style: ElevatedButton.styleFrom(
@@ -211,13 +192,6 @@ class _AdminPanel_ScreenState extends State<AdminPanel_Screen> {
     });
   }
 
-  void removeImageErroMessage() {
-    setState(() {
-      isItemImageSelected = true;
-      isItemDemoImageSelected = true;
-    });
-  }
-
   void saveToDatabase() async {
     final data = ItemsModal(
       fitnessItemImage: fitnessItemImagePathController.text.toString(),
@@ -235,76 +209,7 @@ class _AdminPanel_ScreenState extends State<AdminPanel_Screen> {
     // Save data to box
     await box.add(data);
 
-    // Close the box to release resources
-    // await box.close();
     print(box);
-    // Navigator.pop(context);
-    if (SelectedCategory == 'CHEST') {
-      navigateToChestScreen(SelectedCategory.toString());
-    } else if (SelectedCategory == "BACK") {
-      navigateToBackScreen(SelectedCategory.toString());
-    } else if (SelectedCategory == 'BUTTOCKS') {
-      navigateToButtocksScreen(SelectedCategory.toString());
-    } else if (SelectedCategory == 'LEGS') {
-      navigateToLegsScreen(SelectedCategory.toString());
-    } else if (SelectedCategory == 'TRICEPS') {
-      navigateToTricepsScreen(SelectedCategory.toString());
-    } else if (SelectedCategory == 'ABS') {
-      navigateToAbsScreen(SelectedCategory.toString());
-    } else if (SelectedCategory == 'FOREARM') {
-      navigateToForearmScreen(SelectedCategory.toString());
-    } else if (SelectedCategory == 'CALF') {
-      navigateToCalfScreen(SelectedCategory.toString());
-    } else if (SelectedCategory == 'SHOULDER') {
-      navigateToShoulderScreen(SelectedCategory.toString());
-    } else if (SelectedCategory == 'BICEPS') {
-      navigateToBicepsScreen(SelectedCategory.toString());
-    } else if (SelectedCategory == 'STRETCHERS') {
-      navigateToStrecherScreen(SelectedCategory.toString());
-    }
-  }
-
-  void navigateToStrecherScreen(String selectedCategory) {
-    Navigator.pop(context);
-  }
-
-  void navigateToChestScreen(String selectedCategory) {
-    Navigator.pop(context);
-  }
-
-  void navigateToBackScreen(String selectedCategory) {
-    Navigator.pop(context);
-  }
-
-  void navigateToButtocksScreen(String selectedCategory) {
-    Navigator.pop(context);
-  }
-
-  void navigateToLegsScreen(String selectedCategory) {
-    Navigator.pop(context);
-  }
-
-  void navigateToTricepsScreen(String selectedCategory) {
-    Navigator.pop(context);
-  }
-
-  void navigateToAbsScreen(String selectedCategory) {
-    Navigator.pop(context);
-  }
-
-  void navigateToForearmScreen(String selectedCategory) {
-    Navigator.pop(context);
-  }
-
-  void navigateToCalfScreen(String selectedCategory) {
-    Navigator.pop(context);
-  }
-
-  void navigateToShoulderScreen(String selectedCategory) {
-    Navigator.pop(context);
-  }
-
-  void navigateToBicepsScreen(String selectedCategory) {
-    Navigator.pop(context);
+    NavigationUtils.navigateToScreen(context, SelectedCategory.toString());
   }
 }

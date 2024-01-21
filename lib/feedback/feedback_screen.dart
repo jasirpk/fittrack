@@ -1,5 +1,6 @@
 import 'package:fittrack/Sqlite/notesmodal.dart';
 import 'package:fittrack/Sqlite/sqflite.dart';
+import 'package:fittrack/feedback/feedback_widgets/feedback_field.dart';
 import 'package:flutter/material.dart';
 
 class Feedback_Screen extends StatefulWidget {
@@ -81,47 +82,10 @@ class _Feedback_ScreenState extends State<Feedback_Screen> {
                     SizedBox(
                       height: 20,
                     ),
-                    Form(
-                      key: formKey,
-                      child: Column(
-                        children: [
-                          TextFormField(
-                            enabled: false,
-                            autovalidateMode:
-                                AutovalidateMode.onUserInteraction,
-                            validator: (value) {
-                              if (value!.isEmpty) {
-                                return "Title is required";
-                              }
-                              return null;
-                            },
-                            controller: titleController,
-                            decoration: InputDecoration(
-                                prefixIcon: Icon(Icons.date_range),
-                                labelText: 'dd-mm-yyyy',
-                                labelStyle: TextStyle(fontSize: 12)),
-                          ),
-                          SizedBox(
-                            height: 20,
-                          ),
-                          TextFormField(
-                            autovalidateMode:
-                                AutovalidateMode.onUserInteraction,
-                            validator: (value) {
-                              if (value!.isEmpty) {
-                                return "Content Required";
-                              }
-                              return null;
-                            },
-                            controller: FeedbackController,
-                            decoration: InputDecoration(
-                                prefixIcon: Icon(Icons.description),
-                                labelText: 'How was this day?',
-                                labelStyle: TextStyle(fontSize: 12)),
-                          ),
-                        ],
-                      ),
-                    ),
+                    FeedbackField_Screen(
+                        formKey: formKey,
+                        titleController: titleController,
+                        FeedbackController: FeedbackController),
                     SizedBox(
                       height: 20,
                     ),
