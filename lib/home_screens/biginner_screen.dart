@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:fittrack/items_screens/items/abs.dart';
 import 'package:fittrack/items_screens/items/back.dart';
 import 'package:fittrack/items_screens/items/biceps.dart';
@@ -105,22 +107,28 @@ class _Biginner_ScreenState extends State<Biginner_Screen> {
                           'assets/images/istockphoto-679305702-170667a.jpg'),
                       fit: BoxFit.cover),
                 ),
-                child: Padding(
-                  padding: const EdgeInsets.all(12.0),
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      Text(
-                        'STRETCHES',
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 22,
-                            fontWeight: FontWeight.bold,
-                            letterSpacing: 1,
-                            fontFamily: "JacquesFracois"),
-                      ),
-                    ],
+                child: Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    color: Colors.black.withOpacity(0.3),
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(12.0),
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        Text(
+                          'STRETCHES',
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 22,
+                              fontWeight: FontWeight.bold,
+                              letterSpacing: 1,
+                              fontFamily: "JacquesFracois"),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),
@@ -132,8 +140,6 @@ class _Biginner_ScreenState extends State<Biginner_Screen> {
             child: GridView.builder(
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2,
-                // crossAxisSpacing: 6,
-                // mainAxisSpacing: 6,
               ),
               itemCount: catagaries.length,
               itemBuilder: (context, index) {
@@ -151,19 +157,27 @@ class _Biginner_ScreenState extends State<Biginner_Screen> {
                             image: AssetImage(catagarie['image']),
                             fit: BoxFit.cover),
                       ),
-                      child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            catagarie['title'],
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 22,
-                                fontWeight: FontWeight.bold,
-                                letterSpacing: 1,
-                                fontFamily: "JacquesFracois"),
-                          ),
-                        ],
+                      child: Container(
+                        decoration: BoxDecoration(
+                            color: Colors.black.withOpacity(0.3),
+                            borderRadius: BorderRadius.circular(10)),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Text(
+                                catagarie['title'],
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 22,
+                                    fontWeight: FontWeight.bold,
+                                    letterSpacing: 1,
+                                    fontFamily: "JacquesFracois"),
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                   ),

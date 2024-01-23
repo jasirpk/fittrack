@@ -154,17 +154,26 @@ class _intermediate_ScreenState extends State<intermediate_Screen> {
                                     image: AssetImage(catagarie['image']),
                                     fit: BoxFit.cover),
                               ),
-                              child: Row(
-                                  crossAxisAlignment: CrossAxisAlignment.end,
-                                  children: [
-                                    Text(catagarie['title'],
-                                        style: TextStyle(
-                                            color: Colors.white,
-                                            fontSize: 24,
-                                            fontWeight: FontWeight.bold,
-                                            letterSpacing: 1,
-                                            fontFamily: "JacquesFracois"))
-                                  ]))),
+                              child: Container(
+                                decoration: BoxDecoration(
+                                    color: Colors.black.withOpacity(0.3),
+                                    borderRadius: BorderRadius.circular(10)),
+                                child: Row(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: Text(catagarie['title'],
+                                            style: TextStyle(
+                                                color: Colors.white,
+                                                fontSize: 24,
+                                                fontWeight: FontWeight.bold,
+                                                letterSpacing: 1,
+                                                fontFamily: "JacquesFracois")),
+                                      )
+                                    ]),
+                              ))),
                     );
                   })))
     ]);

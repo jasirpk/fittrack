@@ -71,136 +71,147 @@ class _UpdateItem_ScreenState extends State<UpdateItem_Screen> {
             ),
           )),
       body: Container(
-        child: SingleChildScrollView(
-          child: Container(
-            child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Form(
-                    key: formKey,
-                    child: Container(
-                        child: Column(children: [
-                      Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Row(children: [
-                            Text('Fitness Item',
-                                style: TextStyle(
-                                  fontFamily: 'JacquesFracois',
-                                  fontWeight: FontWeight.bold,
-                                  letterSpacing: 1,
-                                ))
-                          ])),
-                      Item_Image_Screen(fitnessItemImage: fitnessItemImage),
-                      IconButton(
-                        onPressed: () {
-                          pickImageFromGallery('fitnessItem');
-                        },
-                        icon: Icon(Icons.image),
-                      ),
-                      Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Row(children: [
-                            Text('Fitness Item Demo',
-                                style: TextStyle(
-                                  fontFamily: 'JacquesFracois',
-                                  fontWeight: FontWeight.bold,
-                                  letterSpacing: 1,
-                                ))
-                          ])),
-                      Item_Demo_Image(
-                          fitnessItemDemoImage: fitnessItemDemoImage),
-                      IconButton(
-                          onPressed: () {
+          child: SingleChildScrollView(
+              child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Form(
+                      key: formKey,
+                      child: Container(
+                          child: Column(children: [
+                        Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Row(children: [
+                              Text('Fitness Item',
+                                  style: TextStyle(
+                                    fontFamily: 'JacquesFracois',
+                                    fontWeight: FontWeight.bold,
+                                    letterSpacing: 1,
+                                  ))
+                            ])),
+                        GestureDetector(
+                            onTap: () {
+                              pickImageFromGallery('fitnessItem');
+                            },
+                            child: Item_Image_Screen(
+                                fitnessItemImage: fitnessItemImage)),
+                        Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Row(children: [
+                              Text('Fitness Item Demo',
+                                  style: TextStyle(
+                                    fontFamily: 'JacquesFracois',
+                                    fontWeight: FontWeight.bold,
+                                    letterSpacing: 1,
+                                  ))
+                            ])),
+                        GestureDetector(
+                          onTap: () {
                             pickImageFromGallery('fitnessItemDemo');
                           },
-                          icon: Icon(Icons.video_camera_back)),
-                      SizedBox(
-                        height: 20,
-                      ),
-                      ItemName_Screen(ItemNameController: ItemNameController),
-                      SizedBox(
-                        height: 20,
-                      ),
-                      WorkoutLevel_Screen(
-                        selectedWorkoutLevel: selectedWorkoutLevel,
-                        onChanged: (newValue) {
-                          setState(() {
-                            selectedWorkoutLevel = newValue;
-                          });
-                        },
-                      ),
-                      SizedBox(height: 20),
-                      Category_Screen(
-                        SelectedCategory: SelectedCategory,
-                        onChanged: (newValue) {
-                          setState(() {
-                            SelectedCategory = newValue;
-                          });
-                        },
-                      ),
-                      SizedBox(
-                        height: 20,
-                      ),
-                      WorkoutPlan_Screen(
-                        SelectedWorkoutPlan: SelectedWorkoutPlan,
-                        onChanged: (newValue) {
-                          setState(() {
-                            SelectedWorkoutPlan = newValue;
-                          });
-                        },
-                      ),
-                      Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Row(children: [
-                            Text('How to do?',
-                                style: TextStyle(
-                                  fontFamily: 'JacquesFracois',
-                                  fontWeight: FontWeight.bold,
-                                  letterSpacing: 1,
-                                ))
-                          ])),
-                      DescriptionField_Screen(
-                          DescriptionController: DescriptionController),
-                      SizedBox(
-                        height: 20,
-                      ),
-                      Row(mainAxisAlignment: MainAxisAlignment.end, children: [
-                        ElevatedButton(
-                            onPressed: () async {
-                              widget.updateModal.fitnessItemImage =
-                                  fitnessItemImagePathController.text
-                                      .toString();
-                              widget.updateModal.fitnessItemDemoImage =
-                                  fitnessItemDemoImagePathController.text
-                                      .toString();
-                              widget.updateModal.itemName =
-                                  ItemNameController.text.toString();
-                              widget.updateModal.SelectedWorkoutLevel =
-                                  selectedWorkoutLevel ?? ''.toString();
-                              widget.updateModal.SelectedCategory =
-                                  SelectedCategory ?? ''.toString();
-                              widget.updateModal.SelctedWorkoutPlan =
-                                  SelectedWorkoutPlan ?? ''.toString();
-                              widget.updateModal.Description =
-                                  DescriptionController.text.toString();
+                          child: Item_Demo_Image(
+                              fitnessItemDemoImage: fitnessItemDemoImage),
+                        ),
+                        SizedBox(
+                          height: 20,
+                        ),
+                        ItemName_Screen(ItemNameController: ItemNameController),
+                        SizedBox(
+                          height: 20,
+                        ),
+                        WorkoutLevel_Screen(
+                          selectedWorkoutLevel: selectedWorkoutLevel,
+                          onChanged: (newValue) {
+                            setState(() {
+                              selectedWorkoutLevel = newValue;
+                            });
+                          },
+                        ),
+                        SizedBox(height: 20),
+                        Category_Screen(
+                          SelectedCategory: SelectedCategory,
+                          onChanged: (String? newValue) {
+                            setState(() {
+                              SelectedCategory = newValue!;
+                            });
+                          },
+                        ),
+                        SizedBox(
+                          height: 20,
+                        ),
+                        WorkoutPlan_Screen(
+                          SelectedWorkoutPlan: SelectedWorkoutPlan,
+                          onChanged: (newValue) {
+                            setState(() {
+                              SelectedWorkoutPlan = newValue;
+                            });
+                          },
+                        ),
+                        Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Row(children: [
+                              Text('How to do?',
+                                  style: TextStyle(
+                                    fontFamily: 'JacquesFracois',
+                                    fontWeight: FontWeight.bold,
+                                    letterSpacing: 1,
+                                  ))
+                            ])),
+                        DescriptionField_Screen(
+                            DescriptionController: DescriptionController),
+                        SizedBox(
+                          height: 20,
+                        ),
+                        Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              ElevatedButton(
+                                  onPressed: () async {
+                                    if (formKey.currentState!.validate()) {
+                                      if (fitnessItemDemoImage != null) {
+                                        widget.updateModal.fitnessItemImage =
+                                            fitnessItemImagePathController.text
+                                                .toString();
+                                        widget.updateModal
+                                                .fitnessItemDemoImage =
+                                            fitnessItemDemoImagePathController
+                                                .text
+                                                .toString();
+                                        widget.updateModal.itemName =
+                                            ItemNameController.text.toString();
+                                        widget.updateModal
+                                                .SelectedWorkoutLevel =
+                                            selectedWorkoutLevel ??
+                                                ''.toString();
+                                        widget.updateModal.SelectedCategory =
+                                            SelectedCategory ?? ''.toString();
+                                        widget.updateModal.SelctedWorkoutPlan =
+                                            SelectedWorkoutPlan ??
+                                                ''.toString();
+                                        widget.updateModal.Description =
+                                            DescriptionController.text
+                                                .toString();
 
-                              // Save the updated model back to Hive
-                              await widget.updateModal.save();
-                              Navigator.pop(context);
-                            },
-                            style: ElevatedButton.styleFrom(
-                                backgroundColor: Colors.black),
-                            child: Text(
-                              'Update Details',
-                              style: TextStyle(
-                                  fontFamily: 'JacquesFracois',
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold),
-                            ))
-                      ])
-                    ])))),
-          ),
-        ),
-      ),
+                                        // Save the updated model back to Hive
+                                        await widget.updateModal.save();
+                                        Navigator.pop(context);
+                                      } else {
+                                        setState(() {
+                                          isItemDemoImageSelected = false;
+                                        });
+                                      }
+                                    }
+                                  },
+                                  style: ElevatedButton.styleFrom(
+                                      backgroundColor: Colors.black),
+                                  child: Text(
+                                    'Save Details',
+                                    style: TextStyle(
+                                        fontFamily: 'JacquesFracois',
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.bold),
+                                  ))
+                            ])
+                      ])))))),
     );
   }
 

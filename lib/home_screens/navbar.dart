@@ -10,6 +10,7 @@ import 'package:fittrack/home_screens/navbar_widgets/search_custom.dart';
 import 'package:fittrack/home_screens/navbar_widgets/signout_custom.dart';
 import 'package:fittrack/home_screens/navbar_widgets/stretcher_custom.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 
 class Navbar extends StatefulWidget {
   const Navbar({super.key});
@@ -34,6 +35,9 @@ class _NavbarState extends State<Navbar> {
   ];
   late DatabaseHelper handler;
   late Future<List<Users>> users;
+  bool isImageSelected = false;
+  var imagepathcontroller = TextEditingController();
+  File? selectedImage;
   @override
   void initState() {
     handler = DatabaseHelper();
@@ -76,18 +80,18 @@ class _NavbarState extends State<Navbar> {
                           return Row(children: [
                             Container(
                                 child: Padding(
-                                    padding: const EdgeInsets.all(10.0),
-                                    child: ClipOval(
-                                        child: CircleAvatar(
-                                      maxRadius: 50,
-                                      backgroundImage:
-                                          FileImage(File(imagepath)),
-                                    )))),
+                              padding: const EdgeInsets.all(10.0),
+                              child: ClipOval(
+                                  child: CircleAvatar(
+                                maxRadius: 50,
+                                backgroundImage: FileImage(File(imagepath)),
+                              )),
+                            )),
                             Text(
                               userName,
                               style:
                                   TextStyle(color: Colors.white, fontSize: 20),
-                            )
+                            ),
                           ]);
                         }
                       })),
@@ -177,5 +181,21 @@ class _NavbarState extends State<Navbar> {
         ),
       ),
     );
+  }
+
+  Future pickImageFromGallery() async {
+    final returnimage =
+        await ImagePicker().pickImage(source: ImageSource.gallery);
+    if (returnimage == null) {
+      setState(() {
+        isImageSelected = false;
+      });
+      return;
+    }
+    setState(() {
+      selectedImage = File(returnimage.path);
+      imagepathcontroller.text = returnimage.path;
+      isImageSelected = true;
+    });
   }
 }

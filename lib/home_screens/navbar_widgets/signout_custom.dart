@@ -16,8 +16,7 @@ class Custom_SignOut extends StatelessWidget {
       child: InkWell(
         splashColor: Colors.grey,
         onTap: () {
-          Navigator.of(context)
-              .push(MaterialPageRoute(builder: (ctx) => signout(ctx)));
+          signout(context);
         },
         child: Padding(
           padding: const EdgeInsets.only(left: 20, top: 12, bottom: 12),
@@ -46,7 +45,7 @@ class Custom_SignOut extends StatelessWidget {
     );
   }
 
-  signout(BuildContext ctx) async {
+  Future<void> signout(BuildContext ctx) async {
     final sharedprefs = await SharedPreferences.getInstance();
     await sharedprefs.clear();
     Navigator.of(ctx).pushAndRemoveUntil(

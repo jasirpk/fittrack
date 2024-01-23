@@ -43,7 +43,9 @@ class _Admin_LoginState extends State<Admin_Login> {
                         autovalidateMode: AutovalidateMode.onUserInteraction,
                         validator: (value) {
                           if (value!.isEmpty) {
-                            return "Message Required";
+                            return "Message required";
+                          } else if (UserNameController.text.length < 4) {
+                            return "Message Length should be more than 4 characters";
                           }
                           return null;
                         },
@@ -67,7 +69,9 @@ class _Admin_LoginState extends State<Admin_Login> {
                         autovalidateMode: AutovalidateMode.onUserInteraction,
                         validator: (value) {
                           if (value!.isEmpty) {
-                            return "Password Required";
+                            return "Password required";
+                          } else if (UserPasswordController.text.length < 4) {
+                            return "password Length should be more than 4 characters";
                           }
                           return null;
                         },
@@ -89,10 +93,7 @@ class _Admin_LoginState extends State<Admin_Login> {
                       ),
                       ElevatedButton(
                           onPressed: () {
-                            if (formkey.currentState!.validate()) {
-                              // passwordController.clear();
-                              // EmailAddressController.clear();
-                            }
+                            if (formkey.currentState!.validate()) {}
                             checkLogin(context);
                           },
                           child: Text(
@@ -115,8 +116,8 @@ class _Admin_LoginState extends State<Admin_Login> {
   void checkLogin(BuildContext ctx) async {
     final username = UserNameController.text;
     final password = UserPasswordController.text;
-    const Message = '1';
-    const scrtCode = '1';
+    const Message = 'jasi';
+    const scrtCode = '1234';
     if (Message == username && scrtCode == password) {
       // Go to Home
       final sharedprefs = await SharedPreferences.getInstance();

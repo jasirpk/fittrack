@@ -66,39 +66,84 @@ class _SignUp_ScreenState extends State<SignUp_Screen> {
                                 Row(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
-                                    Container(
-                                      height: 200,
-                                      width: 200,
-                                      decoration: BoxDecoration(
-                                        border: Border.all(),
-                                        borderRadius:
-                                            BorderRadius.circular(100),
-                                        image: DecorationImage(
-                                            image: AssetImage(
-                                                'assets/images/images.png'),
-                                            fit: BoxFit.cover),
-                                      ),
-                                      child: selectedImage != null
-                                          ? ClipRRect(
-                                              borderRadius:
-                                                  BorderRadius.circular(100),
-                                              child: Image.file(
-                                                selectedImage!,
-                                                fit: BoxFit.cover,
-                                              ))
-                                          : SizedBox(),
-                                    ),
+                                    Stack(
+                                      children: [
+                                        // Container with image
+                                        Container(
+                                          height: 200,
+                                          width: 200,
+                                          decoration: BoxDecoration(
+                                            border: Border.all(),
+                                            borderRadius:
+                                                BorderRadius.circular(100),
+                                            image: DecorationImage(
+                                              image: AssetImage(
+                                                  'assets/images/images.png'),
+                                              fit: BoxFit.cover,
+                                            ),
+                                          ),
+                                          child: selectedImage != null
+                                              ? ClipRRect(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          100),
+                                                  child: Image.file(
+                                                    selectedImage!,
+                                                    fit: BoxFit.cover,
+                                                  ),
+                                                )
+                                              : SizedBox(),
+                                        ),
+                                        // Camera IconButton
+                                        Positioned(
+                                          bottom: 0,
+                                          right: 0,
+                                          child: IconButton(
+                                            onPressed: () {
+                                              pickImageFromGallery();
+                                            },
+                                            icon: Icon(
+                                              Icons.image,
+                                              color: Colors.white,
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    )
+
+                                    // Container(
+                                    //   height: 200,
+                                    //   width: 200,
+                                    //   decoration: BoxDecoration(
+                                    //     border: Border.all(),
+                                    //     borderRadius:
+                                    //         BorderRadius.circular(100),
+                                    //     image: DecorationImage(
+                                    //         image: AssetImage(
+                                    //             'assets/images/images.png'),
+                                    //         fit: BoxFit.cover),
+                                    //   ),
+                                    //   child: selectedImage != null
+                                    //       ? ClipRRect(
+                                    //           borderRadius:
+                                    //               BorderRadius.circular(100),
+                                    //           child: Image.file(
+                                    //             selectedImage!,
+                                    //             fit: BoxFit.cover,
+                                    //           ))
+                                    //       : SizedBox(),
+                                    // ),
                                   ],
                                 ),
-                                IconButton(
-                                  onPressed: () {
-                                    pickImageFromGallery();
-                                  },
-                                  icon: Icon(
-                                    Icons.camera_alt_outlined,
-                                    color: Colors.white,
-                                  ),
-                                ),
+                                // IconButton(
+                                //   onPressed: () {
+                                //     pickImageFromGallery();
+                                //   },
+                                //   icon: Icon(
+                                //     Icons.camera_alt_outlined,
+                                //     color: Colors.white,
+                                //   ),
+                                // ),
                                 if (!isImageSelected)
                                   Text('Image is required',
                                       style: TextStyle(

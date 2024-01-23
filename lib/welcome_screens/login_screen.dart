@@ -121,8 +121,6 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                         onPressed: () {
                           if (formkey.currentState!.validate()) {
-                            // passwordController.clear();
-                            // EmailAddressController.clear();
                             after();
                           }
                         },

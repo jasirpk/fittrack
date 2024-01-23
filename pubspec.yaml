@@ -46,6 +46,7 @@ dependencies:
   syncfusion_flutter_calendar: ^21.2.3
   shared_preferences: ^2.2.2
   provider: ^6.1.1
+  url_launcher: ^6.2.3
  
   
 
@@ -101,6 +102,8 @@ flutter:
     - assets/images/greatest-abs-exercises-1445673601.jpg
     - assets/images/284-2840011_person-in-gray-hoodie-using-computer-inside-dark.jpg
     - assets/images/flat-lay-crossfit-gym-equipment_403156-27.avif
+    - assets/images/qrcode_www.prosupps.com.png
+    - assets/images/5580709.png
   
 
   # An image asset can refer to one or more resolution-specific "variants", see

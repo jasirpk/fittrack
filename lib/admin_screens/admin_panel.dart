@@ -70,13 +70,12 @@ class _AdminPanel_ScreenState extends State<AdminPanel_Screen> {
                                   letterSpacing: 1,
                                 ))
                           ])),
-                      Item_Image_Screen(fitnessItemImage: fitnessItemImage),
-                      IconButton(
-                        onPressed: () {
-                          pickImageFromGallery('fitnessItem');
-                        },
-                        icon: Icon(Icons.image),
-                      ),
+                      GestureDetector(
+                          onTap: () {
+                            pickImageFromGallery('fitnessItem');
+                          },
+                          child: Item_Image_Screen(
+                              fitnessItemImage: fitnessItemImage)),
                       Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: Row(children: [
@@ -87,17 +86,16 @@ class _AdminPanel_ScreenState extends State<AdminPanel_Screen> {
                                   letterSpacing: 1,
                                 ))
                           ])),
-                      Item_Demo_Image(
-                          fitnessItemDemoImage: fitnessItemDemoImage),
-                      IconButton(
-                          onPressed: () {
-                            pickImageFromGallery('fitnessItemDemo');
-                          },
-                          icon: Icon(Icons.video_camera_back)),
-                      if (!isItemDemoImageSelected)
-                        SizedBox(
-                          height: 20,
-                        ),
+                      GestureDetector(
+                        onTap: () {
+                          pickImageFromGallery('fitnessItemDemo');
+                        },
+                        child: Item_Demo_Image(
+                            fitnessItemDemoImage: fitnessItemDemoImage),
+                      ),
+                      SizedBox(
+                        height: 20,
+                      ),
                       ItemName_Screen(ItemNameController: ItemNameController),
                       SizedBox(
                         height: 20,
