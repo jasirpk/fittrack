@@ -13,6 +13,13 @@ class Admin_Login extends StatefulWidget {
 }
 
 class _Admin_LoginState extends State<Admin_Login> {
+  bool passwordObscuretext = true;
+  void togglePasswordVisibility() {
+    setState(() {
+      passwordObscuretext = !passwordObscuretext;
+    });
+  }
+
   final formkey = GlobalKey<FormState>();
   var UserNameController = TextEditingController();
   var UserPasswordController = TextEditingController();
@@ -76,16 +83,29 @@ class _Admin_LoginState extends State<Admin_Login> {
                           return null;
                         },
                         controller: UserPasswordController,
+                        obscureText: passwordObscuretext,
                         decoration: InputDecoration(
-                            labelText: 'Password',
-                            labelStyle: TextStyle(
+                          labelText: 'Password',
+                          labelStyle: TextStyle(
+                            color: Colors.white38,
+                            fontFamily: 'JacquesFracois',
+                          ),
+                          prefixIcon: Icon(
+                            Icons.lock,
+                            color: Colors.white,
+                          ),
+                          suffixIcon: IconButton(
+                            onPressed: () {
+                              togglePasswordVisibility();
+                            },
+                            icon: Icon(
+                              passwordObscuretext
+                                  ? Icons.visibility_off
+                                  : Icons.visibility,
                               color: Colors.white38,
-                              fontFamily: 'JacquesFracois',
                             ),
-                            prefixIcon: Icon(
-                              Icons.lock,
-                              color: Colors.white,
-                            )),
+                          ),
+                        ),
                         style: TextStyle(color: Colors.white),
                       ),
                       SizedBox(
