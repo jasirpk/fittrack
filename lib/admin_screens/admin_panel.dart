@@ -4,7 +4,7 @@ import 'package:fittrack/admin_screens/admin_widgets/category_widget.dart';
 import 'package:fittrack/admin_screens/admin_widgets/item_image.dart';
 import 'package:fittrack/admin_screens/admin_widgets/itemdemo_image.dart';
 import 'package:fittrack/admin_screens/admin_widgets/itemname_field.dart';
-import 'package:fittrack/admin_screens/admin_widgets/navigaiton.dart';
+import 'package:fittrack/admin_screens/navigaiton.dart';
 import 'package:fittrack/admin_screens/admin_widgets/workoutlevel_widget.dart';
 import 'package:fittrack/admin_screens/admin_widgets/workoutplan_widget.dart';
 import 'package:fittrack/admin_screens/admin_widgets/description_widget.dart';

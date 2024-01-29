@@ -15,6 +15,7 @@ main() async {
   Hive.init(directory.path);
   Hive.registerAdapter(ItemsModalAdapter());
   await Hive.openBox<ItemsModal>('items');
+
   runApp(Fit_Track());
 }
 

@@ -30,7 +30,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
- 
+
 
 
   # The following adds the Cupertino Icons font to your application.
@@ -46,7 +46,12 @@ dependencies:
   syncfusion_flutter_calendar: ^21.2.3
   shared_preferences: ^2.2.2
   provider: ^6.1.1
-  url_launcher: ^6.2.3
+  share_plus: ^7.2.1
+  url_launcher: ^6.2.4
+  flutter_local_notifications: ^16.3.2
+  datetime_picker_formfield_new: ^2.1.0
+
+
  
   
 
@@ -54,7 +59,12 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  flutter_launcher_icons: "^0.13.1"
 
+flutter_launcher_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "assets/images/png-clipart-man-holding-barbell-garage-gym-fitness-centre-computer-icons-physical-fitness-bodybuilding-white-logo.png"
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
   # activated in the `analysis_options.yaml` file located at the root of your
@@ -102,8 +112,9 @@ flutter:
     - assets/images/greatest-abs-exercises-1445673601.jpg
     - assets/images/284-2840011_person-in-gray-hoodie-using-computer-inside-dark.jpg
     - assets/images/flat-lay-crossfit-gym-equipment_403156-27.avif
-    - assets/images/qrcode_www.prosupps.com.png
+    - assets/images/qrcode_www.mountsinai.org.png
     - assets/images/5580709.png
+  
   
 
   # An image asset can refer to one or more resolution-specific "variants", see

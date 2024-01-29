@@ -26,8 +26,9 @@ class _Chest_ScreenState extends State<Chest_Screen> {
             iconTheme: IconThemeData(color: Colors.white),
             backgroundColor: Colors.black,
             title: Text(
-              'CHEST',
-              style: TextStyle(color: Colors.white),
+              'Chest',
+              style: TextStyle(
+                  color: Colors.white, fontSize: 18, letterSpacing: 1),
             ),
           ),
           body: ValueListenableBuilder<Box<ItemsModal>>(

@@ -23,8 +23,9 @@ class _ButtocksItem_ScreenState extends State<ButtocksItem_Screen> {
           iconTheme: IconThemeData(color: Colors.white),
           backgroundColor: Colors.black,
           title: Text(
-            'BUTTOCKS',
-            style: TextStyle(color: Colors.white),
+            'Buttocks',
+            style:
+                TextStyle(color: Colors.white, fontSize: 18, letterSpacing: 1),
           ),
         ),
         body: ValueListenableBuilder<Box<ItemsModal>>(
@@ -75,39 +76,45 @@ class _ButtocksItem_ScreenState extends State<ButtocksItem_Screen> {
                                         .fitnessItemImage
                                         .toString())),
                                     fit: BoxFit.cover)),
-                            child: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    data[index].itemName.toString(),
-                                    style: TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 22,
-                                        fontWeight: FontWeight.bold,
-                                        letterSpacing: 1,
-                                        fontFamily: "JacquesFracois"),
-                                  ),
-                                  IconButton(
-                                    onPressed: () {
-                                      setState(() {
-                                        data[index].isFavorite =
-                                            !data[index].isFavorite;
-                                        data[index].save();
-                                      });
-                                    },
-                                    icon: Icon(
-                                        data[index].isFavorite
-                                            ? Icons.favorite
-                                            : Icons.favorite_border,
-                                        color: data[index].isFavorite
-                                            ? Colors.red
-                                            : Colors.white),
-                                  )
-                                ],
+                            child: Container(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10),
+                                color: Colors.black.withOpacity(0.3),
+                              ),
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      data[index].itemName.toString(),
+                                      style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 22,
+                                          fontWeight: FontWeight.bold,
+                                          letterSpacing: 1,
+                                          fontFamily: "JacquesFracois"),
+                                    ),
+                                    IconButton(
+                                      onPressed: () {
+                                        setState(() {
+                                          data[index].isFavorite =
+                                              !data[index].isFavorite;
+                                          data[index].save();
+                                        });
+                                      },
+                                      icon: Icon(
+                                          data[index].isFavorite
+                                              ? Icons.favorite
+                                              : Icons.favorite_border,
+                                          color: data[index].isFavorite
+                                              ? Colors.red
+                                              : Colors.white),
+                                    )
+                                  ],
+                                ),
                               ),
                             ),
                           ),

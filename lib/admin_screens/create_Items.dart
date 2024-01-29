@@ -88,7 +88,7 @@ class _Create_ItemsScreenState extends State<Create_ItemsScreen> {
                                     child: Container(
                                         decoration: BoxDecoration(
                                           borderRadius:
-                                              BorderRadius.circular(20),
+                                              BorderRadius.circular(10),
                                           image: DecorationImage(
                                               image: FileImage(File(data[index]
                                                   .fitnessItemImage
@@ -96,7 +96,12 @@ class _Create_ItemsScreenState extends State<Create_ItemsScreen> {
                                               fit: BoxFit.cover),
                                         ),
                                         child: Container(
-                                          color: Colors.black.withOpacity(0.3),
+                                          decoration: BoxDecoration(
+                                            borderRadius:
+                                                BorderRadius.circular(10),
+                                            color:
+                                                Colors.black.withOpacity(0.3),
+                                          ),
                                           child: Column(
                                               mainAxisAlignment:
                                                   MainAxisAlignment
