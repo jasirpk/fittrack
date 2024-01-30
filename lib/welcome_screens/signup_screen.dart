@@ -8,6 +8,7 @@ import 'package:fittrack/welcome_screens/signup_widgets/confirm_password.dart';
 import 'package:fittrack/welcome_screens/signup_widgets/email_field_custom.dart';
 import 'package:fittrack/welcome_screens/signup_widgets/name_field_custom.dart';
 import 'package:fittrack/welcome_screens/signup_widgets/password_field_custom.dart';
+import 'package:fittrack/welcome_screens/signup_widgets/profile_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -68,33 +69,8 @@ class _SignUp_ScreenState extends State<SignUp_Screen> {
                                   children: [
                                     Stack(
                                       children: [
-                                        // Container with image
-                                        Container(
-                                          height: 200,
-                                          width: 200,
-                                          decoration: BoxDecoration(
-                                            border: Border.all(),
-                                            borderRadius:
-                                                BorderRadius.circular(100),
-                                            image: DecorationImage(
-                                              image: AssetImage(
-                                                  'assets/images/images.png'),
-                                              fit: BoxFit.cover,
-                                            ),
-                                          ),
-                                          child: selectedImage != null
-                                              ? ClipRRect(
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          100),
-                                                  child: Image.file(
-                                                    selectedImage!,
-                                                    fit: BoxFit.cover,
-                                                  ),
-                                                )
-                                              : SizedBox(),
-                                        ),
-                                        // Camera IconButton
+                                        Profile_Custom_Screen(
+                                            selectedImage: selectedImage),
                                         Positioned(
                                           bottom: 0,
                                           right: 0,
@@ -110,40 +86,8 @@ class _SignUp_ScreenState extends State<SignUp_Screen> {
                                         ),
                                       ],
                                     )
-
-                                    // Container(
-                                    //   height: 200,
-                                    //   width: 200,
-                                    //   decoration: BoxDecoration(
-                                    //     border: Border.all(),
-                                    //     borderRadius:
-                                    //         BorderRadius.circular(100),
-                                    //     image: DecorationImage(
-                                    //         image: AssetImage(
-                                    //             'assets/images/images.png'),
-                                    //         fit: BoxFit.cover),
-                                    //   ),
-                                    //   child: selectedImage != null
-                                    //       ? ClipRRect(
-                                    //           borderRadius:
-                                    //               BorderRadius.circular(100),
-                                    //           child: Image.file(
-                                    //             selectedImage!,
-                                    //             fit: BoxFit.cover,
-                                    //           ))
-                                    //       : SizedBox(),
-                                    // ),
                                   ],
                                 ),
-                                // IconButton(
-                                //   onPressed: () {
-                                //     pickImageFromGallery();
-                                //   },
-                                //   icon: Icon(
-                                //     Icons.camera_alt_outlined,
-                                //     color: Colors.white,
-                                //   ),
-                                // ),
                                 if (!isImageSelected)
                                   Text('Image is required',
                                       style: TextStyle(

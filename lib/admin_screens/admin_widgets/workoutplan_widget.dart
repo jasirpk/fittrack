@@ -34,7 +34,6 @@ class _WorkoutPlan_ScreenState extends State<WorkoutPlan_Screen> {
         onChanged: widget.onChanged,
         items: <String>[
           'Gym Exercise',
-          'Home Exercise',
         ].map<DropdownMenuItem<String>>((String value) {
           return DropdownMenuItem<String>(
             value: value,

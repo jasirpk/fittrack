@@ -19,7 +19,9 @@ class Profile_Custom_Screen extends StatelessWidget {
         border: Border.all(),
         borderRadius: BorderRadius.circular(100),
         image: DecorationImage(
-            image: AssetImage('assets/images/images.png'), fit: BoxFit.cover),
+          image: AssetImage('assets/images/218738-200.png'),
+          fit: BoxFit.cover,
+        ),
       ),
       child: selectedImage != null
           ? ClipRRect(
@@ -27,7 +29,8 @@ class Profile_Custom_Screen extends StatelessWidget {
               child: Image.file(
                 selectedImage!,
                 fit: BoxFit.cover,
-              ))
+              ),
+            )
           : SizedBox(),
     );
   }

@@ -1,52 +1,39 @@
 import 'dart:io';
 
-import 'package:fittrack/Sqlite/sqflite.dart';
-import 'package:fittrack/Sqlite/usermodal.dart';
-import 'package:fittrack/settings_file/profile/profile.dart';
 import 'package:flutter/material.dart';
+import 'package:fittrack/Sqlite/usermodal.dart';
+import 'package:fittrack/Sqlite/sqflite.dart';
+import 'package:image_picker/image_picker.dart';
 
-class EditProfile_Screen extends StatefulWidget {
-  final String? Imagepath;
-  final String? userName;
-  final String? userMail;
-  final String? userPassword;
-  final userId;
+class UpdateProfileScreen extends StatefulWidget {
+  final int userId;
 
-  const EditProfile_Screen(
-      {super.key,
-      required this.Imagepath,
-      required this.userName,
-      required this.userMail,
-      required this.userPassword,
-      required this.userId});
+  UpdateProfileScreen({required this.userId});
 
   @override
-  State<EditProfile_Screen> createState() => _EditProfile_ScreenState();
+  _UpdateProfileScreenState createState() => _UpdateProfileScreenState();
 }
 
-class _EditProfile_ScreenState extends State<EditProfile_Screen> {
-  final sizedbox = SizedBox(
-    height: 20,
-  );
+class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
   File? selectedImage;
-  late TextEditingController ImagepathController;
-  late TextEditingController userNameController;
-  late TextEditingController userMailController;
-  late TextEditingController userPasswordController;
+  bool isImageSelected = false;
+
+  String? Imagepath;
   late DatabaseHelper handler;
   late Future<List<Users>> users;
-  final db = DatabaseHelper();
+  TextEditingController imagepathcontroller = TextEditingController();
+  TextEditingController nameController = TextEditingController();
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+
   @override
   void initState() {
-    ImagepathController = TextEditingController(text: widget.Imagepath);
-    userNameController = TextEditingController(text: widget.userName);
-    userMailController = TextEditingController(text: widget.userMail);
-    userPasswordController = TextEditingController(text: widget.userPassword);
     handler = DatabaseHelper();
     users = handler.getUsers();
     handler.initDB().whenComplete(() {
       users = getAllUsers();
     });
+    refresh();
     super.initState();
   }
 
@@ -54,95 +41,177 @@ class _EditProfile_ScreenState extends State<EditProfile_Screen> {
     return handler.getUsers();
   }
 
+//Refresh method
   Future<void> refresh() async {
     setState(() {
-      users = getAllUsers();
+      users = handler.getUsers();
     });
   }
 
+  var sizedbox = SizedBox(
+    height: 20,
+  );
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        iconTheme: IconThemeData(color: Colors.white),
-        backgroundColor: Colors.black,
         title: Text(
-          'Profile',
-          style: TextStyle(color: Colors.white, fontSize: 20),
-        ),
-      ),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Card(
-            elevation: 0,
-            child: Container(
-              decoration: BoxDecoration(
-                  color: Colors.black12,
-                  borderRadius: BorderRadius.circular(30)),
-              height: 500,
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Column(
-                  children: [
-                    Container(
-                      decoration: BoxDecoration(
-                          border: Border.all(width: 3, color: Colors.blue),
-                          borderRadius: BorderRadius.circular(100)),
-                      child: CircleAvatar(
-                        maxRadius: 80,
-                        backgroundImage:
-                            FileImage(File(ImagepathController.text)),
-                      ),
-                    ),
-                    TextFormField(
-                      controller: userNameController,
-                    ),
-                    sizedbox,
-                    TextFormField(
-                      controller: userMailController,
-                    ),
-                    sizedbox,
-                    TextFormField(
-                      controller: userPasswordController,
-                    ),
-                    sizedbox,
-                    Row(
-                      children: [
-                        TextButton(
-                          onPressed: () async {
-                            db
-                                .updateuser(
-                                    ImagepathController.text,
-                                    userNameController.text,
-                                    userMailController.text,
-                                    userPasswordController.text,
-                                    widget.userId)
-                                .whenComplete(() {
-                              refresh();
-                              Navigator.of(context)
-                                  .pop(MaterialPageRoute(builder: (context) {
-                                return profile_Screen();
-                              }));
-                            });
-                          },
-                          child: Text('Update'),
-                        ),
-                        sizedbox,
-                        TextButton(
-                            onPressed: () {
-                              Navigator.pop(context);
-                            },
-                            child: Text('Cancel'))
-                      ],
-                    )
-                  ],
-                ),
-              ),
-            ),
+          'Edit Profile',
+          style: TextStyle(
+            fontSize: 20,
           ),
         ),
       ),
+      body: SingleChildScrollView(
+        child: FutureBuilder(
+          future: users,
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return CircularProgressIndicator();
+            } else if (snapshot.hasError) {
+              return Text('Error: ${snapshot.error}');
+            } else {
+              List<Users> userList = snapshot.data as List<Users>;
+              Users userData = userList.first;
+              imagepathcontroller.text = userData.Imagepath ?? '';
+              nameController.text = userData.usrName ?? '';
+              emailController.text = userData.usrMail;
+              passwordController.text = userData.usrPassword;
+
+              return Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Stack(
+                      children: [
+                        GestureDetector(
+                          onTap: () {
+                            pickImageFromGallery();
+                          },
+                          child: Container(
+                            height: 200,
+                            width: 200,
+                            decoration: BoxDecoration(
+                              border: Border.all(width: 3),
+                              borderRadius: BorderRadius.circular(100),
+                            ),
+                            child: selectedImage != null
+                                ? ClipRRect(
+                                    borderRadius: BorderRadius.circular(100),
+                                    child: Image.file(
+                                      selectedImage!,
+                                      fit: BoxFit.cover,
+                                    ),
+                                  )
+                                : userData.Imagepath != null
+                                    ? ClipRRect(
+                                        borderRadius:
+                                            BorderRadius.circular(100),
+                                        child: Image.file(
+                                          File(userData.Imagepath!),
+                                          fit: BoxFit.cover,
+                                        ),
+                                      )
+                                    : SizedBox(),
+                          ),
+                        ),
+                        if (selectedImage != null)
+                          Positioned(
+                            top: 10,
+                            right: 10,
+                            child: IconButton(
+                              onPressed: () {
+                                setState(() {
+                                  selectedImage = null;
+                                  imagepathcontroller.text = '';
+                                });
+                              },
+                              icon: Icon(Icons.cancel),
+                            ),
+                          ),
+                      ],
+                    ),
+                    sizedbox,
+                    TextFormField(
+                      controller: nameController,
+                      decoration: InputDecoration(
+                          labelText: 'Name',
+                          border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(20))),
+                    ),
+                    sizedbox,
+                    TextFormField(
+                      controller: emailController,
+                      decoration: InputDecoration(
+                          labelText: 'Email',
+                          border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(20))),
+                    ),
+                    sizedbox,
+                    TextFormField(
+                      controller: passwordController,
+                      decoration: InputDecoration(
+                          labelText: 'Password',
+                          border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(20))),
+                    ),
+                    SizedBox(
+                      height: 30,
+                    ),
+                    ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.black,
+                          minimumSize: Size(250, 60)),
+                      onPressed: () async {
+                        await updateProfile(widget.userId)
+                            .then((value) => refresh());
+                      },
+                      child: Text(
+                        'Update',
+                        style: TextStyle(
+                            color: Colors.white,
+                            letterSpacing: 1,
+                            fontSize: 20),
+                      ),
+                    ),
+                  ],
+                ),
+              );
+            }
+          },
+        ),
+      ),
     );
+  }
+
+  Future<void> updateProfile(int userId) async {
+    String ImagePath = selectedImage != null
+        ? selectedImage!.path
+        : imagepathcontroller.text.toString();
+    String name = nameController.text.toString();
+    String email = emailController.text.toString();
+    String password = passwordController.text.toString();
+
+    int result =
+        await handler.updateuser(ImagePath, name, email, password, userId);
+    if (result > 0) {
+      Navigator.of(context).pop();
+    }
+  }
+
+  Future pickImageFromGallery() async {
+    final returnimage =
+        await ImagePicker().pickImage(source: ImageSource.gallery);
+    if (returnimage == null) {
+      setState(() {
+        isImageSelected = false;
+      });
+      return;
+    }
+    setState(() {
+      selectedImage = File(returnimage.path);
+      imagepathcontroller.text = returnimage.path;
+    });
   }
 }
