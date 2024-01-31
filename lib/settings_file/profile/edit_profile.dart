@@ -1,5 +1,9 @@
 import 'dart:io';
 
+import 'package:fittrack/settings_file/profile/custom_profie/userimage.dart';
+import 'package:fittrack/settings_file/profile/custom_profie/usermail.dart';
+import 'package:fittrack/settings_file/profile/custom_profie/username_field.dart';
+import 'package:fittrack/settings_file/profile/custom_profie/userpassword.dart';
 import 'package:flutter/material.dart';
 import 'package:fittrack/Sqlite/usermodal.dart';
 import 'package:fittrack/Sqlite/sqflite.dart';
@@ -17,6 +21,7 @@ class UpdateProfileScreen extends StatefulWidget {
 class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
   File? selectedImage;
   bool isImageSelected = false;
+  final formkey = GlobalKey<FormState>();
 
   String? Imagepath;
   late DatabaseHelper handler;
@@ -51,6 +56,7 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
   var sizedbox = SizedBox(
     height: 20,
   );
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -78,104 +84,70 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
               emailController.text = userData.usrMail;
               passwordController.text = userData.usrPassword;
 
-              return Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Stack(
-                      children: [
-                        GestureDetector(
-                          onTap: () {
-                            pickImageFromGallery();
-                          },
-                          child: Container(
-                            height: 200,
-                            width: 200,
-                            decoration: BoxDecoration(
-                              border: Border.all(width: 3),
-                              borderRadius: BorderRadius.circular(100),
-                            ),
-                            child: selectedImage != null
-                                ? ClipRRect(
-                                    borderRadius: BorderRadius.circular(100),
-                                    child: Image.file(
-                                      selectedImage!,
-                                      fit: BoxFit.cover,
-                                    ),
-                                  )
-                                : userData.Imagepath != null
-                                    ? ClipRRect(
-                                        borderRadius:
-                                            BorderRadius.circular(100),
-                                        child: Image.file(
-                                          File(userData.Imagepath!),
-                                          fit: BoxFit.cover,
-                                        ),
-                                      )
-                                    : SizedBox(),
+              return Form(
+                key: formkey,
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Stack(
+                        children: [
+                          GestureDetector(
+                            onTap: () {
+                              pickImageFromGallery();
+                            },
+                            child: UserImage_Screen(
+                                selectedImage: selectedImage,
+                                userData: userData),
                           ),
-                        ),
-                        if (selectedImage != null)
-                          Positioned(
-                            top: 10,
-                            right: 10,
-                            child: IconButton(
-                              onPressed: () {
-                                setState(() {
-                                  selectedImage = null;
-                                  imagepathcontroller.text = '';
-                                });
-                              },
-                              icon: Icon(Icons.cancel),
+                          if (selectedImage != null)
+                            Positioned(
+                              top: 10,
+                              right: 10,
+                              child: IconButton(
+                                onPressed: () {
+                                  setState(() {
+                                    selectedImage = null;
+                                    imagepathcontroller.text = '';
+                                  });
+                                },
+                                icon: Icon(Icons.cancel),
+                              ),
                             ),
-                          ),
-                      ],
-                    ),
-                    sizedbox,
-                    TextFormField(
-                      controller: nameController,
-                      decoration: InputDecoration(
-                          labelText: 'Name',
-                          border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(20))),
-                    ),
-                    sizedbox,
-                    TextFormField(
-                      controller: emailController,
-                      decoration: InputDecoration(
-                          labelText: 'Email',
-                          border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(20))),
-                    ),
-                    sizedbox,
-                    TextFormField(
-                      controller: passwordController,
-                      decoration: InputDecoration(
-                          labelText: 'Password',
-                          border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(20))),
-                    ),
-                    SizedBox(
-                      height: 30,
-                    ),
-                    ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.black,
-                          minimumSize: Size(250, 60)),
-                      onPressed: () async {
-                        await updateProfile(widget.userId)
-                            .then((value) => refresh());
-                      },
-                      child: Text(
-                        'Update',
-                        style: TextStyle(
-                            color: Colors.white,
-                            letterSpacing: 1,
-                            fontSize: 20),
+                        ],
                       ),
-                    ),
-                  ],
+                      sizedbox,
+                      UserName_Field(nameController: nameController),
+                      sizedbox,
+                      UserMail_Field(emailController: emailController),
+                      sizedbox,
+                      UserPassword_Field(
+                          passwordController: passwordController),
+                      SizedBox(
+                        height: 30,
+                      ),
+                      ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.black,
+                            minimumSize: Size(250, 60)),
+                        onPressed: () async {
+                          if (formkey.currentState!.validate()) {
+                            await updateProfile(widget.userId).then((value) {
+                              refresh();
+                            });
+                          }
+                        },
+                        child: Text(
+                          'Update',
+                          style: TextStyle(
+                              color: Colors.white,
+                              letterSpacing: 1,
+                              fontSize: 20),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               );
             }
@@ -197,6 +169,9 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
         await handler.updateuser(ImagePath, name, email, password, userId);
     if (result > 0) {
       Navigator.of(context).pop();
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          backgroundColor: Colors.blue,
+          content: Text("You Updated Successfully")));
     }
   }
 

@@ -20,12 +20,12 @@ class DescriptionField_Screen extends StatelessWidget {
       },
       controller: DescriptionController,
       decoration: InputDecoration(
-        labelText: 'Description',
-        labelStyle: TextStyle(fontFamily: 'JacquesFracois', fontSize: 12),
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(20),
-        ),
-      ),
+          labelText: 'Description',
+          labelStyle: TextStyle(fontFamily: 'JacquesFracois', fontSize: 12),
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(20),
+          ),
+          alignLabelWithHint: true),
       maxLines: 6,
     );
   }

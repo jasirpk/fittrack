@@ -44,7 +44,7 @@ class _profile_ScreenState extends State<profile_Screen> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'back',
+          'Profile',
           style: TextStyle(
             fontSize: 20,
           ),
@@ -67,15 +67,6 @@ class _profile_ScreenState extends State<profile_Screen> {
                 return Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    SizedBox(height: 40),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 20),
-                      child: Text(
-                        'Profile',
-                        style: TextStyle(
-                            fontSize: 28, fontFamily: 'JacquesFracois'),
-                      ),
-                    ),
                     sizedbox,
                     Padding(
                       padding: const EdgeInsets.all(8.0),
