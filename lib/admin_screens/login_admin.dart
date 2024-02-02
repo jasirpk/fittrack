@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:fittrack/admin_screens/create_Items.dart';
 import 'package:fittrack/main.dart';
 import 'package:flutter/material.dart';
@@ -27,24 +25,27 @@ class _Admin_LoginState extends State<Admin_Login> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        body: Container(
-          decoration: BoxDecoration(
-            image: DecorationImage(
-                image: AssetImage(
-                  'assets/images/284-2840011_person-in-gray-hoodie-using-computer-inside-dark.jpg',
-                ),
-                fit: BoxFit.cover),
-          ),
-          child: BackdropFilter(
-            filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
+        appBar: AppBar(
+          leading: IconButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              icon: Icon(Icons.arrow_back)),
+        ),
+        body: SingleChildScrollView(
+          child: Form(
+            key: formkey,
             child: Padding(
               padding: const EdgeInsets.all(16.0),
-              child: Form(
-                key: formkey,
-                child: Container(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.end,
+              child: Column(
+                children: [
+                  Text(
+                    'User Can Add New Items :',
+                    style:
+                        TextStyle(fontSize: 32, fontFamily: "JacquesFracois"),
+                  ),
+                  SizedBox(height: 40),
+                  Column(
                     children: [
                       TextFormField(
                         autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -58,19 +59,18 @@ class _Admin_LoginState extends State<Admin_Login> {
                         },
                         controller: UserNameController,
                         decoration: InputDecoration(
-                            labelText: 'Message',
+                            border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(20)),
+                            labelText: 'Enter a Text',
                             labelStyle: TextStyle(
-                              color: Colors.white38,
                               fontFamily: 'JacquesFracois',
                             ),
                             prefixIcon: Icon(
                               Icons.admin_panel_settings,
-                              color: Colors.white,
                             )),
-                        style: TextStyle(color: Colors.white),
                       ),
                       SizedBox(
-                        height: 30,
+                        height: 40,
                       ),
                       TextFormField(
                         autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -85,14 +85,14 @@ class _Admin_LoginState extends State<Admin_Login> {
                         controller: UserPasswordController,
                         obscureText: passwordObscuretext,
                         decoration: InputDecoration(
-                          labelText: 'Password',
+                          border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(20)),
+                          labelText: 'Re-Enter Text',
                           labelStyle: TextStyle(
-                            color: Colors.white38,
                             fontFamily: 'JacquesFracois',
                           ),
                           prefixIcon: Icon(
                             Icons.lock,
-                            color: Colors.white,
                           ),
                           suffixIcon: IconButton(
                             onPressed: () {
@@ -102,29 +102,45 @@ class _Admin_LoginState extends State<Admin_Login> {
                               passwordObscuretext
                                   ? Icons.visibility_off
                                   : Icons.visibility,
-                              color: Colors.white38,
                             ),
                           ),
                         ),
-                        style: TextStyle(color: Colors.white),
                       ),
                       SizedBox(
                         height: 30,
                       ),
                       ElevatedButton(
-                          onPressed: () {
-                            if (formkey.currentState!.validate()) {}
-                            checkLogin(context);
-                          },
-                          child: Text(
-                            'Login',
-                            style: TextStyle(
-                                fontFamily: 'JacquesFracois',
-                                fontWeight: FontWeight.bold),
-                          ))
+                        style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.black,
+                            minimumSize: Size(250, 60)),
+                        onPressed: () async {
+                          if (formkey.currentState!.validate()) {}
+                          checkLogin(context);
+                        },
+                        child: Text(
+                          'Login',
+                          style: TextStyle(
+                              color: Colors.white,
+                              letterSpacing: 1,
+                              fontSize: 20),
+                        ),
+                      ),
                     ],
                   ),
-                ),
+                  SizedBox(height: 150),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        "FitTrack",
+                        style: TextStyle(
+                          letterSpacing: 1,
+                          fontFamily: "JacquesFracois",
+                        ),
+                      )
+                    ],
+                  )
+                ],
               ),
             ),
           ),
@@ -136,9 +152,9 @@ class _Admin_LoginState extends State<Admin_Login> {
   void checkLogin(BuildContext ctx) async {
     final username = UserNameController.text;
     final password = UserPasswordController.text;
-    const Message = 'jasi';
-    const scrtCode = '1234';
-    if (Message == username && scrtCode == password) {
+    // const Message = 'jasi';
+    // const scrtCode = '1234';
+    if (username == password) {
       // Go to Home
       final sharedprefs = await SharedPreferences.getInstance();
       await sharedprefs.setBool(Save_key, true);

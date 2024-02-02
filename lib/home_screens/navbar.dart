@@ -31,7 +31,7 @@ class _NavbarState extends State<Navbar> {
     {"icon": Icons.search, "title": "Search Exercises"},
     {"icon": Icons.message, "title": "Feedback"},
     {"icon": Icons.settings, "title": "Settings"},
-    {"icon": Icons.admin_panel_settings, "title": "Admin"},
+    {"icon": Icons.admin_panel_settings, "title": "User Can Add ?"},
     {"icon": Icons.logout, "title": "SignOut"},
   ];
   late DatabaseHelper handler;

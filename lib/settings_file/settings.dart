@@ -63,40 +63,34 @@ class _Settings_HomeState extends State<Settings_Home> {
         children: [
           Padding(
             padding: const EdgeInsets.all(8.0),
-            child: Row(
-              children: [
-                Text(
-                  'General',
-                  style: TextStyle(
-                      fontFamily: 'JacquesFracois',
-                      fontWeight: FontWeight.bold),
-                ),
-              ],
-            ),
           ),
           Expanded(
             child: ListView(
               children: settings.map((General) {
-                return Card(
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(30)),
-                  child: ListTile(
-                    iconColor: Colors.black,
-                    leading: CircleAvatar(
-                      child: Icon(
-                        General['icon'],
-                        color: Colors.white,
+                return Padding(
+                  padding: const EdgeInsets.only(bottom: 10),
+                  child: Card(
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(30)),
+                    child: ListTile(
+                      minVerticalPadding: 20,
+                      iconColor: Colors.black,
+                      leading: CircleAvatar(
+                        child: Icon(
+                          General['icon'],
+                          color: Colors.white,
+                        ),
+                        backgroundColor: Colors.black,
                       ),
-                      backgroundColor: Colors.black,
+                      title: InkWell(
+                        splashColor: Colors.blueGrey,
+                        child: Text(General['title']),
+                      ),
+                      onTap: () {
+                        handleIconTap(General['title']);
+                      },
+                      trailing: Icon(General['navigation']),
                     ),
-                    title: InkWell(
-                      splashColor: Colors.blueGrey,
-                      child: Text(General['title']),
-                    ),
-                    onTap: () {
-                      handleIconTap(General['title']);
-                    },
-                    trailing: Icon(General['navigation']),
                   ),
                 );
               }).toList(),

@@ -85,7 +85,7 @@ class _Create_ItemsScreenState extends State<Create_ItemsScreen> {
                                 },
                                 child: Padding(
                                     padding: const EdgeInsets.all(8.0),
-                                    child: Container(
+                                    child: Container(    
                                         decoration: BoxDecoration(
                                           borderRadius:
                                               BorderRadius.circular(10),

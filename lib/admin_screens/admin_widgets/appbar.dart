@@ -41,7 +41,7 @@ class AppbarItems_Screen extends StatelessWidget
       iconTheme: IconThemeData(color: Colors.white),
       backgroundColor: Colors.black,
       title: Text(
-        'Create Admin',
+        'Added Items',
         style: TextStyle(color: Colors.white),
       ),
     );

@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:fittrack/hive/box.dart';
 import 'package:fittrack/hive/modal.dart';
 import 'package:fittrack/items_screens/details.dart';
+import 'package:fittrack/items_screens/items/default_items/chest.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
@@ -17,38 +18,49 @@ class Chest_Screen extends StatefulWidget {
 
 class _Chest_ScreenState extends State<Chest_Screen> {
   File? fitnessItemImage;
+  late bool isFavorite;
+  @override
+  void initState() {
+    isFavorite = false;
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-          appBar: AppBar(
-            iconTheme: IconThemeData(color: Colors.white),
-            backgroundColor: Colors.black,
-            title: Text(
-              'Chest',
-              style: TextStyle(
-                  color: Colors.white, fontSize: 18, letterSpacing: 1),
-            ),
+        appBar: AppBar(
+          iconTheme: IconThemeData(color: Colors.white),
+          backgroundColor: Colors.black,
+          title: Text(
+            'Chest',
+            style:
+                TextStyle(color: Colors.white, fontSize: 18, letterSpacing: 1),
           ),
-          body: ValueListenableBuilder<Box<ItemsModal>>(
-              valueListenable: Boxes.getData().listenable(),
-              builder: (context, box, _) {
-                var data = box.values
-                    .where((item) =>
-                        item.SelectedCategory.trim() ==
-                        widget.selectedCategory.toString())
-                    .toList()
-                    .cast<ItemsModal>();
-                // var data = box.values.toList().cast<ItemsModal>();
-                if (data.isEmpty) {
-                  return Center(
-                    child: Text('No Exercieses'),
-                  );
-                } else {
-                  print("Widget Category: ${widget.selectedCategory}");
+        ),
+        body: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Chest_Default_Item(),
+            Expanded(
+              child: ValueListenableBuilder<Box<ItemsModal>>(
+                valueListenable: Boxes.getData().listenable(),
+                builder: (context, box, _) {
+                  var data = box.values
+                      .where((item) =>
+                          item.SelectedCategory.trim() ==
+                          widget.selectedCategory.toString())
+                      .toList()
+                      .cast<ItemsModal>();
+                  if (data.isEmpty) {
+                    return SizedBox();
+                    // return Center(
+                    //   child: Text('No Exercieses'),
+                    // );
+                  } else {
+                    print("Widget Category: ${widget.selectedCategory}");
 
-                  return GridView.builder(
+                    return GridView.builder(
                       itemCount: data.length,
                       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                           crossAxisCount: 1,
@@ -117,9 +129,15 @@ class _Chest_ScreenState extends State<Chest_Screen> {
                             ),
                           ),
                         );
-                      });
-                }
-              })),
+                      },
+                    );
+                  }
+                },
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }

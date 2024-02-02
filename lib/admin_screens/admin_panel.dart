@@ -46,7 +46,7 @@ class _AdminPanel_ScreenState extends State<AdminPanel_Screen> {
               backgroundColor: Colors.black,
               centerTitle: true,
               title: Text(
-                'Admin Panel',
+                'Owner Side',
                 style: TextStyle(
                     fontFamily: 'JacquesFracois',
                     fontSize: 36,
