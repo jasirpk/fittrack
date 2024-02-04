@@ -35,7 +35,7 @@ class _Privacy_PolicyState extends State<Privacy_Policy> {
                   ),
                   sizedbox,
                   Text(
-                    "Nothing. None.\nI do not collect any personal information. Nothing at all.",
+                    "Your privacy matters. We collect email, username, and images from the gallery for personalized experiences. Rest assured, your data is securely managed and protected",
                     style: TextStyle(fontSize: 16, fontWeight: FontWeight.w300),
                   ),
                   sizedbox,
