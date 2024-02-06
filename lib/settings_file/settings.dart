@@ -133,7 +133,7 @@ class _Settings_HomeState extends State<Settings_Home> {
         );
         break;
       case "Share this App":
-        Share.share("http://schemas.android.com/apk/res/android");
+        Share.share("https://www.amazon.com/dp/B0CTXVT897/ref=apps_sf_sta");
         break;
       case "SignOut":
         showDialog(

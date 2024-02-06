@@ -172,7 +172,7 @@ class _create_noteState extends State<create_note> {
                             icon: Icon(Icons.delete),
                           ),
                           onTap: () {
-                            Navigator.push(
+                            Navigator.pushReplacement(
                                 context,
                                 MaterialPageRoute(
                                     builder: (context) => UpdateNoteScreen(
