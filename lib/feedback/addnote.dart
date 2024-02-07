@@ -147,6 +147,9 @@ class _create_noteState extends State<create_note> {
                                         'Are you sure to want Delete?'),
                                     actions: [
                                       TextButton(
+                                          onPressed: () {},
+                                          child: Text('Example')),
+                                      TextButton(
                                         onPressed: () {
                                           Navigator.of(context).pop();
                                         },
