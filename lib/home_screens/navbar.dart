@@ -175,7 +175,7 @@ class _NavbarState extends State<Navbar> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      'Version 6.0',
+                      'Version 1.0.0+1',
                       style: TextStyle(fontWeight: FontWeight.w200),
                     ),
                   ],
