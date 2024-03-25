@@ -1,6 +1,8 @@
 import 'package:fittrack/home_screens/biginner_screen.dart';
 import 'package:fittrack/home_screens/intermediate_screen.dart';
 import 'package:fittrack/home_screens/navbar.dart';
+import 'package:fittrack/home_screens/navbar_widgets/fab_widget.dart';
+
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -10,9 +12,23 @@ class HomeScreen extends StatefulWidget {
   _HomeScreenState createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _HomeScreenState extends State<HomeScreen>
+    with SingleTickerProviderStateMixin {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   List<Map<String, dynamic>> categories = [];
+
+  Animation<double>? animation;
+  AnimationController? animationController;
+
+  @override
+  void initState() {
+    animationController =
+        AnimationController(vsync: this, duration: Duration(milliseconds: 260));
+    final curvedAnimation =
+        CurvedAnimation(parent: animationController!, curve: Curves.easeInOut);
+    animation = Tween<double>(begin: 0, end: 1).animate(curvedAnimation);
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -20,6 +36,8 @@ class _HomeScreenState extends State<HomeScreen> {
       length: 2,
       child: SafeArea(
         child: Scaffold(
+          floatingActionButton: BMi_Widget(
+              animationController: animationController, animation: animation),
           key: _scaffoldKey,
           drawer: Navbar(),
           appBar: PreferredSize(
